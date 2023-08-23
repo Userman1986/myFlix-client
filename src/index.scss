@@ -2,4 +2,76 @@ $color: steelblue;
 
 .my-flix {
   color: $color;
+}/* styles.css */
+
+/* Reset some default styles */
+body, h1, h2, h3, p {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Container for the main view */
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Style for individual movie cards */
+.movie-card {
+  width: 200px;
+  margin: 10px;
+  padding: 10px;
+  background-color: #141414;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+}
+
+.movie-card img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Style for movie details view */
+.movie-details {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #141414;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+
+.movie-details img {
+  max-width: 100%;
+  height: auto;
+}
+
+.movie-details span {
+  display: block;
+  margin: 5px 0;
+  color: #ffffff;
+}
+
+.movie-details button {
+  background-color: #e50914;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.movie-details button:hover {
+  background-color: #ff0a16;
 }
