@@ -5,41 +5,63 @@ import { BookView } from "../book-view/book-view";
 export const MainView = () => {
   const [books, setBooks] = useState([
     {
-      id: 1,
-      title: "Eloquent JavaScript",
-      image:
-        "https://images-na.ssl-images-amazon.com/images/I/51InjRPaF7L._SX377_BO1,204,203,200_.jpg",
-      author: "Marijn Haverbeke"
+      _id: "64a3ecab95727e8cf840ee02",
+      title: "The Shawshank Redemption",
+      description: "Two imprisoned men bond over a number of years, finding solace and even redemption through acts of common decency.",
+      genre: "Drama",
+      director: "Frank Darabont",
+      imgURL: "https://example.com/movie1.jpg"
     },
     {
-      id: 2,
-      title: "Mastering JavaScript Functional Programming",
-      image:
-        "https://images-na.ssl-images-amazon.com/images/I/51WAikRq37L._SX218_BO1,204,203,200_QL40_FMwebp_.jpg",
-      author: "Federico Kereki"
+      _id: "64a3ed2195727e8cf840ee06",
+      title: "The Lord of the Rings: The Return of the King",
+      description: "Gandalf and Aragorn lead the World of Men against Sauron's army to draw his gaze from Frodo and Sam as they approach Mount Doom with the One Ring.",
+      genre: "Adventure",
+      director: "Peter Jackson",
+      imgURL: "https://example.com/movie5.jpg"
     },
     {
-      id: 3,
-      title: "JavaScript: The Good Parts",
-      image:
-        "https://images-na.ssl-images-amazon.com/images/I/5131OWtQRaL._SX381_BO1,204,203,200_.jpg",
-      author: "Douglas Crockford"
+      _id: "64a3ecab95727e8cf840ee03",
+      title: "The Godfather",
+      description: "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
+      genre: "Crime",
+      director: "Francis Ford Coppola",
+      imgURL: "https://example.com/movie2.jpg"
     },
     {
-      id: 4,
-      title: "JavaScript: The Definitive Guide",
-      image:
-        "https://images-na.ssl-images-amazon.com/images/I/51HbNW6RzhL._SX218_BO1,204,203,200_QL40_FMwebp_.jpg",
-      author: "David Flanagan"
+      _id: "64a3ed2195727e8cf840ee08",
+      title: "The Good, the Bad and the Ugly",
+      description: "A bounty hunting scam joins two men in an uneasy alliance against a third in a race to find a fortune in gold buried in a remote cemetery.",
+      genre: "Western",
+      director: "Sergio Leone",
+      imgURL: "https://example.com/movie7.jpg"
     },
     {
-      id: 5,
-      title: "The Road to React",
-      image:
-        "https://images-na.ssl-images-amazon.com/images/I/41MBLi5a4jL._SX384_BO1,204,203,200_.jpg",
-      author: "Robin Wieruch"
+      _id: "64a3ed2195727e8cf840ee05",
+      title: "12 Angry Men",
+      description: "A jury holdout attempts to prevent a miscarriage of justice by forcing his colleagues to reconsider the evidence.",
+      genre: "Drama",
+      director: "Sidney Lumet",
+      imgURL: "https://example.com/movie4.jpg"
+    },
+    {
+      _id: "64a3ed2195727e8cf840ee0b",
+      title: "Inception",
+      description: "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.",
+      genre: "Action",
+      director: "Christopher Nolan",
+      imgURL: "https://example.com/movie10.jpg"
+    },
+    {
+      _id: "64a3ed2195727e8cf840ee04",
+      title: "The Dark Knight",
+      description: "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
+      genre: "Action",
+      director: "Christopher Nolan",
+      imgURL: "https://example.com/movie3.jpg"
     }
   ]);
+
 
   const [selectedBook, setSelectedBook] = useState(null);
 
