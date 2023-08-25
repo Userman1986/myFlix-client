@@ -1,9 +1,9 @@
 import { useState } from "react";movie
-import { movieCard } from "../movie-card/movie-card";
-import { movieView } from "../movie-view/movie-view";
+import { MovieCard } from "../movie-card/movie-card";
+import { MovieView } from "../movie-view/movie-view";
 
 export const MainView = () => {
-  const [movies, setmovies] = useState([
+  const [movies, setMovies] = useState([
     {
       _id: "64a3ecab95727e8cf840ee02",
       title: "The Shawshank Redemption",
@@ -63,11 +63,11 @@ export const MainView = () => {
   ]);
 
 
-  const [selectedmovie, setSelectedmovie] = useState(null);
+  const [selectedMovie, setSelectedMovie] = useState(null);
 
   if (selectedmovie) {
     return (
-      <movieView movie={selectedmovie} onBackClick={() => setSelectedmovie(null)} />
+      <movieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
     );
   }
 
@@ -78,11 +78,11 @@ export const MainView = () => {
   return (
     <div>
       {movies.map((movie) => (
-        <movieCard
+        <MovieCard
           key={movie.id}
           movie={movie}
-          onmovieClick={(newSelectedmovie) => {
-            setSelectedmovie(newSelectedmovie);
+          onmovieClick={(newSelectedMovie) => {
+            setSelectedmovie(newSelectedMovie);
           }}
         />
       ))}
