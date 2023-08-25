@@ -1,16 +1,16 @@
-import { useState } from "react";
-import { BookCard } from "../book-card/book-card";
-import { BookView } from "../book-view/book-view";
+import { useState } from "react";movie
+import { movieCard } from "../movie-card/movie-card";
+import { movieView } from "../movie-view/movie-view";
 
 export const MainView = () => {
-  const [books, setBooks] = useState([
+  const [movies, setmovies] = useState([
     {
       _id: "64a3ecab95727e8cf840ee02",
       title: "The Shawshank Redemption",
       description: "Two imprisoned men bond over a number of years, finding solace and even redemption through acts of common decency.",
       genre: "Drama",
       director: "Frank Darabont",
-      imgURL: "https://example.com/movie1.jpg"
+      imgURL: "https://pics.filmaffinity.com/The_Shawshank_Redemption-576140557-large.jpg"
     },
     {
       _id: "64a3ed2195727e8cf840ee06",
@@ -18,7 +18,7 @@ export const MainView = () => {
       description: "Gandalf and Aragorn lead the World of Men against Sauron's army to draw his gaze from Frodo and Sam as they approach Mount Doom with the One Ring.",
       genre: "Adventure",
       director: "Peter Jackson",
-      imgURL: "https://example.com/movie5.jpg"
+      imgURL: "https://m.media-amazon.com/images/M/MV5BNzA5ZDNlZWMtM2NhNS00NDJjLTk4NDItYTRmY2EwMWZlMTY3XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg"
     },
     {
       _id: "64a3ecab95727e8cf840ee03",
@@ -26,7 +26,7 @@ export const MainView = () => {
       description: "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
       genre: "Crime",
       director: "Francis Ford Coppola",
-      imgURL: "https://example.com/movie2.jpg"
+      imgURL: "https://static.wikia.nocookie.net/international-entertainment-project/images/9/9b/The_Godfather_-_poster_%28English%29.jpg/revision/latest?cb=20230121190704"
     },
     {
       _id: "64a3ed2195727e8cf840ee08",
@@ -34,7 +34,7 @@ export const MainView = () => {
       description: "A bounty hunting scam joins two men in an uneasy alliance against a third in a race to find a fortune in gold buried in a remote cemetery.",
       genre: "Western",
       director: "Sergio Leone",
-      imgURL: "https://example.com/movie7.jpg"
+      imgURL: "https://static.wikia.nocookie.net/dubbing9585/images/a/a1/The_good%2C_the_bad_%26_the_ugly.jpg/revision/latest?cb=20171206011139"
     },
     {
       _id: "64a3ed2195727e8cf840ee05",
@@ -42,7 +42,7 @@ export const MainView = () => {
       description: "A jury holdout attempts to prevent a miscarriage of justice by forcing his colleagues to reconsider the evidence.",
       genre: "Drama",
       director: "Sidney Lumet",
-      imgURL: "https://example.com/movie4.jpg"
+      imgURL: "https://static.wikia.nocookie.net/moviedatabase/images/2/2f/12_Angry_Men.jpg/revision/latest?cb=20160503195139"
     },
     {
       _id: "64a3ed2195727e8cf840ee0b",
@@ -50,7 +50,7 @@ export const MainView = () => {
       description: "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.",
       genre: "Action",
       director: "Christopher Nolan",
-      imgURL: "https://example.com/movie10.jpg"
+      imgURL: "https://upload.wikimedia.org/wikipedia/en/1/18/Inception_OST.jpg"
     },
     {
       _id: "64a3ed2195727e8cf840ee04",
@@ -58,31 +58,31 @@ export const MainView = () => {
       description: "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
       genre: "Action",
       director: "Christopher Nolan",
-      imgURL: "https://example.com/movie3.jpg"
+      imgURL: "https://upload.wikimedia.org/wikipedia/en/1/1c/The_Dark_Knight_%282008_film%29.jpg"
     }
   ]);
 
 
-  const [selectedBook, setSelectedBook] = useState(null);
+  const [selectedmovie, setSelectedmovie] = useState(null);
 
-  if (selectedBook) {
+  if (selectedmovie) {
     return (
-      <BookView book={selectedBook} onBackClick={() => setSelectedBook(null)} />
+      <movieView movie={selectedmovie} onBackClick={() => setSelectedmovie(null)} />
     );
   }
 
-  if (books.length === 0) {
+  if (movies.length === 0) {
     return <div>The list is empty!</div>;
   }
 
   return (
     <div>
-      {books.map((book) => (
-        <BookCard
-          key={book.id}
-          book={book}
-          onBookClick={(newSelectedBook) => {
-            setSelectedBook(newSelectedBook);
+      {movies.map((movie) => (
+        <movieCard
+          key={movie.id}
+          movie={movie}
+          onmovieClick={(newSelectedmovie) => {
+            setSelectedmovie(newSelectedmovie);
           }}
         />
       ))}
