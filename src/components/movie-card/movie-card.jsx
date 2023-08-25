@@ -1,8 +1,8 @@
-export const movieCard = ({ movie, MovieClick }) => {
+export const MovieCard = ({ movie, MovieClick }) => {
     return (
       <div
         onClick={() => {
-          onmovieClick(movie);
+          MovieClick(movie);
         }}
       >
         {movie.title}
