@@ -1,11 +1,11 @@
-export const BookCard = ({ book, onBookClick }) => {
+export const movieCard = ({ movie, MovieClick }) => {
     return (
       <div
         onClick={() => {
-          onBookClick(book);
+          onmovieClick(movie);
         }}
       >
-        {book.title}
+        {movie.title}
       </div>
     );
   };
