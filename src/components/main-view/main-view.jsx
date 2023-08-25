@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from 'react';
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 
@@ -67,7 +67,7 @@ export const MainView = () => {
 
   if (selectedMovie) {
     return (
-      <movieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
+      <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
     );
   }
 
@@ -81,7 +81,7 @@ export const MainView = () => {
         <MovieCard
           key={movie.id}
           movie={movie}
-          onmovieClick={(newSelectedMovie) => {
+          onMovieClick={(newSelectedMovie) => {
             setSelectedmovie(newSelectedMovie);
           }}
         />
