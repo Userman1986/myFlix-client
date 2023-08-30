@@ -9,7 +9,8 @@ export const MainView = () => {
 
   useEffect(() => {
     fetch("https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/movies")
-      .then((response) => response.json())
+      .then((response) =>  { console.log(response.json())
+    })
       .then((data) => {
         const movieFromApi = data.docs.map((doc) => {
           return {
