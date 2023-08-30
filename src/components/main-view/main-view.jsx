@@ -1,18 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
-import { useState, useEffect } from "react";
 
-export const MainView = () => {
+export const MainView = ({ apiUrl }) => {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
 
   useEffect(() => {
-    fetch("https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/movies")
-      .then((response) =>  { console.log(response.json())
-    })
+    fetch(apiUrl)
+      .then((response) => response.json())
       .then((data) => {
-        const movieFromApi = data.docs.map((doc) => {
+        const movieFromApi = data.map((movie) => {
           return {
             id: movie._id,
             title: movie.title,
@@ -23,11 +21,12 @@ export const MainView = () => {
           };
         });
 
-        setMovie(movieFromApi);
+        setMovies(movieFromApi);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
       });
-  }, []);
-
-
+  }, [apiUrl]);
 
   if (selectedMovie) {
     return (
@@ -43,13 +42,15 @@ export const MainView = () => {
     <div>
       {movies.map((movie) => (
         <MovieCard
-          key={movie._id}
+          key={movie.id}
           movie={movie}
-          onMovieClick={(newSelectedMovie) => {
-            setSelectedMovie(newSelectedMovie);
+          onMovieClick={() => {
+            setSelectedMovie(movie);
           }}
         />
       ))}
     </div>
   );
 }
+
+export default MainView;
