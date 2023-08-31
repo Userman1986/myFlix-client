@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export const MovieCard = ({ movie, onMovieClick }) => {
+  const { _id, title, imgURL, description, genre, director} = movie;
   return (
     <div
       onClick={() => {
