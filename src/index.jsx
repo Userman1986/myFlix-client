@@ -4,7 +4,7 @@ import { createRoot } from 'react-dom';
 import { MainView } from './components/main-view/main-view';
 import './index.scss';
 
-let allowedOrigins = ['http://localhost:1234', 'http://testsite.com'];
+let allowedOrigins = ['http://localhost:1234', 'http://testsite.com', 'https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com'];
 
 app.use(cors({
  origin: (origin, callback) => {
