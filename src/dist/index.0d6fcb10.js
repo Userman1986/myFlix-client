@@ -2956,7 +2956,6 @@ let allowedOrigins = [
     "https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com"
 ];
 const apiUrl = "https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/movies";
-const apiUrl = "https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/movies";
 const App = ()=>{
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _mainView.MainView), {
         apiUrl: apiUrl
