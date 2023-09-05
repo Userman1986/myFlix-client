@@ -2952,15 +2952,17 @@ var _mainView = require("./components/main-view/main-view");
 var _indexScss = require("./index.scss");
 let allowedOrigins = [
     "http://localhost:1234",
-    "http://testsite.com"
+    "http://testsite.com",
+    "https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com"
 ];
+const apiUrl = "https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/movies";
 const apiUrl = "https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/movies";
 const App = ()=>{
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _mainView.MainView), {
         apiUrl: apiUrl
     }, void 0, false, {
         fileName: "src/index.jsx",
-        lineNumber: 13,
+        lineNumber: 16,
         columnNumber: 10
     }, undefined);
 };
@@ -2969,7 +2971,7 @@ const root = document.getElementById("root");
 const appRoot = (0, _client.createRoot)(root);
 appRoot.render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(App, {}, void 0, false, {
     fileName: "src/index.jsx",
-    lineNumber: 20,
+    lineNumber: 23,
     columnNumber: 16
 }, undefined));
 var _c;
