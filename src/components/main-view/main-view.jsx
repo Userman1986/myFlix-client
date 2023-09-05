@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
+import { LoginView } from "../login-view/login-view";
 
 export const MainView = ({ apiUrl }) => {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
+  const [user, setUser] = useState(null);
+
+
+
 
   useEffect(() => {
     fetch(apiUrl)
@@ -27,6 +32,12 @@ export const MainView = ({ apiUrl }) => {
         console.error('Error fetching data:', error);
       });
   }, [apiUrl]);
+
+
+  if (!user) {
+    return <LoginView />;
+  }
+
 
   if (selectedMovie) {
     return (
