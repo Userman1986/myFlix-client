@@ -16,8 +16,8 @@ export const MainView = ({ apiUrl }) => {
             title: movie.title,
             description: movie.description,
             imgURL: movie.imgURL,
-            director: movie.director.name,
-            genre: movie.genre.name,
+            director: movie.director,
+            genre: movie.genre,
           };
         });
 
@@ -37,7 +37,6 @@ export const MainView = ({ apiUrl }) => {
   if (movies.length === 0) {
     return <div>The list is empty!</div>;
   }
-
   return (
     <div>
       {movies.map((movie) => (
@@ -49,6 +48,12 @@ export const MainView = ({ apiUrl }) => {
           }}
         />
       ))}
+      {selectedMovie && (
+        <MovieView
+          movie={selectedMovie}
+          onBackClick={() => setSelectedMovie(null)}
+        />
+      )}
     </div>
   );
 }
