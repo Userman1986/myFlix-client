@@ -7,12 +7,30 @@ export const MainView = ({ apiUrl }) => {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
 
+  if (!user) {
+    return (
+      <LoginView
+        onLoggedIn={(user, token) => {
+          setUser(user);
+          setToken(token);
+        }}
+      />
+    );
+  }
 
 
 
   useEffect(() => {
-    fetch(apiUrl)
+    if (!token) {
+      return;
+    }
+    fetch(apiUrl, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         const movieFromApi = data.map((movie) => {
@@ -32,11 +50,48 @@ export const MainView = ({ apiUrl }) => {
         console.error('Error fetching data:', error);
       });
   }, [apiUrl]);
+  
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const data = {
+      Username: username,
+      Password: password,
+      Email: email,
+      Birthday: birthday
+    };
+
+    fetch("https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/movies", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then((response) => {
+      if (response.ok) {
+        alert("Signup successful");
+        window.location.reload();
+      } else {
+        alert("Signup failed");
+      }
+    });
+  };
 
 
-  if (!user) {
-    return <LoginView />;
-  }
+<button onClick={() => { setUser(null); setToken(null); }}>Logout</button>
+
+if (!user) {
+  return (
+    <div>
+      <LoginView onLoggedIn={(user, token) => {
+        setUser(user);
+        setToken(token);
+      }} />
+      <span> or </span>
+      <SignupView />
+    </div>
+  );
+}
 
 
   if (selectedMovie) {
