@@ -27194,8 +27194,8 @@ const MainView = ({ apiUrl })=>{
                     title: movie.title,
                     description: movie.description,
                     imgURL: movie.imgURL,
-                    director: movie.director,
-                    genre: movie.genre
+                    director: movie.director.name,
+                    genre: movie.genre.name
                 };
             });
             setMovies(movieFromApi);
