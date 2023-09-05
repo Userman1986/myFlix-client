@@ -10,7 +10,7 @@ let allowedOrigins = ['http://localhost:1234', 'http://testsite.com', 'https://g
 
 
 const apiUrl = 'https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/movies';
-const apiUrl = 'https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/movies';
+
 
 const App = () => {
   return <MainView apiUrl={apiUrl} />;
