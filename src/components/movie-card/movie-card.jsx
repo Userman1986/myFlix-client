@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export const MovieCard = ({ movie, onMovieClick }) => {
-  const { _id, title, imgURL, description, genre, director} = movie;
+  const { _id, title, imgURL, description, genre, director } = movie;
   return (
     <div
       onClick={() => {
@@ -29,4 +29,3 @@ MovieCard.propTypes = {
   }).isRequired,
   onMovieClick: PropTypes.func.isRequired,
 };
-

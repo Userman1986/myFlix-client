@@ -17,18 +17,18 @@ export const MovieView = ({ movie, onBackClick }) => {
       </div>
       <div>
         <span>Genre: </span>
-        <span>{movie.genre}</span>
+        <span>{movie.genre.name}</span> {/* Access the name property */}
       </div>
       <div>
         <span>Director: </span>
-        <span>{movie.director}</span>
+        <span>{movie.director.name}</span> {/* Access the name property */}
       </div>
       <button onClick={onBackClick}>Back</button>
     </div>
   );
 };
 
-MovieCard.propTypes = {
+MovieView.propTypes = {
   movie: PropTypes.shape({
     _id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
@@ -41,5 +41,5 @@ MovieCard.propTypes = {
     }).isRequired,
     imgURL: PropTypes.string.isRequired,
   }).isRequired,
-  onMovieClick: PropTypes.func.isRequired,
+  onBackClick: PropTypes.func.isRequired,
 };
