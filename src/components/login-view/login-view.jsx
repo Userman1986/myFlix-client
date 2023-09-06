@@ -8,8 +8,8 @@ export const LoginView = ({ onLoggedIn }) => {
     event.preventDefault();
 
     const data = {
-      access: username,
-      secret: password, // Use the password state
+      Username: username,
+      Password: password, // Use the password state
     };
 
     fetch("https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/movies/login", {

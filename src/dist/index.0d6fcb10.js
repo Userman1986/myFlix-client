@@ -28466,8 +28466,8 @@ const LoginView = ({ onLoggedIn })=>{
     const handleSubmit = (event)=>{
         event.preventDefault();
         const data = {
-            access: username,
-            secret: password
+            Username: username,
+            Password: password
         };
         fetch("https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/movies/login", {
             method: "POST",
