@@ -2,16 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
+import { SignupView} from '../signup-view/signup-view';
 
 export const MainView = ({ apiUrl }) => {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
-  const [user, setUser] = useState(null);
-  const [token, setToken] = useState(null);
+  const [user, setUser] = useState(localStorage.getItem('user') || null);
+  const [token, setToken] = useState(localStorage.getItem('token') || null);
 
 
   useEffect(() => {
     if (token) {
+
+      localStorage.setItem('user', user);
+      localStorage.setItem('token', token);
+
       fetch(apiUrl, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -42,11 +47,25 @@ export const MainView = ({ apiUrl }) => {
           console.error('Error fetching data:', error);
         });
     }
-  }, [token, apiUrl]);
+  }, [token, apiUrl, user]);
 
   const handleLogout = () => {
+
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
     setUser(null);
     setToken(null);
+  };
+
+  const [showSignup, setShowSignup] = useState(false);
+
+  const toggleSignup = () => {
+    setShowSignup(!showSignup);
+  };
+
+  const handleSignup = () => {
+
+    setShowSignup(false);
   };
 
   if (!user) {
@@ -58,6 +77,10 @@ export const MainView = ({ apiUrl }) => {
             setToken(token);
           }}
         />
+     or
+        <SignupView />
+
+
       </div>
     );
   }
@@ -73,21 +96,37 @@ export const MainView = ({ apiUrl }) => {
   }
   return (
     <div>
-      <button onClick={handleLogout}>Logout</button>
-      {movies.map((movie) => (
-        <MovieCard
-          key={movie._id}
-          movie={movie}
-          onMovieClick={() => {
-            setSelectedMovie(movie);
-          }}
-        />
-      ))}
-      {selectedMovie && (
-        <MovieView
-          movie={selectedMovie}
-          onBackClick={() => setSelectedMovie(null)}
-        />
+      {user ? (
+        <div>
+          <button onClick={handleLogout}>Logout</button>
+          {movies.map((movie) => (
+            <MovieCard
+              key={movie._id}
+              movie={movie}
+              onMovieClick={() => {
+                setSelectedMovie(movie);
+              }}
+            />
+          ))}
+          {selectedMovie && (
+            <MovieView
+              movie={selectedMovie}
+              onBackClick={() => setSelectedMovie(null)}
+            />
+          )}
+        </div>
+      ) : (
+        <div>
+          <LoginView onLoggedIn={(user, token) => {
+            setUser(user);
+            setToken(token);
+          }} />
+          {!showSignup ? (
+            <button onClick={toggleSignup}>Signup</button>
+          ) : (
+            <SignupView onSignup={handleSignup} />
+          )}
+        </div>
       )}
     </div>
   );
