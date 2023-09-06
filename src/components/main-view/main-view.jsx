@@ -2,18 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
-import { SignupView} from '../signup-view/signup-view';
+import SignupView from '../signup-view/signup-view';
 
 export const MainView = ({ apiUrl }) => {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [user, setUser] = useState(localStorage.getItem('user') || null);
   const [token, setToken] = useState(localStorage.getItem('token') || null);
-
+  const [showSignup, setShowSignup] = useState(false);
 
   useEffect(() => {
     if (token) {
-
       localStorage.setItem('user', user);
       localStorage.setItem('token', token);
 
@@ -50,50 +49,19 @@ export const MainView = ({ apiUrl }) => {
   }, [token, apiUrl, user]);
 
   const handleLogout = () => {
-
     localStorage.removeItem('user');
     localStorage.removeItem('token');
     setUser(null);
     setToken(null);
   };
 
-  const [showSignup, setShowSignup] = useState(false);
+  const handleSignup = () => {
 
+  };
   const toggleSignup = () => {
     setShowSignup(!showSignup);
   };
 
-  const handleSignup = () => {
-
-    setShowSignup(false);
-  };
-
-  if (!user) {
-    return (
-      <div>
-        <LoginView
-          onLoggedIn={(user, token) => {
-            setUser(user);
-            setToken(token);
-          }}
-        />
-     or
-        <SignupView />
-
-
-      </div>
-    );
-  }
-
-  if (selectedMovie) {
-    return (
-      <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
-    );
-  }
-
-  if (movies.length === 0) {
-    return <div>The list is empty!</div>;
-  }
   return (
     <div>
       {user ? (
@@ -121,11 +89,11 @@ export const MainView = ({ apiUrl }) => {
             setUser(user);
             setToken(token);
           }} />
-          {!showSignup ? (
-            <button onClick={toggleSignup}>Signup</button>
-          ) : (
-            <SignupView onSignup={handleSignup} />
-          )}
+          {showSignup ? (
+  <SignupView onSignup={handleSignup} />
+) : (
+  <button onClick={toggleSignup}>Signup</button>
+)}
         </div>
       )}
     </div>
