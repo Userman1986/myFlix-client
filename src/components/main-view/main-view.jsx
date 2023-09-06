@@ -2,13 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
-import { SignupView } from "../signup-view/signup-view";
+import SignupView from '../signup-view/signup-view';
 
 export const MainView = ({ apiUrl }) => {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [user, setUser] = useState(localStorage.getItem('user') || null);
   const [token, setToken] = useState(localStorage.getItem('token') || null);
+
+
+
 
 
   useEffect(() => {
@@ -49,6 +52,7 @@ export const MainView = ({ apiUrl }) => {
     }
   }, [token, apiUrl, user]);
 
+
   const handleLogout = () => {
 
     localStorage.removeItem('user');
@@ -58,6 +62,9 @@ export const MainView = ({ apiUrl }) => {
   };
 
   
+  const [showSignup, setShowSignup] = useState(false);
+
+
 
 
   if (!user) {
@@ -87,21 +94,37 @@ export const MainView = ({ apiUrl }) => {
   }
   return (
     <div>
-      <button onClick={handleLogout}>Logout</button>
-      {movies.map((movie) => (
-        <MovieCard
-          key={movie._id}
-          movie={movie}
-          onMovieClick={() => {
-            setSelectedMovie(movie);
-          }}
-        />
-      ))}
-      {selectedMovie && (
-        <MovieView
-          movie={selectedMovie}
-          onBackClick={() => setSelectedMovie(null)}
-        />
+      {user ? (
+        <div>
+          <button onClick={handleLogout}>Logout</button>
+          {movies.map((movie) => (
+            <MovieCard
+              key={movie._id}
+              movie={movie}
+              onMovieClick={() => {
+                setSelectedMovie(movie);
+              }}
+            />
+          ))}
+          {selectedMovie && (
+            <MovieView
+              movie={selectedMovie}
+              onBackClick={() => setSelectedMovie(null)}
+            />
+          )}
+        </div>
+      ) : (
+        <div>
+          <LoginView onLoggedIn={(user, token) => {
+            setUser(user);
+            setToken(token);
+          }} />
+          {!showSignup ? (
+            <button onClick={toggleSignup}>Signup</button>
+          ) : (
+            <SignupView onSignup={handleSignup} />
+          )}
+        </div>
       )}
     </div>
   );
