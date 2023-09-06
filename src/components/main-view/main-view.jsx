@@ -1,38 +1,66 @@
 import React, { useState, useEffect } from 'react';
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
+import { LoginView } from "../login-view/login-view";
 
 export const MainView = ({ apiUrl }) => {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
+  const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
+
 
   useEffect(() => {
-    fetch(apiUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        const movieFromApi = data.map((movie) => {
-          return {
-            _id: movie._id,
-            title: movie.title,
-            description: movie.description,
-            imgURL: movie.imgURL,
-            director: movie.director ? {
-              _id: movie.director._id || '',
-              name: movie.director.name || '',
-            } : {},
-            genre: movie.genre ? {
-              _id: movie.genre._id || '',
-              name: movie.genre.name || '',
-            } : {},
-          };
-        });
-
-        setMovies(movieFromApi);
+    if (token) {
+      fetch(apiUrl, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
-  }, [apiUrl]);
+        .then((response) => response.json())
+        .then((data) => {
+          const movieFromApi = data.map((movie) => {
+            return {
+              _id: movie._id,
+              title: movie.title,
+              description: movie.description,
+              imgURL: movie.imgURL,
+              director: movie.director ? {
+                _id: movie.director._id || '',
+                name: movie.director.name || '',
+              } : {},
+              genre: movie.genre ? {
+                _id: movie.genre._id || '',
+                name: movie.genre.name || '',
+              } : {},
+            };
+          });
+
+          setMovies(movieFromApi);
+        })
+        .catch((error) => {
+          console.error('Error fetching data:', error);
+        });
+    }
+  }, [token, apiUrl]);
+
+  const handleLogout = () => {
+    setUser(null);
+    setToken(null);
+  };
+
+  if (!user) {
+    return (
+      <div>
+        <LoginView
+          onLoggedIn={(user, token) => {
+            setUser(user);
+            setToken(token);
+          }}
+        />
+      </div>
+    );
+  }
 
   if (selectedMovie) {
     return (
@@ -45,6 +73,7 @@ export const MainView = ({ apiUrl }) => {
   }
   return (
     <div>
+      <button onClick={handleLogout}>Logout</button>
       {movies.map((movie) => (
         <MovieCard
           key={movie._id}
