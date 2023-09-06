@@ -12,7 +12,7 @@ export const LoginView = ({ onLoggedIn }) => {
       Password: password, // Use the password state
     };
 
-    fetch("https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/movies/login", {
+    fetch("https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
