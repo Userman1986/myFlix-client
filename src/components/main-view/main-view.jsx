@@ -56,9 +56,10 @@ export const MainView = ({ apiUrl }) => {
   };
 
   const handleSignup = () => {
-    // Add any logic you want to perform after a successful signup here.
-    // For example, you can close the signup form or redirect the user.
-    // You can also update the user state with the new user data.
+
+  };
+  const toggleSignup = () => {
+    setShowSignup(!showSignup);
   };
 
   return (
@@ -88,11 +89,11 @@ export const MainView = ({ apiUrl }) => {
             setUser(user);
             setToken(token);
           }} />
-          {!showSignup ? (
-            <button onClick={() => setShowSignup(!showSignup)}>Signup</button>
-          ) : (
-            <SignupView onSignup={handleSignup} />
-          )}
+          {showSignup ? (
+  <SignupView onSignup={handleSignup} />
+) : (
+  <button onClick={toggleSignup}>Signup</button>
+)}
         </div>
       )}
     </div>
