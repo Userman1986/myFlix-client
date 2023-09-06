@@ -27189,19 +27189,8 @@ const MainView = ({ apiUrl })=>{
     const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null);
     const [user, setUser] = (0, _react.useState)(null);
     const [token, setToken] = (0, _react.useState)(null);
-    if (!user) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _loginView.LoginView), {
-        onLoggedIn: (user, token)=>{
-            setUser(user);
-            setToken(token);
-        }
-    }, void 0, false, {
-        fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 14,
-        columnNumber: 7
-    }, undefined);
     (0, _react.useEffect)(()=>{
-        if (!token) return;
-        fetch(apiUrl, {
+        if (token) fetch(apiUrl, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -27221,99 +27210,68 @@ const MainView = ({ apiUrl })=>{
             console.error("Error fetching data:", error);
         });
     }, [
+        token,
         apiUrl
     ]);
-    const handleSubmit = (event)=>{
-        event.preventDefault();
-        const data = {
-            Username: username,
-            Password: password,
-            Email: email,
-            Birthday: birthday
-        };
-        fetch("https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/movies", {
-            method: "POST",
-            body: JSON.stringify(data),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }).then((response)=>{
-            if (response.ok) {
-                alert("Signup successful");
-                window.location.reload();
-            } else alert("Signup failed");
-        });
+    const handleLogout = ()=>{
+        setUser(null);
+        setToken(null);
     };
-    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
-        onClick: ()=>{
-            setUser(null);
-            setToken(null);
-        },
-        children: "Logout"
+    if (!user) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _loginView.LoginView), {
+            onLoggedIn: (user, token)=>{
+                setUser(user);
+                setToken(token);
+            }
+        }, void 0, false, {
+            fileName: "src/components/main-view/main-view.jsx",
+            lineNumber: 48,
+            columnNumber: 9
+        }, undefined)
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 81,
-        columnNumber: 1
-    }, undefined);
-    if (!user) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        children: [
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _loginView.LoginView), {
-                onLoggedIn: (user, token)=>{
-                    setUser(user);
-                    setToken(token);
-                }
-            }, void 0, false, {
-                fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 86,
-                columnNumber: 7
-            }, undefined),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                children: " or "
-            }, void 0, false, {
-                fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 90,
-                columnNumber: 7
-            }, undefined),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(SignupView, {}, void 0, false, {
-                fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 91,
-                columnNumber: 7
-            }, undefined)
-        ]
-    }, void 0, true, {
-        fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 85,
-        columnNumber: 5
+        lineNumber: 47,
+        columnNumber: 7
     }, undefined);
     if (selectedMovie) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
         movie: selectedMovie,
         onBackClick: ()=>setSelectedMovie(null)
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 99,
+        lineNumber: 60,
         columnNumber: 7
     }, undefined);
     if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: "The list is empty!"
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 104,
+        lineNumber: 65,
         columnNumber: 12
     }, undefined);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        children: movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
-                movie: movie,
-                onMovieClick: ()=>{
-                    setSelectedMovie(movie);
-                }
-            }, movie.id, false, {
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                onClick: handleLogout,
+                children: "Logout"
+            }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 110,
-                columnNumber: 9
-            }, undefined))
-    }, void 0, false, {
+                lineNumber: 70,
+                columnNumber: 7
+            }, undefined),
+            movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
+                    movie: movie,
+                    onMovieClick: ()=>{
+                        setSelectedMovie(movie);
+                    }
+                }, movie._id, false, {
+                    fileName: "src/components/main-view/main-view.jsx",
+                    lineNumber: 72,
+                    columnNumber: 9
+                }, undefined))
+        ]
+    }, void 0, true, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 108,
+        lineNumber: 69,
         columnNumber: 5
     }, undefined);
 };

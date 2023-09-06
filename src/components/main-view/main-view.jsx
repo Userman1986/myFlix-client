@@ -9,90 +9,51 @@ export const MainView = ({ apiUrl }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
 
-  if (!user) {
-    return (
-      <LoginView
-        onLoggedIn={(user, token) => {
-          setUser(user);
-          setToken(token);
-        }}
-      />
-    );
-  }
-
-
-
   useEffect(() => {
-    if (!token) {
-      return;
-    }
-    fetch(apiUrl, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        const movieFromApi = data.map((movie) => {
-          return {
-            _id: movie._id,
-            title: movie.title,
-            description: movie.description,
-            imgURL: movie.imgURL,
-            director: movie.director,
-            genre: movie.genre
-          };
-        });
-
-        setMovies(movieFromApi);
+    if (token) {
+      fetch(apiUrl, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
-  }, [apiUrl]);
-  
-  const handleSubmit = (event) => {
-    event.preventDefault();
+        .then((response) => response.json())
+        .then((data) => {
+          const movieFromApi = data.map((movie) => {
+            return {
+              _id: movie._id,
+              title: movie.title,
+              description: movie.description,
+              imgURL: movie.imgURL,
+              director: movie.director,
+              genre: movie.genre
+            };
+          });
 
-    const data = {
-      Username: username,
-      Password: password,
-      Email: email,
-      Birthday: birthday
-    };
+          setMovies(movieFromApi);
+        })
+        .catch((error) => {
+          console.error('Error fetching data:', error);
+        });
+    }
+  }, [token, apiUrl]);
 
-    fetch("https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/movies", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    }).then((response) => {
-      if (response.ok) {
-        alert("Signup successful");
-        window.location.reload();
-      } else {
-        alert("Signup failed");
-      }
-    });
+  const handleLogout = () => {
+    setUser(null);
+    setToken(null);
   };
 
-
-<button onClick={() => { setUser(null); setToken(null); }}>Logout</button>
-
-if (!user) {
-  return (
-    <div>
-      <LoginView onLoggedIn={(user, token) => {
-        setUser(user);
-        setToken(token);
-      }} />
-      <span> or </span>
-      <SignupView />
-    </div>
-  );
-}
-
+  if (!user) {
+    return (
+      <div>
+        <LoginView
+          onLoggedIn={(user, token) => {
+            setUser(user);
+            setToken(token);
+          }}
+        />
+      </div>
+    );
+  }
 
   if (selectedMovie) {
     return (
@@ -106,9 +67,10 @@ if (!user) {
 
   return (
     <div>
+      <button onClick={handleLogout}>Logout</button>
       {movies.map((movie) => (
         <MovieCard
-          key={movie.id}
+          key={movie._id} // Use _id as the key
           movie={movie}
           onMovieClick={() => {
             setSelectedMovie(movie);
