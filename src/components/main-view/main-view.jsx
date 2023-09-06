@@ -9,6 +9,7 @@ export const MainView = ({ apiUrl }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
 
+
   useEffect(() => {
     if (token) {
       fetch(apiUrl, {
