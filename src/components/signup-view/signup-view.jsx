@@ -17,7 +17,7 @@ const SignupView = ({ onSignup }) => {
     };
 
     
-    fetch("https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/users", {
+    fetch("https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {

@@ -9,14 +9,10 @@ export const MainView = ({ apiUrl }) => {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [user, setUser] = useState(localStorage.getItem('user') || null);
   const [token, setToken] = useState(localStorage.getItem('token') || null);
-
-
-
-
+  const [showSignup, setShowSignup] = useState(false);
 
   useEffect(() => {
     if (token) {
-
       localStorage.setItem('user', user);
       localStorage.setItem('token', token);
 
@@ -52,46 +48,19 @@ export const MainView = ({ apiUrl }) => {
     }
   }, [token, apiUrl, user]);
 
-
   const handleLogout = () => {
-
     localStorage.removeItem('user');
     localStorage.removeItem('token');
     setUser(null);
     setToken(null);
   };
 
-  
-  const [showSignup, setShowSignup] = useState(false);
+  const handleSignup = () => {
+    // Add any logic you want to perform after a successful signup here.
+    // For example, you can close the signup form or redirect the user.
+    // You can also update the user state with the new user data.
+  };
 
-
-
-
-  if (!user) {
-    return (
-      <div>
-        <LoginView
-          onLoggedIn={(user, token) => {
-            setUser(user);
-            setToken(token);
-          }}
-        />
-    
-
-
-      </div>
-    );
-  }
-
-  if (selectedMovie) {
-    return (
-      <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
-    );
-  }
-
-  if (movies.length === 0) {
-    return <div>The list is empty!</div>;
-  }
   return (
     <div>
       {user ? (
@@ -120,7 +89,7 @@ export const MainView = ({ apiUrl }) => {
             setToken(token);
           }} />
           {!showSignup ? (
-            <button onClick={toggleSignup}>Signup</button>
+            <button onClick={() => setShowSignup(!showSignup)}>Signup</button>
           ) : (
             <SignupView onSignup={handleSignup} />
           )}
