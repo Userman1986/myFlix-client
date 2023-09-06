@@ -74,16 +74,21 @@ export const MainView = ({ apiUrl }) => {
 
   return (
     <div>
-      <button onClick={handleLogout}>Logout</button>
       {movies.map((movie) => (
         <MovieCard
-          key={movie._id} // Use _id as the key
+          key={movie._id}
           movie={movie}
           onMovieClick={() => {
             setSelectedMovie(movie);
           }}
         />
       ))}
+      {selectedMovie && (
+        <MovieView
+          movie={selectedMovie}
+          onBackClick={() => setSelectedMovie(null)}
+        />
+      )}
     </div>
   );
 }
