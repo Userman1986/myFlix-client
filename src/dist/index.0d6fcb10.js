@@ -27194,8 +27194,14 @@ const MainView = ({ apiUrl })=>{
                     title: movie.title,
                     description: movie.description,
                     imgURL: movie.imgURL,
-                    director: movie.director,
-                    genre: movie.genre
+                    director: {
+                        _id: movie.director._id,
+                        name: movie.director.name
+                    },
+                    genre: {
+                        _id: movie.genre._id,
+                        name: movie.genre.name
+                    }
                 };
             });
             setMovies(movieFromApi);
@@ -27210,14 +27216,14 @@ const MainView = ({ apiUrl })=>{
         onBackClick: ()=>setSelectedMovie(null)
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 33,
+        lineNumber: 39,
         columnNumber: 7
     }, undefined);
     if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: "The list is empty!"
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 38,
+        lineNumber: 44,
         columnNumber: 12
     }, undefined);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27229,7 +27235,7 @@ const MainView = ({ apiUrl })=>{
                     }
                 }, movie._id, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 43,
+                    lineNumber: 49,
                     columnNumber: 9
                 }, undefined)),
             selectedMovie && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
@@ -27237,13 +27243,13 @@ const MainView = ({ apiUrl })=>{
                 onBackClick: ()=>setSelectedMovie(null)
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 52,
+                lineNumber: 58,
                 columnNumber: 9
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 41,
+        lineNumber: 47,
         columnNumber: 5
     }, undefined);
 };
@@ -28311,13 +28317,12 @@ const MovieView = ({ movie, onBackClick })=>{
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                        children: movie.genre
+                        children: movie.genre.name
                     }, void 0, false, {
                         fileName: "src/components/movie-view/movie-view.jsx",
                         lineNumber: 20,
                         columnNumber: 9
-                    }, undefined),
-                    " "
+                    }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/movie-view/movie-view.jsx",
@@ -28334,13 +28339,12 @@ const MovieView = ({ movie, onBackClick })=>{
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                        children: movie.director
+                        children: movie.director.name
                     }, void 0, false, {
                         fileName: "src/components/movie-view/movie-view.jsx",
                         lineNumber: 24,
                         columnNumber: 9
-                    }, undefined),
-                    " "
+                    }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/movie-view/movie-view.jsx",

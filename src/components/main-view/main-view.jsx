@@ -16,8 +16,14 @@ export const MainView = ({ apiUrl }) => {
             title: movie.title,
             description: movie.description,
             imgURL: movie.imgURL,
-            director: movie.director,
-            genre: movie.genre,
+            director: {
+              _id: movie.director._id,
+              name: movie.director.name, 
+            },
+            genre: {
+              _id: movie.genre._id, 
+              name: movie.genre.name, 
+            },
           };
         });
 
