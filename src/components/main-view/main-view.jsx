@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
-import { SignupView} from '..signup-view/signup-view';
+import { SignupView } from "../signup-view/signup-view";
 
 export const MainView = ({ apiUrl }) => {
   const [movies, setMovies] = useState([]);
@@ -57,11 +57,7 @@ export const MainView = ({ apiUrl }) => {
     setToken(null);
   };
 
-  const [showSignup, setShowSignup] = useState(false);
-
-  const toggleSignup = () => {
-    setShowSignup(!showSignup);
-  };
+  
 
 
   if (!user) {
@@ -73,10 +69,7 @@ export const MainView = ({ apiUrl }) => {
             setToken(token);
           }}
         />
-    {/* Render the SignupView component when showSignup is true */}
-    {showSignup && <SignupView />}
-        {/* Add a button to toggle the SignupView */}
-        <button onClick={toggleSignup}>Signup</button>
+    
 
 
       </div>

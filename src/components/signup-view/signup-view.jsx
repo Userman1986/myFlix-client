@@ -6,38 +6,7 @@ export const SignupView = () => {
   const [email, setEmail] = useState("");
   const [birthday, setBirthday] = useState("");
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-  
-    const data = {
-      Username: username,
-      Password: password,
-      Email: email,
-      Birthday: birthday,
-    };
-  
-    fetch("https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/users", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        if (response.ok) {
-          alert("Signup successful");
-          // You might want to redirect the user or handle the success differently.
-        } else {
-          alert("Signup failed");
-          // Handle the failure, e.g., display an error message to the user.
-        }
-      })
-      .catch((error) => {
-        console.error("Error during signup:", error);
-        alert("Something went wrong");
-      });
-  };
-  
+  const handleSubmit = (event) => {};
 
   return (
     <form onSubmit={handleSubmit}>
@@ -82,5 +51,4 @@ export const SignupView = () => {
     </form>
   );
 };
-
-export default SignupView;
+Not
