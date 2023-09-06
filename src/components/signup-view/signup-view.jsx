@@ -82,3 +82,5 @@ export const SignupView = () => {
     </form>
   );
 };
+
+export default SignupView;

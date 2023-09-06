@@ -2,16 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
+import { SignupView} from '..signup-view/signup-view';
 
 export const MainView = ({ apiUrl }) => {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
-  const [user, setUser] = useState(null);
-  const [token, setToken] = useState(null);
+  const [user, setUser] = useState(localStorage.getItem('user') || null);
+  const [token, setToken] = useState(localStorage.getItem('token') || null);
 
 
   useEffect(() => {
     if (token) {
+
+      localStorage.setItem('user', user);
+      localStorage.setItem('token', token);
+
       fetch(apiUrl, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -42,12 +47,22 @@ export const MainView = ({ apiUrl }) => {
           console.error('Error fetching data:', error);
         });
     }
-  }, [token, apiUrl]);
+  }, [token, apiUrl, user]);
 
   const handleLogout = () => {
+
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
     setUser(null);
     setToken(null);
   };
+
+  const [showSignup, setShowSignup] = useState(false);
+
+  const toggleSignup = () => {
+    setShowSignup(!showSignup);
+  };
+
 
   if (!user) {
     return (
@@ -58,6 +73,12 @@ export const MainView = ({ apiUrl }) => {
             setToken(token);
           }}
         />
+    {/* Render the SignupView component when showSignup is true */}
+    {showSignup && <SignupView />}
+        {/* Add a button to toggle the SignupView */}
+        <button onClick={toggleSignup}>Signup</button>
+
+
       </div>
     );
   }
