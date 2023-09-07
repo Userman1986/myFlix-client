@@ -58,7 +58,7 @@ export const MainView = ({ apiUrl }) => {
   };
 
   const handleSignup = () => {
-    // Implement your signup logic here
+    
   };
 
   const toggleSignup = () => {
@@ -66,11 +66,11 @@ export const MainView = ({ apiUrl }) => {
   };
 
   const handleMovieCardClick = (movie) => {
-    setExpandedMovie(movie); // Set the selected movie to expand
+    setSelectedMovie(movie); 
   };
 
   const handleBackClick = () => {
-    setExpandedMovie(null); // Reset selected movie when going back
+    setExpandedMovie(null);
   };
 
   return (
@@ -90,12 +90,12 @@ export const MainView = ({ apiUrl }) => {
               </Col>
             ))}
           </Row>
-          {expandedMovie && (
-            <MovieView
-              movie={expandedMovie}
-              onBackClick={handleBackClick}
-            />
-          )}
+          {selectedMovie && (
+  <MovieView
+    movie={selectedMovie}
+    onBackClick={handleBackClick}
+  />
+)}
         </div>
       ) : (
         <div className="login-container">

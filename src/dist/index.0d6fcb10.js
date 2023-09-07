@@ -27235,17 +27235,15 @@ const MainView = ({ apiUrl })=>{
         setUser(null);
         setToken(null);
     };
-    const handleSignup = ()=>{
-    // Implement your signup logic here
-    };
+    const handleSignup = ()=>{};
     const toggleSignup = ()=>{
         setShowSignup(!showSignup);
     };
     const handleMovieCardClick = (movie)=>{
-        setExpandedMovie(movie); // Set the selected movie to expand
+        setSelectedMovie(movie);
     };
     const handleBackClick = ()=>{
-        setExpandedMovie(null); // Reset selected movie when going back
+        setExpandedMovie(null);
     };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Container), {
         children: user ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27282,13 +27280,13 @@ const MainView = ({ apiUrl })=>{
                     lineNumber: 83,
                     columnNumber: 11
                 }, undefined),
-                expandedMovie && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
-                    movie: expandedMovie,
+                selectedMovie && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
+                    movie: selectedMovie,
                     onBackClick: handleBackClick
                 }, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
                     lineNumber: 94,
-                    columnNumber: 13
+                    columnNumber: 3
                 }, undefined)
             ]
         }, void 0, true, {
