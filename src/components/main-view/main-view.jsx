@@ -3,6 +3,8 @@ import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import SignupView from '../signup-view/signup-view';
+import { Row, Col, Container, Button } from "react-bootstrap";
+import Row from "react-bootstrap/Row";
 
 export const MainView = ({ apiUrl }) => {
   const [movies, setMovies] = useState([]);

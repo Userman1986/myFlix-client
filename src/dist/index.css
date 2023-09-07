@@ -1,73 +1,74 @@
-.my-flix {
-  color: #4682b4;
-}
+@import "~bootstrap/dist/css/bootstrap.min.css";
 
-body, h1, h2, h3, p {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-}
 
+/* Custom styling for MainView */
 .container {
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
-  padding: 20px;
-  display: flex;
+  padding: 20px; /* Add padding to the container for spacing */
 }
 
+button {
+  margin-right: 10px; /* Add margin to buttons for spacing */
+}
+
+/* Style the movie cards */
 .movie-card {
-  cursor: pointer;
-  background-color: #141414;
-  border-radius: 5px;
-  width: 200px;
-  margin: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
   padding: 10px;
-  transition: transform .2s;
-  box-shadow: 0 0 10px #0003;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
 }
 
-.movie-card:hover {
-  transform: scale(1.05);
-}
-
+/* Style the movie card image */
 .movie-card img {
   max-width: 100%;
   height: auto;
 }
 
-.movie-details {
-  background-color: #141414;
-  border-radius: 5px;
-  max-width: 400px;
-  margin: 0 auto;
+/* Style the login and signup forms */
+.login-form,
+.signup-form {
+  background-color: #f8f8f8;
   padding: 20px;
-  box-shadow: 0 0 10px #0003;
-}
-
-.movie-details img {
-  max-width: 100%;
-  height: auto;
-}
-
-.movie-details span {
-  color: #fff;
-  margin: 5px 0;
-  display: block;
-}
-
-.movie-details button {
-  color: #fff;
-  cursor: pointer;
-  background-color: #e50914;
-  border: none;
   border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Style form input fields */
+.login-form input,
+.signup-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+/* Style the signup button */
+.signup-form button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
   padding: 10px 20px;
-  transition: background-color .3s;
+  border-radius: 3px;
+  cursor: pointer;
 }
 
-.movie-details button:hover {
-  background-color: #ff0a16;
+/* Style the logout button */
+.logout-button {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 3px;
+  cursor: pointer;
 }
 
-/*# sourceMappingURL=index.css.map */
+/* Style the movie view */
+.movie-view {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
