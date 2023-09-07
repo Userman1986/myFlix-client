@@ -16,8 +16,7 @@ const SignupView = ({ onSignup }) => {
       Birthday: birthday,
     };
 
-    
-    fetch("https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com", {
+    fetch("https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/users", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -27,11 +26,9 @@ const SignupView = ({ onSignup }) => {
       .then((response) => {
         if (response.ok) {
           alert("Signup successful");
-      
           onSignup(); 
         } else {
           alert("Signup failed");
-          
         }
       })
       .catch((error) => {
@@ -87,4 +84,4 @@ const SignupView = ({ onSignup }) => {
   );
 };
 
-export default SignupView;
+

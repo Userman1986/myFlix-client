@@ -89,6 +89,8 @@ export const MainView = ({ apiUrl }) => {
             setUser(user);
             setToken(token);
           }} />
+          or
+
           {showSignup ? (
   <SignupView onSignup={handleSignup} />
 ) : (
