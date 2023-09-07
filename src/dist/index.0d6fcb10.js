@@ -27190,10 +27190,10 @@ var _s = $RefreshSig$();
 const MainView = ({ apiUrl })=>{
     _s();
     const [movies, setMovies] = (0, _react.useState)([]);
-    const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null);
     const [user, setUser] = (0, _react.useState)(localStorage.getItem("user") || null);
     const [token, setToken] = (0, _react.useState)(localStorage.getItem("token") || null);
     const [showSignup, setShowSignup] = (0, _react.useState)(false);
+    const [expandedMovie, setExpandedMovie] = (0, _react.useState)(null); // Track expanded movie
     (0, _react.useEffect)(()=>{
         if (token) {
             localStorage.setItem("user", user);
@@ -27235,9 +27235,17 @@ const MainView = ({ apiUrl })=>{
         setUser(null);
         setToken(null);
     };
-    const handleSignup = ()=>{};
+    const handleSignup = ()=>{
+    // Implement your signup logic here
+    };
     const toggleSignup = ()=>{
         setShowSignup(!showSignup);
+    };
+    const handleMovieCardClick = (movie)=>{
+        setExpandedMovie(movie); // Set the selected movie to expand
+    };
+    const handleBackClick = ()=>{
+        setExpandedMovie(null); // Reset selected movie when going back
     };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Container), {
         children: user ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27248,7 +27256,7 @@ const MainView = ({ apiUrl })=>{
                     children: "Logout"
                 }, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 71,
+                    lineNumber: 80,
                     columnNumber: 11
                 }, undefined),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Row), {
@@ -27258,36 +27266,34 @@ const MainView = ({ apiUrl })=>{
                             lg: 3,
                             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
                                 movie: movie,
-                                onMovieClick: ()=>{
-                                    setSelectedMovie(movie);
-                                }
+                                onMovieClick: ()=>handleMovieCardClick(movie)
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 75,
+                                lineNumber: 86,
                                 columnNumber: 17
                             }, undefined)
                         }, movie._id, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 74,
+                            lineNumber: 85,
                             columnNumber: 15
                         }, undefined))
                 }, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 72,
+                    lineNumber: 83,
                     columnNumber: 11
                 }, undefined),
-                selectedMovie && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
-                    movie: selectedMovie,
-                    onBackClick: ()=>setSelectedMovie(null)
+                expandedMovie && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
+                    movie: expandedMovie,
+                    onBackClick: handleBackClick
                 }, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 85,
+                    lineNumber: 94,
                     columnNumber: 13
                 }, undefined)
             ]
         }, void 0, true, {
             fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 70,
+            lineNumber: 79,
             columnNumber: 9
         }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
             className: "login-container",
@@ -27299,7 +27305,7 @@ const MainView = ({ apiUrl })=>{
                     }
                 }, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 93,
+                    lineNumber: 102,
                     columnNumber: 11
                 }, undefined),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27308,7 +27314,7 @@ const MainView = ({ apiUrl })=>{
                         onSignup: handleSignup
                     }, void 0, false, {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 99,
+                        lineNumber: 110,
                         columnNumber: 15
                     }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
                         className: "signup-button",
@@ -27316,29 +27322,28 @@ const MainView = ({ apiUrl })=>{
                         children: "Signup"
                     }, void 0, false, {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 101,
+                        lineNumber: 112,
                         columnNumber: 15
                     }, undefined)
                 }, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 97,
+                    lineNumber: 108,
                     columnNumber: 11
                 }, undefined)
             ]
         }, void 0, true, {
             fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 92,
+            lineNumber: 101,
             columnNumber: 9
         }, undefined)
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 68,
+        lineNumber: 77,
         columnNumber: 5
     }, undefined);
 };
-_s(MainView, "98jsDUxqZ0nER34hRCD6zNoVAIo=");
+_s(MainView, "AGtze74TO1BdxHTzKrYOs5WvFlk=");
 _c = MainView;
-exports.default = MainView;
 var _c;
 $RefreshReg$(_c, "MainView");
 
