@@ -27249,7 +27249,7 @@ const MainView = ({ apiUrl })=>{
                 }, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
                     lineNumber: 71,
-                    columnNumber: 5
+                    columnNumber: 11
                 }, undefined),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Row), {
                     children: movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
@@ -27264,17 +27264,17 @@ const MainView = ({ apiUrl })=>{
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
                                 lineNumber: 75,
-                                columnNumber: 11
+                                columnNumber: 17
                             }, undefined)
                         }, movie._id, false, {
                             fileName: "src/components/main-view/main-view.jsx",
                             lineNumber: 74,
-                            columnNumber: 9
+                            columnNumber: 15
                         }, undefined))
                 }, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
                     lineNumber: 72,
-                    columnNumber: 5
+                    columnNumber: 11
                 }, undefined),
                 selectedMovie && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
                     movie: selectedMovie,
@@ -27282,13 +27282,13 @@ const MainView = ({ apiUrl })=>{
                 }, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
                     lineNumber: 85,
-                    columnNumber: 7
+                    columnNumber: 13
                 }, undefined)
             ]
         }, void 0, true, {
             fileName: "src/components/main-view/main-view.jsx",
             lineNumber: 70,
-            columnNumber: 3
+            columnNumber: 9
         }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
             className: "login-container",
             children: [
@@ -27300,7 +27300,7 @@ const MainView = ({ apiUrl })=>{
                 }, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
                     lineNumber: 93,
-                    columnNumber: 5
+                    columnNumber: 11
                 }, undefined),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                     className: "signup-form",
@@ -27309,7 +27309,7 @@ const MainView = ({ apiUrl })=>{
                     }, void 0, false, {
                         fileName: "src/components/main-view/main-view.jsx",
                         lineNumber: 99,
-                        columnNumber: 7
+                        columnNumber: 15
                     }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
                         className: "signup-button",
                         onClick: toggleSignup,
@@ -27317,18 +27317,18 @@ const MainView = ({ apiUrl })=>{
                     }, void 0, false, {
                         fileName: "src/components/main-view/main-view.jsx",
                         lineNumber: 101,
-                        columnNumber: 7
+                        columnNumber: 15
                     }, undefined)
                 }, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
                     lineNumber: 97,
-                    columnNumber: 4
+                    columnNumber: 11
                 }, undefined)
             ]
         }, void 0, true, {
             fileName: "src/components/main-view/main-view.jsx",
             lineNumber: 92,
-            columnNumber: 3
+            columnNumber: 9
         }, undefined)
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
@@ -27394,6 +27394,7 @@ const MovieCard = ({ movie, onMovieClick })=>{
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
+                        className: "btn-danger1",
                         onClick: ()=>onMovieClick(movie),
                         variant: "danger",
                         children: "Open"

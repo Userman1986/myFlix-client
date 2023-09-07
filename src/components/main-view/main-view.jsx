@@ -67,42 +67,42 @@ export const MainView = ({ apiUrl }) => {
   return (
     <Container>
       {user ? (
-  <div>
-    <Button variant="danger" onClick={handleLogout}>Logout</Button>
-    <Row>
-      {movies.map((movie) => (
-        <Col key={movie._id} sm={6} md={4} lg={3}>
-          <MovieCard
-            movie={movie}
-            onMovieClick={() => {
-              setSelectedMovie(movie);
-            }}
-          />
-        </Col>
-      ))}
-    </Row>
-    {selectedMovie && (
-      <MovieView
-        movie={selectedMovie}
-        onBackClick={() => setSelectedMovie(null)}
-      />
-    )}
-  </div>
-) : (
-  <div className="login-container">
-    <LoginView onLoggedIn={(user, token) => {
-      setUser(user);
-      setToken(token);
-    }} />
-   <div className="signup-form">
-    {showSignup ? (
-      <SignupView onSignup={handleSignup} />
-    ) : (
-      <Button className="signup-button" onClick={toggleSignup}>Signup</Button>
-    )}
-    </div>
-  </div>
-)}
+        <div>
+          <Button variant="danger" onClick={handleLogout}>Logout</Button>
+          <Row>
+            {movies.map((movie) => (
+              <Col key={movie._id} sm={6} md={4} lg={3}>
+                <MovieCard
+                  movie={movie}
+                  onMovieClick={() => {
+                    setSelectedMovie(movie);
+                  }}
+                />
+              </Col>
+            ))}
+          </Row>
+          {selectedMovie && (
+            <MovieView
+              movie={selectedMovie}
+              onBackClick={() => setSelectedMovie(null)}
+            />
+          )}
+        </div>
+      ) : (
+        <div className="login-container">
+          <LoginView onLoggedIn={(user, token) => {
+            setUser(user);
+            setToken(token);
+          }} />
+          <div className="signup-form">
+            {showSignup ? (
+              <SignupView onSignup={handleSignup} />
+            ) : (
+              <Button className="signup-button" onClick={toggleSignup}>Signup</Button>
+            )}
+          </div>
+        </div>
+      )}
     </Container>
   );
 }
