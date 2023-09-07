@@ -4,7 +4,7 @@ import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import SignupView from '../signup-view/signup-view';
 import { Row, Col, Container, Button } from "react-bootstrap";
-import Row from "react-bootstrap/Row";
+import "../../dist/index.css"; 
 
 export const MainView = ({ apiUrl }) => {
   const [movies, setMovies] = useState([]);
@@ -65,44 +65,44 @@ export const MainView = ({ apiUrl }) => {
   };
 
   return (
-    <div>
+    <Container>
       {user ? (
-        <div>
-          <button onClick={handleLogout}>Logout</button>
-          {movies.map((movie) => (
-            <MovieCard
-              key={movie._id}
-              movie={movie}
-              onMovieClick={() => {
-                setSelectedMovie(movie);
-              }}
-            />
-          ))}
-          {selectedMovie && (
-            <MovieView
-              movie={selectedMovie}
-              onBackClick={() => setSelectedMovie(null)}
-            />
-          )}
-        </div>
-      ) : (
-        <div>
-          <Col md={5}>
-          <LoginView onLoggedIn={(user, token) => {
-            setUser(user);
-            setToken(token);
-          }} />
-          or
-
-          {showSignup ? (
-  <SignupView onSignup={handleSignup} />
+  <div>
+    <Button variant="danger" onClick={handleLogout}>Logout</Button>
+    <Row>
+      {movies.map((movie) => (
+        <Col key={movie._id} sm={6} md={4} lg={3}>
+          <MovieCard
+            movie={movie}
+            onMovieClick={() => {
+              setSelectedMovie(movie);
+            }}
+          />
+        </Col>
+      ))}
+    </Row>
+    {selectedMovie && (
+      <MovieView
+        movie={selectedMovie}
+        onBackClick={() => setSelectedMovie(null)}
+      />
+    )}
+  </div>
 ) : (
-  <button onClick={toggleSignup}>Signup</button>
+  <div className="login-container">
+    <LoginView onLoggedIn={(user, token) => {
+      setUser(user);
+      setToken(token);
+    }} />
+   
+    {showSignup ? (
+      <SignupView onSignup={handleSignup} />
+    ) : (
+      <Button className="signup-button" onClick={toggleSignup}>Signup</Button>
+    )}
+  </div>
 )}
-</Col>
-        </div>
-      )}
-    </div>
+    </Container>
   );
 }
 

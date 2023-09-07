@@ -1,16 +1,17 @@
 import React, { useState } from "react";
+import "../../dist/index.css";
 
 
 export const LoginView = ({ onLoggedIn }) => {
   const [username, setUsername] = useState("");
-  const [password, setPassword] = useState(""); // Add password state
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     const data = {
       Username: username,
-      Password: password, // Use the password state
+      Password: password,
     };
 
     fetch("https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/login", {
@@ -22,37 +23,40 @@ export const LoginView = ({ onLoggedIn }) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Login response: ", data);
         if (data.user) {
           onLoggedIn(data.user, data.token);
         } else {
           alert("No such user");
         }
       })
-      .catch((e) => {
+      .catch(() => {
         alert("Something went wrong");
       });
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="login-form" onSubmit={handleSubmit}>
       <label>
         Username:
         <input
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          className="login-input" // Apply a custom CSS class
         />
       </label>
       <label>
         Password:
         <input
           type="password"
-          value={password} // Bind to the password state
-          onChange={(e) => setPassword(e.target.value)} // Update the password state
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="login-input" // Apply a custom CSS class
         />
       </label>
-      <button type="submit">Submit</button>
+      <button className="login-button" type="submit">
+        Submit
+      </button>
     </form>
   );
 };

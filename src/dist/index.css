@@ -1,74 +1,134 @@
-@import "~bootstrap/dist/css/bootstrap.min.css";
+@import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 
+/* Add this to your existing CSS */
+/* Add this to make it look more like Netflix */
 
-/* Custom styling for MainView */
-.container {
-  padding: 20px; /* Add padding to the container for spacing */
+body {
+  background-color: #141414;
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-button {
-  margin-right: 10px; /* Add margin to buttons for spacing */
+.container {
+  padding: 20px;
+}
+
+/* Style the header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.header h1 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.header .user-info {
+  display: flex;
+  align-items: center;
+}
+
+.header .user-info img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+/* Style the main view */
+.main-view {
+  padding: 20px 0;
 }
 
 /* Style the movie cards */
 .movie-card {
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
+  background-color: #1e1e1e;
+  margin: 0 10px 20px;
   padding: 10px;
   border-radius: 5px;
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Style the movie card image */
+.movie-card:hover {
+  transform: scale(1.05);
+}
+
 .movie-card img {
   max-width: 100%;
   height: auto;
+  object-fit: cover;
 }
 
-/* Style the login and signup forms */
-.login-form,
-.signup-form {
-  background-color: #f8f8f8;
+/* Style the movie view */
+.movie-view {
+  background-color: #1e1e1e;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.movie-view img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.movie-view h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.movie-view p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.login-form {
+  background-color: #000;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: 0 auto;
+  text-align: center;
 }
 
-/* Style form input fields */
-.login-form input,
-.signup-form input {
+.login-input {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 3px;
+  background-color: #333;
+  color: white;
 }
 
-/* Style the signup button */
-.signup-form button {
-  background-color: #007bff;
-  color: #fff;
+.login-button {
+  background-color: #e50914;
+  color: white;
   border: none;
   padding: 10px 20px;
   border-radius: 3px;
   cursor: pointer;
+  width: 100%; 
+  font-size: 16px;
 }
 
-/* Style the logout button */
-.logout-button {
-  background-color: #dc3545;
-  color: #fff;
+
+.signup-button {
+  background-color: #e50914;
+  color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 10px 20px; 
   border-radius: 3px;
   cursor: pointer;
-}
-
-/* Style the movie view */
-.movie-view {
+  width: 100%;
+  font-size: 16px; 
   margin-top: 20px;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
 }
