@@ -94,12 +94,13 @@ export const MainView = ({ apiUrl }) => {
       setUser(user);
       setToken(token);
     }} />
-   
+   <div className="signup-form">
     {showSignup ? (
       <SignupView onSignup={handleSignup} />
     ) : (
       <Button className="signup-button" onClick={toggleSignup}>Signup</Button>
     )}
+    </div>
   </div>
 )}
     </Container>
