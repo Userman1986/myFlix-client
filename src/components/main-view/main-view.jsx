@@ -9,7 +9,7 @@ export const MainView = ({ apiUrl }) => {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [user, setUser] = useState(localStorage.getItem('user') || null);
   const [token, setToken] = useState(localStorage.getItem('token') || null);
-  const [showSignup, setShowSignup] = useState(false);
+  const [showSignup, setShowSignup] = useState(true);
 
   useEffect(() => {
     if (token) {
