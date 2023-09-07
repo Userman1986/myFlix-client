@@ -87,6 +87,7 @@ export const MainView = ({ apiUrl }) => {
         </div>
       ) : (
         <div>
+          <Col md={5}>
           <LoginView onLoggedIn={(user, token) => {
             setUser(user);
             setToken(token);
@@ -98,6 +99,7 @@ export const MainView = ({ apiUrl }) => {
 ) : (
   <button onClick={toggleSignup}>Signup</button>
 )}
+</Col>
         </div>
       )}
     </div>
