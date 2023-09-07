@@ -85,3 +85,4 @@ const SignupView = ({ onSignup }) => {
 };
 
 
+export default SignupView;
