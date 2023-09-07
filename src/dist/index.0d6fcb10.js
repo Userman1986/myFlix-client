@@ -27193,7 +27193,7 @@ const MainView = ({ apiUrl })=>{
     const [user, setUser] = (0, _react.useState)(localStorage.getItem("user") || null);
     const [token, setToken] = (0, _react.useState)(localStorage.getItem("token") || null);
     const [showSignup, setShowSignup] = (0, _react.useState)(false);
-    const [expandedMovie, setExpandedMovie] = (0, _react.useState)(null); // Track expanded movie
+    const [expandedMovie, setExpandedMovie] = (0, _react.useState)(null);
     (0, _react.useEffect)(()=>{
         if (token) {
             localStorage.setItem("user", user);
@@ -27235,12 +27235,14 @@ const MainView = ({ apiUrl })=>{
         setUser(null);
         setToken(null);
     };
-    const handleSignup = ()=>{};
+    const handleSignup = ()=>{
+    // ... Your signup logic ...
+    };
     const toggleSignup = ()=>{
         setShowSignup(!showSignup);
     };
     const handleMovieCardClick = (movie)=>{
-        setSelectedMovie(movie);
+        setExpandedMovie(movie);
     };
     const handleBackClick = ()=>{
         setExpandedMovie(null);
@@ -27280,13 +27282,13 @@ const MainView = ({ apiUrl })=>{
                     lineNumber: 83,
                     columnNumber: 11
                 }, undefined),
-                selectedMovie && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
-                    movie: selectedMovie,
+                expandedMovie && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
+                    movie: expandedMovie,
                     onBackClick: handleBackClick
                 }, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
                     lineNumber: 94,
-                    columnNumber: 3
+                    columnNumber: 13
                 }, undefined)
             ]
         }, void 0, true, {
