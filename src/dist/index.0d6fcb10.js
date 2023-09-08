@@ -27195,7 +27195,11 @@ const MainView = ({ apiUrl })=>{
     const [showSignup, setShowSignup] = (0, _react.useState)(false);
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     const [expandedMovie, setExpandedMovie] = (0, _react.useState)(null); // Track expanded movie
+=======
+    const [expandedMovie, setExpandedMovie] = (0, _react.useState)(null);
+>>>>>>> parent of b9d9434 (6543)
 =======
     const [expandedMovie, setExpandedMovie] = (0, _react.useState)(null);
 >>>>>>> parent of b9d9434 (6543)
@@ -27250,7 +27254,11 @@ const MainView = ({ apiUrl })=>{
     const handleMovieCardClick = (movie)=>{
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         setSelectedMovie(movie);
+=======
+        setExpandedMovie(movie);
+>>>>>>> parent of b9d9434 (6543)
 =======
         setExpandedMovie(movie);
 >>>>>>> parent of b9d9434 (6543)
@@ -27298,8 +27306,13 @@ const MainView = ({ apiUrl })=>{
                 }, undefined),
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                 selectedMovie && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
                     movie: selectedMovie,
+=======
+                expandedMovie && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
+                    movie: expandedMovie,
+>>>>>>> parent of b9d9434 (6543)
 =======
                 expandedMovie && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
                     movie: expandedMovie,
@@ -27314,7 +27327,11 @@ const MainView = ({ apiUrl })=>{
                     lineNumber: 94,
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                     columnNumber: 3
+=======
+                    columnNumber: 13
+>>>>>>> parent of b9d9434 (6543)
 =======
                     columnNumber: 13
 >>>>>>> parent of b9d9434 (6543)
