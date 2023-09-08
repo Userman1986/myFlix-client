@@ -80,21 +80,24 @@ export const MainView = ({ apiUrl }) => {
           <Button variant="danger" onClick={handleLogout}>
             Logout
           </Button>
-          <Row>
-            {movies.map((movie) => (
-              <Col key={movie._id} sm={6} md={4} lg={3}>
-                <MovieCard
-                  movie={movie}
-                  onMovieClick={() => handleMovieCardClick(movie)}
-                />
-              </Col>
-            ))}
-          </Row>
-          {selectedMovie && (
+          {selectedMovie ? ( 
             <MovieView
               movie={selectedMovie}
               onBackClick={handleBackClick}
             />
+          ) : (
+            <div>
+              <Row>
+                {movies.map((movie) => (
+                  <Col key={movie._id} sm={6} md={4} lg={3}>
+                    <MovieCard
+                      movie={movie}
+                      onMovieClick={() => handleMovieCardClick(movie)}
+                    />
+                  </Col>
+                ))}
+              </Row>
+            </div>
           )}
         </div>
       ) : (
