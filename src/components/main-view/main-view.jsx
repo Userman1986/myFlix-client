@@ -11,7 +11,7 @@ export const MainView = ({ apiUrl }) => {
   const [user, setUser] = useState(localStorage.getItem('user') || null);
   const [token, setToken] = useState(localStorage.getItem('token') || null);
   const [showSignup, setShowSignup] = useState(false);
-  const [expandedMovie, setExpandedMovie] = useState(null);
+  const [expandedMovie, setExpandedMovie] = useState(null); // Track expanded movie
 
   useEffect(() => {
     if (token) {
@@ -58,7 +58,7 @@ export const MainView = ({ apiUrl }) => {
   };
 
   const handleSignup = () => {
-    // ... Your signup logic ...
+    
   };
 
   const toggleSignup = () => {
@@ -66,7 +66,7 @@ export const MainView = ({ apiUrl }) => {
   };
 
   const handleMovieCardClick = (movie) => {
-    setExpandedMovie(movie); 
+    setSelectedMovie(movie); 
   };
 
   const handleBackClick = () => {
@@ -90,12 +90,12 @@ export const MainView = ({ apiUrl }) => {
               </Col>
             ))}
           </Row>
-          {expandedMovie && (
-            <MovieView
-              movie={expandedMovie}
-              onBackClick={handleBackClick}
-            />
-          )}
+          {selectedMovie && (
+  <MovieView
+    movie={selectedMovie}
+    onBackClick={handleBackClick}
+  />
+)}
         </div>
       ) : (
         <div className="login-container">
