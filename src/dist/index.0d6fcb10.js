@@ -27193,7 +27193,11 @@ const MainView = ({ apiUrl })=>{
     const [user, setUser] = (0, _react.useState)(localStorage.getItem("user") || null);
     const [token, setToken] = (0, _react.useState)(localStorage.getItem("token") || null);
     const [showSignup, setShowSignup] = (0, _react.useState)(false);
+<<<<<<< HEAD
     const [expandedMovie, setExpandedMovie] = (0, _react.useState)(null); // Track expanded movie
+=======
+    const [expandedMovie, setExpandedMovie] = (0, _react.useState)(null);
+>>>>>>> parent of b9d9434 (6543)
     (0, _react.useEffect)(()=>{
         if (token) {
             localStorage.setItem("user", user);
@@ -27240,7 +27244,11 @@ const MainView = ({ apiUrl })=>{
         setShowSignup(!showSignup);
     };
     const handleMovieCardClick = (movie)=>{
+<<<<<<< HEAD
         setSelectedMovie(movie);
+=======
+        setExpandedMovie(movie);
+>>>>>>> parent of b9d9434 (6543)
     };
     const handleBackClick = ()=>{
         setExpandedMovie(null);
@@ -27280,13 +27288,22 @@ const MainView = ({ apiUrl })=>{
                     lineNumber: 83,
                     columnNumber: 11
                 }, undefined),
+<<<<<<< HEAD
                 selectedMovie && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
                     movie: selectedMovie,
+=======
+                expandedMovie && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
+                    movie: expandedMovie,
+>>>>>>> parent of b9d9434 (6543)
                     onBackClick: handleBackClick
                 }, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
                     lineNumber: 94,
+<<<<<<< HEAD
                     columnNumber: 3
+=======
+                    columnNumber: 13
+>>>>>>> parent of b9d9434 (6543)
                 }, undefined)
             ]
         }, void 0, true, {
