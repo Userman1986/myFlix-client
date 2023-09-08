@@ -27193,19 +27193,6 @@ const MainView = ({ apiUrl })=>{
     const [user, setUser] = (0, _react.useState)(localStorage.getItem("user") || null);
     const [token, setToken] = (0, _react.useState)(localStorage.getItem("token") || null);
     const [showSignup, setShowSignup] = (0, _react.useState)(false);
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    const [expandedMovie, setExpandedMovie] = (0, _react.useState)(null); // Track expanded movie
-=======
-    const [expandedMovie, setExpandedMovie] = (0, _react.useState)(null);
->>>>>>> parent of b9d9434 (6543)
-=======
-    const [expandedMovie, setExpandedMovie] = (0, _react.useState)(null);
->>>>>>> parent of b9d9434 (6543)
-=======
-    const [expandedMovie, setExpandedMovie] = (0, _react.useState)(null);
->>>>>>> parent of b9d9434 (6543)
     (0, _react.useEffect)(()=>{
         if (token) {
             localStorage.setItem("user", user);
@@ -27252,22 +27239,7 @@ const MainView = ({ apiUrl })=>{
         setShowSignup(!showSignup);
     };
     const handleMovieCardClick = (movie)=>{
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
         setSelectedMovie(movie);
-=======
-        setExpandedMovie(movie);
->>>>>>> parent of b9d9434 (6543)
-=======
-        setExpandedMovie(movie);
->>>>>>> parent of b9d9434 (6543)
-=======
-        setExpandedMovie(movie);
->>>>>>> parent of b9d9434 (6543)
-    };
-    const handleBackClick = ()=>{
-        setExpandedMovie(null);
     };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Container), {
         children: user ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27278,7 +27250,7 @@ const MainView = ({ apiUrl })=>{
                     children: "Logout"
                 }, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 80,
+                    lineNumber: 79,
                     columnNumber: 11
                 }, undefined),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Row), {
@@ -27291,58 +27263,31 @@ const MainView = ({ apiUrl })=>{
                                 onMovieClick: ()=>handleMovieCardClick(movie)
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 86,
+                                lineNumber: 85,
                                 columnNumber: 17
                             }, undefined)
                         }, movie._id, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 85,
+                            lineNumber: 84,
                             columnNumber: 15
                         }, undefined))
                 }, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 83,
+                    lineNumber: 82,
                     columnNumber: 11
                 }, undefined),
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                 selectedMovie && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
                     movie: selectedMovie,
-=======
-                expandedMovie && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
-                    movie: expandedMovie,
->>>>>>> parent of b9d9434 (6543)
-=======
-                expandedMovie && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
-                    movie: expandedMovie,
->>>>>>> parent of b9d9434 (6543)
-=======
-                expandedMovie && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
-                    movie: expandedMovie,
->>>>>>> parent of b9d9434 (6543)
                     onBackClick: handleBackClick
                 }, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
                     lineNumber: 94,
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                     columnNumber: 3
-=======
-                    columnNumber: 13
->>>>>>> parent of b9d9434 (6543)
-=======
-                    columnNumber: 13
->>>>>>> parent of b9d9434 (6543)
-=======
-                    columnNumber: 13
->>>>>>> parent of b9d9434 (6543)
                 }, undefined)
             ]
         }, void 0, true, {
             fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 79,
+            lineNumber: 78,
             columnNumber: 9
         }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
             className: "login-container",
@@ -27354,7 +27299,7 @@ const MainView = ({ apiUrl })=>{
                     }
                 }, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 102,
+                    lineNumber: 104,
                     columnNumber: 11
                 }, undefined),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27363,7 +27308,7 @@ const MainView = ({ apiUrl })=>{
                         onSignup: handleSignup
                     }, void 0, false, {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 110,
+                        lineNumber: 112,
                         columnNumber: 15
                     }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
                         className: "signup-button",
@@ -27371,27 +27316,27 @@ const MainView = ({ apiUrl })=>{
                         children: "Signup"
                     }, void 0, false, {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 112,
+                        lineNumber: 114,
                         columnNumber: 15
                     }, undefined)
                 }, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 108,
+                    lineNumber: 110,
                     columnNumber: 11
                 }, undefined)
             ]
         }, void 0, true, {
             fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 101,
+            lineNumber: 103,
             columnNumber: 9
         }, undefined)
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 77,
+        lineNumber: 76,
         columnNumber: 5
     }, undefined);
 };
-_s(MainView, "AGtze74TO1BdxHTzKrYOs5WvFlk=");
+_s(MainView, "T73h1QSi38z5Rm8580i/cHUxDys=");
 _c = MainView;
 var _c;
 $RefreshReg$(_c, "MainView");
