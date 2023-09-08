@@ -11,19 +11,7 @@ export const MainView = ({ apiUrl }) => {
   const [user, setUser] = useState(localStorage.getItem('user') || null);
   const [token, setToken] = useState(localStorage.getItem('token') || null);
   const [showSignup, setShowSignup] = useState(false);
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-  const [expandedMovie, setExpandedMovie] = useState(null); // Track expanded movie
-=======
-  const [expandedMovie, setExpandedMovie] = useState(null);
->>>>>>> parent of b9d9434 (6543)
-=======
-  const [expandedMovie, setExpandedMovie] = useState(null);
->>>>>>> parent of b9d9434 (6543)
-=======
-  const [expandedMovie, setExpandedMovie] = useState(null);
->>>>>>> parent of b9d9434 (6543)
+
 
   useEffect(() => {
     if (token) {
@@ -78,24 +66,11 @@ export const MainView = ({ apiUrl }) => {
   };
 
   const handleMovieCardClick = (movie) => {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    setSelectedMovie(movie); 
-=======
-    setExpandedMovie(movie); 
->>>>>>> parent of b9d9434 (6543)
-=======
-    setExpandedMovie(movie); 
->>>>>>> parent of b9d9434 (6543)
-=======
-    setExpandedMovie(movie); 
->>>>>>> parent of b9d9434 (6543)
-  };
 
-  const handleBackClick = () => {
-    setExpandedMovie(null);
-  };
+    setSelectedMovie(movie); 
+
+ };
+
 
   return (
     <Container>
@@ -114,33 +89,15 @@ export const MainView = ({ apiUrl }) => {
               </Col>
             ))}
           </Row>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+
           {selectedMovie && (
   <MovieView
     movie={selectedMovie}
     onBackClick={handleBackClick}
   />
 )}
-=======
-=======
->>>>>>> parent of b9d9434 (6543)
-=======
->>>>>>> parent of b9d9434 (6543)
-          {expandedMovie && (
-            <MovieView
-              movie={expandedMovie}
-              onBackClick={handleBackClick}
-            />
-          )}
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> parent of b9d9434 (6543)
-=======
->>>>>>> parent of b9d9434 (6543)
-=======
->>>>>>> parent of b9d9434 (6543)
+
+          
         </div>
       ) : (
         <div className="login-container">
