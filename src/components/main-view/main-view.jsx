@@ -12,7 +12,11 @@ export const MainView = ({ apiUrl }) => {
   const [token, setToken] = useState(localStorage.getItem('token') || null);
   const [showSignup, setShowSignup] = useState(false);
 <<<<<<< HEAD
+<<<<<<< HEAD
   const [expandedMovie, setExpandedMovie] = useState(null); // Track expanded movie
+=======
+  const [expandedMovie, setExpandedMovie] = useState(null);
+>>>>>>> parent of b9d9434 (6543)
 =======
   const [expandedMovie, setExpandedMovie] = useState(null);
 >>>>>>> parent of b9d9434 (6543)
@@ -71,7 +75,11 @@ export const MainView = ({ apiUrl }) => {
 
   const handleMovieCardClick = (movie) => {
 <<<<<<< HEAD
+<<<<<<< HEAD
     setSelectedMovie(movie); 
+=======
+    setExpandedMovie(movie); 
+>>>>>>> parent of b9d9434 (6543)
 =======
     setExpandedMovie(movie); 
 >>>>>>> parent of b9d9434 (6543)
@@ -99,6 +107,7 @@ export const MainView = ({ apiUrl }) => {
             ))}
           </Row>
 <<<<<<< HEAD
+<<<<<<< HEAD
           {selectedMovie && (
   <MovieView
     movie={selectedMovie}
@@ -106,12 +115,17 @@ export const MainView = ({ apiUrl }) => {
   />
 )}
 =======
+=======
+>>>>>>> parent of b9d9434 (6543)
           {expandedMovie && (
             <MovieView
               movie={expandedMovie}
               onBackClick={handleBackClick}
             />
           )}
+<<<<<<< HEAD
+>>>>>>> parent of b9d9434 (6543)
+=======
 >>>>>>> parent of b9d9434 (6543)
         </div>
       ) : (
