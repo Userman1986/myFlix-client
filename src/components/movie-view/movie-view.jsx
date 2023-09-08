@@ -1,32 +1,32 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import "../../dist/index.css"; 
 
 export const MovieView = ({ movie, onBackClick }) => {
   return (
-    <div>
-      <div>
-        <img src={movie.imgURL} alt={movie.title} />
+    <div className="movie-view">
+      <div className="movie-header">
+        <button className="back-button" onClick={onBackClick}>
+          Back
+        </button>
       </div>
-      <div>
-        <span>Title: </span>
-        <span>{movie.title}</span>
+      <div className="movie-content">
+        <div className="movie-poster">
+          <img src={movie.imgURL} alt={movie.title} />
+        </div>
+        <div className="movie-details">
+          <h2 className="movie-title">{movie.title}</h2>
+          <p className="movie-description">{movie.description}</p>
+          <div className="movie-meta">
+            <p className="movie-genre">Genre: {movie.genre.name}</p>
+            <p className="movie-director">Director: {movie.director.name}</p>
+          </div>
+        </div>
       </div>
-      <div>
-        <span>Description: </span>
-        <span>{movie.description}</span>
-      </div>
-      <div>
-        <span>Genre: </span>
-        <span>{movie.genre.name}</span> 
-      </div>
-      <div>
-        <span>Director: </span>
-        <span>{movie.director.name}</span> 
-      </div>
-      <button onClick={onBackClick}>Back</button>
     </div>
   );
 };
+
 
 MovieView.propTypes = {
   movie: PropTypes.shape({

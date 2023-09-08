@@ -1,73 +1,219 @@
-.my-flix {
-  color: #4682b4;
-}
+@import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 
-body, h1, h2, h3, p {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
+
+
+body {
+  background-color: #141414;
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .container {
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
   padding: 20px;
-  display: flex;
 }
+
+/* Style the header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.header h1 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.header .user-info {
+  display: flex;
+  align-items: center;
+}
+
+.header .user-info img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+/* Style the main view */
+.main-view {
+  padding: 20px 0;
+}
+
 
 .movie-card {
   cursor: pointer;
-  background-color: #141414;
+  text-align: center;
+  background-color: #1e1e1e;
   border-radius: 5px;
-  width: 200px;
-  margin: 10px;
+  margin: 0 10px 20px;
   padding: 10px;
   transition: transform .2s;
-  box-shadow: 0 0 10px #0003;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  box-shadow: 0 4px 8px #0003;
+  height: 730px;
+  color: white; 
 }
+
+.movie-card .card-title,
+.movie-card .card-text {
+  
+
+   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px; 
+    color: white; 
+  }
+
+
+  .movie-card .btn-danger1 {
+    background-color: #e50914;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 16px;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+  }
+  
 
 .movie-card:hover {
   transform: scale(1.05);
 }
 
+.movie-card .card-img-top {
+  width: 260px;
+  height: 386px; 
+  object-fit: cover;
+}
+
 .movie-card img {
   max-width: 100%;
   height: auto;
+  object-fit: cover;
 }
 
-.movie-details {
-  background-color: #141414;
-  border-radius: 5px;
-  max-width: 400px;
-  margin: 0 auto;
+.movie-description {
+  color: white; 
+  font-size: 14px; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex-grow: 1;
+}
+
+
+.movie-view {
+  background-color: #000;
+  color: #fff;
   padding: 20px;
-  box-shadow: 0 0 10px #0003;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  gap: 20px;
+  text-align: center;
+  width: auto;
 }
 
-.movie-details img {
+.movie-poster img {
   max-width: 100%;
   height: auto;
+  object-fit: contain;
+  margin: 0 auto; 
 }
 
-.movie-details span {
-  color: #fff;
-  margin: 5px 0;
-  display: block;
+.movie-title {
+  font-size: 36px;
+  margin-bottom: 10px;
 }
 
-.movie-details button {
-  color: #fff;
-  cursor: pointer;
+
+.movie-meta {
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  gap: 10px;
+}
+
+.back-button {
   background-color: #e50914;
+  color: #fff;
   border: none;
-  border-radius: 5px;
   padding: 10px 20px;
-  transition: background-color .3s;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
-.movie-details button:hover {
-  background-color: #ff0a16;
+
+
+.movie-view .movie-genre,
+.movie-view .movie-director {
+  font-size: 16px;
 }
 
-/*# sourceMappingURL=index.css.map */
+.login-form {
+  background-color: #000;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.login-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  background-color: #333;
+  color: white;
+}
+
+.login-button {
+  background-color: #e50914;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 3px;
+  cursor: pointer;
+  width: 100%; 
+  font-size: 16px;
+}
+
+.signup-form {
+  background-color: #000;
+  padding: 20px;
+  border-radius: 0px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.signup-button {
+  background-color: #e50914;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 3px;
+  cursor: pointer;
+  width: 100%; 
+  font-size: 16px;
+}

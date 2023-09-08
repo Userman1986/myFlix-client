@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../../dist/index.css"; 
 
 const SignupView = ({ onSignup }) => {
   const [username, setUsername] = useState("");
