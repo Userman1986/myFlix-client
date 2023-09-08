@@ -13511,26 +13511,50 @@ body {
 }
 
 .movie-view {
-  background-color: #1e1e1e;
+  color: #fff;
+  text-align: center;
+  background-color: #000;
   border-radius: 5px;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: auto;
   padding: 20px;
+  display: flex;
   box-shadow: 0 4px 8px #0003;
 }
 
-.movie-view img {
-  object-fit: cover;
+.movie-poster img {
+  object-fit: contain;
   max-width: 100%;
   height: auto;
+  margin: 0 auto;
 }
 
-.movie-view h2 {
+.movie-title {
   margin-bottom: 10px;
-  font-size: 24px;
+  font-size: 36px;
 }
 
-.movie-view p {
+.movie-meta {
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  display: flex;
+}
+
+.back-button {
+  color: #fff;
+  cursor: pointer;
+  background-color: #e50914;
+  border: none;
+  border-radius: 3px;
+  padding: 10px 20px;
   font-size: 16px;
-  line-height: 1.5;
+}
+
+.movie-view .movie-genre, .movie-view .movie-director {
+  font-size: 16px;
 }
 
 .login-form {
