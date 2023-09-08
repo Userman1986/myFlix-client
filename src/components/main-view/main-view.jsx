@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { MovieCard } from "../movie-card/movie-card";
+import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import SignupView from '../signup-view/signup-view';
 import { Row, Col, Container, Button } from "react-bootstrap";
@@ -10,6 +11,7 @@ export const MainView = ({ apiUrl }) => {
   const [user, setUser] = useState(localStorage.getItem('user') || null);
   const [token, setToken] = useState(localStorage.getItem('token') || null);
   const [showSignup, setShowSignup] = useState(false);
+  const [expandedMovie, setExpandedMovie] = useState(null);
 
   useEffect(() => {
     if (token) {
@@ -64,9 +66,11 @@ export const MainView = ({ apiUrl }) => {
   };
 
   const handleMovieCardClick = (movie) => {
-    
-    const movieViewURL = `/movie-view/${movie._id}`;
-    window.open(movieViewURL, '_blank');
+    setExpandedMovie(movie); 
+  };
+
+  const handleBackClick = () => {
+    setExpandedMovie(null);
   };
 
   return (
@@ -86,6 +90,12 @@ export const MainView = ({ apiUrl }) => {
               </Col>
             ))}
           </Row>
+          {expandedMovie && (
+            <MovieView
+              movie={expandedMovie}
+              onBackClick={handleBackClick}
+            />
+          )}
         </div>
       ) : (
         <div className="login-container">
