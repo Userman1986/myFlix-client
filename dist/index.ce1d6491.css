@@ -13447,23 +13447,67 @@ body {
 
 .movie-card {
   cursor: pointer;
+  text-align: center;
+  color: #fff;
   background-color: #1e1e1e;
   border-radius: 5px;
+  flex-direction: column;
+  align-items: center;
+  height: 730px;
   margin: 0 10px 20px;
   padding: 10px;
   transition: transform .2s;
+  display: flex;
   overflow: hidden;
   box-shadow: 0 4px 8px #0003;
+}
+
+.movie-card .card-title, .movie-card .card-text {
+  color: #fff;
+  justify-content: center;
+  align-items: center;
+  min-height: 50px;
+  display: flex;
+}
+
+.movie-card .btn-danger1 {
+  color: #fff;
+  cursor: pointer;
+  background-color: #e50914;
+  border: none;
+  border-radius: 3px;
+  width: auto;
+  padding: 10px 20px;
+  font-size: 16px;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .movie-card:hover {
   transform: scale(1.05);
 }
 
+.movie-card .card-img-top {
+  object-fit: cover;
+  width: 260px;
+  height: 386px;
+}
+
 .movie-card img {
   object-fit: cover;
   max-width: 100%;
   height: auto;
+}
+
+.movie-description {
+  color: #fff;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex-grow: 1;
+  font-size: 14px;
+  overflow: hidden;
 }
 
 .movie-view {
@@ -13520,17 +13564,25 @@ body {
   font-size: 16px;
 }
 
+.signup-form {
+  text-align: center;
+  background-color: #000;
+  border-radius: 0;
+  max-width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  box-shadow: 0 0 5px #0003;
+}
+
 .signup-button {
   color: #fff;
   cursor: pointer;
   background-color: #e50914;
   border: none;
   border-radius: 3px;
-  width: 20%;
-  margin: 0 auto;
+  width: 100%;
   padding: 10px 20px;
   font-size: 16px;
-  display: block;
 }
 
 /*# sourceMappingURL=index.ce1d6491.css.map */
