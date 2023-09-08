@@ -63,43 +63,43 @@ export const MainView = ({ apiUrl }) => {
   };
 
   return (
-    <Container>
+    <div>
       {user ? (
         <div>
-          <Button variant="danger" onClick={handleLogout}>
-            Logout
-          </Button>
-          <Row>
-            {movies.map((movie) => (
-              <Col key={movie._id} sm={6} md={4} lg={3}>
-                <Link to={`/movies/${movie._id}`}>
-                  <MovieCard movie={movie} />
-                </Link>
-              </Col>
-            ))}
-          </Row>
+          <button onClick={handleLogout}>Logout</button>
+          {movies.map((movie) => (
+            <MovieCard
+              key={movie._id}
+              movie={movie}
+              onMovieClick={() => {
+                setSelectedMovie(movie);
+              }}
+            />
+          ))}
+          {selectedMovie && (
+            <MovieView
+              movie={selectedMovie}
+              onBackClick={() => setSelectedMovie(null)}
+            />
+          )}
         </div>
       ) : (
-        <div className="login-container">
-          <LoginView
-            onLoggedIn={(user, token) => {
-              setUser(user);
-              setToken(token);
-            }}
-          />
-          <div className="signup-form">
-            {showSignup ? (
-              <SignupView onSignup={handleSignup} />
-            ) : (
-              <Button className="signup-button" onClick={toggleSignup}>
-                Signup
-              </Button>
-            )}
-          </div>
+        <div>
+          <LoginView onLoggedIn={(user, token) => {
+            setUser(user);
+            setToken(token);
+          }} />
+          or
+
+          {showSignup ? (
+  <SignupView onSignup={handleSignup} />
+) : (
+  <button onClick={toggleSignup}>Signup</button>
+)}
         </div>
       )}
-    </Container>
+    </div>
   );
-};
+}
 
 export default MainView;

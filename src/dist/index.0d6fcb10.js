@@ -27237,11 +27237,10 @@ const MainView = ({ apiUrl })=>{
     const toggleSignup = ()=>{
         setShowSignup(!showSignup);
     };
-    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(Container, {
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: user ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
             children: [
-                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(Button, {
-                    variant: "danger",
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
                     onClick: handleLogout,
                     children: "Logout"
                 }, void 0, false, {
@@ -27249,34 +27248,23 @@ const MainView = ({ apiUrl })=>{
                     lineNumber: 69,
                     columnNumber: 11
                 }, undefined),
-                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(Row, {
-                    children: movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(Col, {
-                            sm: 6,
-                            md: 4,
-                            lg: 3,
-                            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(Link, {
-                                to: `/movies/${movie._id}`,
-                                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
-                                    movie: movie
-                                }, void 0, false, {
-                                    fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 76,
-                                    columnNumber: 19
-                                }, undefined)
-                            }, void 0, false, {
-                                fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 75,
-                                columnNumber: 17
-                            }, undefined)
-                        }, movie._id, false, {
-                            fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 74,
-                            columnNumber: 15
-                        }, undefined))
+                movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
+                        movie: movie,
+                        onMovieClick: ()=>{
+                            setSelectedMovie(movie);
+                        }
+                    }, movie._id, false, {
+                        fileName: "src/components/main-view/main-view.jsx",
+                        lineNumber: 71,
+                        columnNumber: 13
+                    }, undefined)),
+                selectedMovie && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
+                    movie: selectedMovie,
+                    onBackClick: ()=>setSelectedMovie(null)
                 }, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 72,
-                    columnNumber: 11
+                    lineNumber: 80,
+                    columnNumber: 13
                 }, undefined)
             ]
         }, void 0, true, {
@@ -27284,7 +27272,6 @@ const MainView = ({ apiUrl })=>{
             lineNumber: 68,
             columnNumber: 9
         }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-            className: "login-container",
             children: [
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _loginView.LoginView), {
                     onLoggedIn: (user, token)=>{
@@ -27293,35 +27280,28 @@ const MainView = ({ apiUrl })=>{
                     }
                 }, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 84,
+                    lineNumber: 88,
                     columnNumber: 11
                 }, undefined),
-                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                    className: "signup-form",
-                    children: showSignup ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _signupViewDefault.default), {
-                        onSignup: handleSignup
-                    }, void 0, false, {
-                        fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 92,
-                        columnNumber: 15
-                    }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(Button, {
-                        className: "signup-button",
-                        onClick: toggleSignup,
-                        children: "Signup"
-                    }, void 0, false, {
-                        fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 94,
-                        columnNumber: 15
-                    }, undefined)
+                "or",
+                showSignup ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _signupViewDefault.default), {
+                    onSignup: handleSignup
                 }, void 0, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 90,
-                    columnNumber: 11
+                    lineNumber: 95,
+                    columnNumber: 3
+                }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                    onClick: toggleSignup,
+                    children: "Signup"
+                }, void 0, false, {
+                    fileName: "src/components/main-view/main-view.jsx",
+                    lineNumber: 97,
+                    columnNumber: 3
                 }, undefined)
             ]
         }, void 0, true, {
             fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 83,
+            lineNumber: 87,
             columnNumber: 9
         }, undefined)
     }, void 0, false, {
