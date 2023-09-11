@@ -151,6 +151,8 @@ export const MainView = ({ propToken, apiUrl }) => {
                       onLoggedIn={(user, token) => {
                         setUser(user);
                         setToken(token);
+                        localStorage.removeItem('user', JSONE.stringify(user));
+                        localStorage.removeItem('token', token);
                       }}
                     />
                   </Col>
