@@ -3,21 +3,18 @@ import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import SignupView from '../signup-view/signup-view';
-import { Row, Col, Container, Button } from "react-bootstrap";
-import "../../dist/index.css";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import { BrowserRouter, Routes, Route, Link, Navigate } from "react-router-dom";
+import { NavigationBar } from "../navigation-bar/navigation-bar";
 
-export const MainView = ({ apiUrl }) => {
+export const MainView = ({ token, apiUrl }) => { // Receive token and apiUrl as props
   const [movies, setMovies] = useState([]);
-  const [user, setUser] = useState(localStorage.getItem('user') || null);
-  const [token, setToken] = useState(localStorage.getItem('token') || null);
-  const [showSignup, setShowSignup] = useState(false);
-  const [selectedMovie, setSelectedMovie] = useState(null);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    if (token) {
-      localStorage.setItem('user', user);
-      localStorage.setItem('token', token);
-
+    if (token) { // Check if token is defined
+      // Fetch your movies data here using apiUrl and token
       fetch(apiUrl, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -25,7 +22,7 @@ export const MainView = ({ apiUrl }) => {
       })
         .then((response) => response.json())
         .then((data) => {
-          const movieFromApi = data.map((movie) => {
+          const moviesFromApi = data.map((movie) => {
             return {
               _id: movie._id,
               title: movie.title,
@@ -42,83 +39,96 @@ export const MainView = ({ apiUrl }) => {
             };
           });
 
-          setMovies(movieFromApi);
+          setMovies(moviesFromApi);
         })
         .catch((error) => {
           console.error('Error fetching data:', error);
         });
     }
-  }, [token, apiUrl, user]);
+  }, [token, apiUrl]);
 
   const handleLogout = () => {
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
-    setUser(null);
-    setToken(null);
-  };
+    // Implement your logout logic here
+    // ...
 
-  const handleSignup = () => {
-    // ... Your signup logic ...
+    setUser(null); // Set user to null when logged out
   };
-
-  const toggleSignup = () => {
-    setShowSignup(!showSignup);
-  };
-
-  const handleMovieCardClick = (movie) => {
-    setSelectedMovie(movie);
-  };
-
-  const handleBackClick = () => {
-    setSelectedMovie(null);
-  };
-
+  
   return (
-    <Container>
-      {user ? (
-        <div>
-          <Button variant="danger" onClick={handleLogout}>
-            Logout
-          </Button>
-          {selectedMovie ? ( 
-            <MovieView
-              movie={selectedMovie}
-              onBackClick={handleBackClick}
-            />
-          ) : (
-            <div>
-              <Row>
-                {movies.map((movie) => (
-                  <Col key={movie._id} sm={6} md={4} lg={3}>
-                    <MovieCard
-                      movie={movie}
-                      onMovieClick={() => handleMovieCardClick(movie)}
-                    />
+    <BrowserRouter>
+    <NavigationBar user={user} onLoggedOut={handleLogout} />
+      <Row className="justify-content-md-center">
+        <Routes>
+          <Route
+            path="/signup"
+            element={
+              <>
+                {user ? (
+                  <Navigate to="/" />
+                ) : (
+                  <Col md={5}>
+                    <SignupView />
                   </Col>
-                ))}
-              </Row>
-            </div>
-          )}
-        </div>
-      ) : (
-        <div className="login-container">
-          <LoginView
-            onLoggedIn={(user, token) => {
-              setUser(user);
-              setToken(token);
-            }}
+                )}
+              </>
+            }
           />
-          <div className="signup-form">
-            {showSignup ? (
-              <SignupView onSignup={handleSignup} />
-            ) : (
-              <Button className="signup-button" onClick={toggleSignup}>
-                Signup
-              </Button>
-            )}
-          </div>
-        </div>
-      )}
-    </Container>
+          <Route
+            path="/login"
+            element={
+              <>
+                {user ? (
+                  <Navigate to="/" />
+                ) : (
+                  <Col md={5}>
+                    <LoginView onLoggedIn={(user) => setUser(user)} />
+                  </Col>
+                )}
+              </>
+            }
+          />
+          <Route
+            path="/movies/:movieId"
+            element={
+              <>
+                {!user ? (
+                  <Navigate to="/login" replace />
+                ) : movies.length === 0 ? (
+                  <Col>The list is empty!</Col>
+                ) : (
+                  <Col md={8}>
+                    {/* Render MovieView component with dynamic route */}
+                    <MovieView movies={movies} />
+                  </Col>
+                )}
+              </>
+            }
+          />
+          <Route
+            path="/"
+            element={
+              <>
+                {!user ? (
+                  <Navigate to="/login" replace />
+                ) : movies.length === 0 ? (
+                  <Col>The list is empty!</Col>
+                ) : (
+                  <>
+                    {movies.map((movie) => (
+                      <Col className="mb-4" key={movie._id} md={3}>
+                        {/* Use Link to navigate to MovieView */}
+                        <Link to={`/movies/${movie._id}`}>
+                          <MovieCard movie={movie} />
+                        </Link>
+                      </Col>
+                    ))}
+                  </>
+                )}
+              </>
+            }
+          />
+        </Routes>
+      </Row>
+    </BrowserRouter>
   );
 };
