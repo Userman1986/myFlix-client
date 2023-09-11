@@ -3,10 +3,10 @@ import { Card, Button, Form } from 'react-bootstrap';
 
 export const ProfileView = ({ user, onUpdateUser, onDeregister, movies, userFavoriteMovies, onUpdateUserFavoriteMovies }) => {
   const [formData, setFormData] = useState({
-    username: user.Username,
-    password: '',
-    email: user.Email,
-    dateOfBirth: user.DateOfBirth,
+    username: user.Username || '', 
+  password: '',
+  email: user.Email || '', 
+  dateOfBirth: user.DateOfBirth || '', 
   });
 
   const handleToggleFavorite = (movie) => {

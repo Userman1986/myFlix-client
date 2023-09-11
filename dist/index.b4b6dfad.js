@@ -47159,10 +47159,10 @@ var _s = $RefreshSig$();
 const ProfileView = ({ user, onUpdateUser, onDeregister, movies, userFavoriteMovies, onUpdateUserFavoriteMovies })=>{
     _s();
     const [formData, setFormData] = (0, _react.useState)({
-        username: user.Username,
+        username: user.Username || "",
         password: "",
-        email: user.Email,
-        dateOfBirth: user.DateOfBirth
+        email: user.Email || "",
+        dateOfBirth: user.DateOfBirth || ""
     });
     const handleToggleFavorite = (movie)=>{
         const isFavorite = userFavoriteMovies.some((favMovie)=>favMovie._id === movie._id);
@@ -47415,7 +47415,7 @@ const ProfileView = ({ user, onUpdateUser, onDeregister, movies, userFavoriteMov
         columnNumber: 5
     }, undefined);
 };
-_s(ProfileView, "oDIL0H2t8JYvZeKPe31a9dTpMYI=");
+_s(ProfileView, "nUAeFst+ukY3SPHI4EEV1bU5HMs=");
 _c = ProfileView;
 var _c;
 $RefreshReg$(_c, "ProfileView");
