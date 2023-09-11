@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { MovieCard } from '../movie-card/movie-card';
-import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import { BrowserRouter, Routes, Route, Link, Navigate, useParams } from 'react-router-dom'; 
+import { BrowserRouter, Routes, Route, Link, Navigate, useParams } from 'react-router-dom';
 import { NavigationBar } from '../navigation-bar/navigation-bar';
 import { ProfileView } from '../profile-view/profile-view';
+import { MovieView } from '../movie-view/movie-view';
 
 export const MainView = ({ propToken, apiUrl }) => {
   const [movies, setMovies] = useState([]);
@@ -61,19 +61,11 @@ export const MainView = ({ propToken, apiUrl }) => {
   };
 
   const handleSignup = () => {
-   
+    // ... Your signup logic ...
   };
 
   const toggleSignup = () => {
     setShowSignup(!showSignup);
-  };
-
-  const handleMovieCardClick = (movie) => {
-    setSelectedMovie(movie);
-  };
-
-  const handleBackClick = () => {
-    setSelectedMovie(null);
   };
 
   return (
@@ -120,26 +112,12 @@ export const MainView = ({ propToken, apiUrl }) => {
           <Route
             path="/movies/:movieId"
             element={
-              <>
-                {!user ? (
-                  <Navigate to="/login" replace />
-                ) : (
-                  <Col md={8}>
-                    {movies.length === 0 ? (
-                      <div>Loading...</div>
-                    ) : (
-                      <MovieView
-                        movie={movies.find((movie) => movie._id === params.movieId)}
-                        onBackClick={() => navigate(-1)}
-                        isFavorite={favoriteMovies.some((favMovie) => favMovie._id === params.movieId)}
-                        onToggleFavorite={(movie) => {
-                          // Handle favorite movie toggle
-                        }}
-                      />
-                    )}
-                  </Col>
-                )}
-              </>
+              <MovieView
+                movies={movies} // Pass movies as a prop to MovieView
+                user={user}
+                token={token}
+                favoriteMovies={favoriteMovies}
+              />
             }
           />
           <Route
@@ -159,11 +137,7 @@ export const MainView = ({ propToken, apiUrl }) => {
                             <Link to={`/movies/${movie._id}`}>
                               <MovieCard
                                 movie={movie}
-                                onMovieClick={(selectedMovie) => navigate(`/movies/${selectedMovie._id}`)}
                                 isFavorite={favoriteMovies.some((favMovie) => favMovie._id === movie._id)}
-                                onToggleFavorite={(movie) => {
-                                  // Handle favorite movie toggle
-                                }}
                               />
                             </Link>
                           </Col>

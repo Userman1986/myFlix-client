@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import "../../dist/index.css"; 
 
-export const MovieView = ({ movie, onBackClick, isFavorite, onToggleFavorite }) => {
+export const MovieView = ({ movies, user, token, favoriteMovies }) => {
+  const { movieId } = useParams(); 
+  const movie = movies.find((movie) => movie._id === movieId); 
+
   return (
     <div className="movie-view">
       <div className="movie-header">
-        <button className="back-button" onClick={onBackClick}>
-          Back
-        </button>
+        <Link to="/">
+          <button className="back-button">
+            Back
+          </button>
+        </Link>
         
         <button className="favorite-button" onClick={() => onToggleFavorite(movie)}>
           {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
@@ -32,19 +38,8 @@ export const MovieView = ({ movie, onBackClick, isFavorite, onToggleFavorite }) 
 };
 
 MovieView.propTypes = {
-  movie: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    genre: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-    }).isRequired,
-    director: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-    }).isRequired,
-    imgURL: PropTypes.string.isRequired,
-  }).isRequired,
-  onBackClick: PropTypes.func.isRequired,
-  isFavorite: PropTypes.bool.isRequired, 
-  onToggleFavorite: PropTypes.func.isRequired, 
+  movies: PropTypes.array.isRequired,
+  user: PropTypes.object,
+  token: PropTypes.string,
+  favoriteMovies: PropTypes.array,
 };

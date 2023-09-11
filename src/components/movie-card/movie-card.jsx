@@ -4,7 +4,7 @@ import { Button, Card } from 'react-bootstrap';
 
 import '../../dist/index.css';
 
-export const MovieCard = ({ movie, onMovieClick, isFavorite, onToggleFavorite }) => {
+export const MovieCard = ({ movie, isFavorite, onToggleFavorite }) => {
   const { _id, title, imgURL, description, genre, director } = movie;
 
   return (
@@ -13,9 +13,11 @@ export const MovieCard = ({ movie, onMovieClick, isFavorite, onToggleFavorite })
       <Card.Body>
         <Card.Title>{title}</Card.Title>
         <Card.Text>{description}</Card.Text>
-        <Button className="btn-danger1" onClick={() => onMovieClick(movie)} variant="danger">
-          Open
-        </Button>
+        <Link to={`/movies/${_id}`}>
+          <Button className="btn-danger1" variant="danger">
+            Open
+          </Button>
+        </Link>
         <Button
           className={isFavorite ? 'btn-primary' : 'btn-secondary'} 
           onClick={() => onToggleFavorite(movie)} 
@@ -40,7 +42,6 @@ MovieCard.propTypes = {
     }).isRequired,
     imgURL: PropTypes.string.isRequired,
   }).isRequired,
-  onMovieClick: PropTypes.func.isRequired,
   isFavorite: PropTypes.bool.isRequired, 
   onToggleFavorite: PropTypes.func.isRequired, 
 };
