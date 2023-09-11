@@ -4,7 +4,7 @@ import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import { BrowserRouter, Routes, Route, Link, Navigate, useParams } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link, Navigate, useParams } from 'react-router-dom'; 
 import { NavigationBar } from '../navigation-bar/navigation-bar';
 import { ProfileView } from '../profile-view/profile-view';
 
@@ -53,7 +53,7 @@ export const MainView = ({ token, apiUrl }) => {
   };
 
   return (
-    <BrowserRouter>
+    <BrowserRouter> {/* Ensure BrowserRouter wraps your entire application */}
       <NavigationBar user={user} onLoggedOut={handleLogout} />
       <Row className="justify-content-md-center">
         <Routes>
@@ -77,12 +77,12 @@ export const MainView = ({ token, apiUrl }) => {
               <ProfileView
                 user={user}
                 onUpdateUser={(updatedUser) => {
-                
+                  // Handle user profile update
                 }}
                 onDeregister={() => {
-                  
+                  // Handle user deregistration
                 }}
-                favoriteMovies={[]}
+                favoriteMovies={favoriteMovies}
               />
             ) : (
               <Navigate to="/login" replace />
@@ -104,7 +104,7 @@ export const MainView = ({ token, apiUrl }) => {
                         onBackClick={() => navigate(-1)}
                         isFavorite={favoriteMovies.some((favMovie) => favMovie._id === params.movieId)}
                         onToggleFavorite={(movie) => {
-                          
+                          // Handle favorite movie toggle
                         }}
                       />
                     )}
@@ -133,7 +133,7 @@ export const MainView = ({ token, apiUrl }) => {
                                 onMovieClick={(selectedMovie) => navigate(`/movies/${selectedMovie._id}`)}
                                 isFavorite={favoriteMovies.some((favMovie) => favMovie._id === movie._id)}
                                 onToggleFavorite={(movie) => {
-                                 
+                                  // Handle favorite movie toggle
                                 }}
                               />
                             </Link>
