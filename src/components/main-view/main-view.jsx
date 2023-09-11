@@ -8,14 +8,19 @@ import { BrowserRouter, Routes, Route, Link, Navigate, useParams } from 'react-r
 import { NavigationBar } from '../navigation-bar/navigation-bar';
 import { ProfileView } from '../profile-view/profile-view';
 
-export const MainView = ({ token, apiUrl }) => {
+export const MainView = ({ propToken, apiUrl }) => {
   const [movies, setMovies] = useState([]);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(localStorage.getItem('user') || null);
+  const [token, setToken] = useState(localStorage.getItem('token') || null);
+  const [showSignup, setShowSignup] = useState(false);
   const [favoriteMovies, setFavoriteMovies] = useState([]);
   const params = useParams();
 
   useEffect(() => {
     if (token) {
+      localStorage.setItem('user', user);
+      localStorage.setItem('token', token);
+
       fetch(`https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/movies`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -46,14 +51,33 @@ export const MainView = ({ token, apiUrl }) => {
           console.error('Error fetching data:', error);
         });
     }
-  }, [token, apiUrl]);
+  }, [token, apiUrl, user]);
 
   const handleLogout = () => {
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
     setUser(null);
+    setToken(null);
+  };
+
+  const handleSignup = () => {
+   
+  };
+
+  const toggleSignup = () => {
+    setShowSignup(!showSignup);
+  };
+
+  const handleMovieCardClick = (movie) => {
+    setSelectedMovie(movie);
+  };
+
+  const handleBackClick = () => {
+    setSelectedMovie(null);
   };
 
   return (
-    <BrowserRouter> {/* Ensure BrowserRouter wraps your entire application */}
+    <BrowserRouter>
       <NavigationBar user={user} onLoggedOut={handleLogout} />
       <Row className="justify-content-md-center">
         <Routes>
@@ -65,7 +89,12 @@ export const MainView = ({ token, apiUrl }) => {
                   <Navigate to="/" />
                 ) : (
                   <Col md={5}>
-                    <LoginView onLoggedIn={(user) => setUser(user)} />
+                    <LoginView
+                      onLoggedIn={(user, token) => {
+                        setUser(user);
+                        setToken(token);
+                      }}
+                    />
                   </Col>
                 )}
               </>
