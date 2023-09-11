@@ -27207,7 +27207,7 @@ const MainView = ({ propToken, apiUrl })=>{
     };
     (0, _react.useEffect)(()=>{
         if (token) {
-            localStorage.setItem("user", user);
+            localStorage.setItem("user", JSON.stringify(user));
             localStorage.setItem("token", token);
             fetch(`https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/movies`, {
                 headers: {
