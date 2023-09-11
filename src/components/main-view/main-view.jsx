@@ -117,6 +117,7 @@ export const MainView = ({ propToken, apiUrl }) => {
                 user={user}
                 token={token}
                 favoriteMovies={favoriteMovies}
+               
                 onToggleFavorite={(movie) => {
                   
                 }}

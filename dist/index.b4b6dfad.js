@@ -27312,7 +27312,7 @@ const MainView = ({ propToken, apiUrl })=>{
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 126,
+                            lineNumber: 127,
                             columnNumber: 11
                         }, undefined)
                     ]
@@ -47381,7 +47381,7 @@ var _indexCss = require("../../dist/index.css");
 var _s = $RefreshSig$();
 const MovieView = ({ movies, user, token, favoriteMovies, navigate })=>{
     _s();
-    const { movieId } = useParams();
+    const { movieId } = (0, _reactRouterDom.useParams)();
     const movie = movies.find((movie)=>movie._id === movieId);
     if (!movie) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: "Movie not found."
@@ -47514,7 +47514,11 @@ const MovieView = ({ movies, user, token, favoriteMovies, navigate })=>{
         columnNumber: 5
     }, undefined);
 };
-_s(MovieView, "e2L2DPdRH1AShA7yIOCsYRlzvlI=", true);
+_s(MovieView, "e2L2DPdRH1AShA7yIOCsYRlzvlI=", false, function() {
+    return [
+        (0, _reactRouterDom.useParams)
+    ];
+});
 _c = MovieView;
 MovieView.propTypes = {
     movies: (0, _propTypesDefault.default).array.isRequired,
