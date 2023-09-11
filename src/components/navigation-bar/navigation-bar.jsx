@@ -16,6 +16,9 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
           <Nav className="ml-auto">
             {user ? (
               <>
+                <Nav.Link as={Link} to="/profile">
+                  Profile
+                </Nav.Link>
                 <Nav.Link as={Link} to="/" onClick={onLoggedOut}>
                   Logout
                 </Nav.Link>

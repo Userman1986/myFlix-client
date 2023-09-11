@@ -1,96 +1,99 @@
-
 import React, { useState, useEffect } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Card, Button, Form } from 'react-bootstrap';
 
-export const ProfileView = ({ user, onUpdateUser, onDeregister, favoriteMovies }) => {
-  const [userData, setUserData] = useState({}); 
-  const [editing, setEditing] = useState(false);
+export const ProfileView = ({ user, onUpdateUser, onDeregister, movies }) => {
+  const [formData, setFormData] = useState({
+    username: user.Username,
+    password: '',
+    email: user.Email,
+    dateOfBirth: user.DateOfBirth,
+  });
+
+  const [favoriteMovies, setFavoriteMovies] = useState([]);
 
   useEffect(() => {
-    setUserData({
-      username: user.username,
-      email: user.email,
-      dob: user.dob,
-    });
-  }, [user]);
-
-  const handleEdit = () => {
-    setEditing(true);
+    if (movies && user && user.FavoriteMovies) {
+      // Filter the movies to get favoriteMovies
+      const favoriteMovies = movies.filter((movie) => user.FavoriteMovies.includes(movie._id));
+      setFavoriteMovies(favoriteMovies);
+    }
+  }, [movies, user]);
+  const handleUpdate = () => {
+    // Send a request to update user information using formData
+    onUpdateUser(formData);
   };
 
-  const handleCancel = () => {
-    setEditing(false);
-  };
-
-  const handleSave = () => {
-    onUpdateUser(userData);
-    setEditing(false);
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setUserData({ ...userData, [name]: value });
+  const handleDeregister = () => {
+    // Send a request to delete the user's account
+    onDeregister();
   };
 
   return (
     <div className="profile-view">
       <h2>Profile</h2>
-      {editing ? (
-        <Form>
-          <Form.Group controlId="formUsername">
-            <Form.Label>Username</Form.Label>
-            <Form.Control
-              type="text"
-              name="username"
-              value={userData.username}
-              onChange={handleInputChange}
-            />
-          </Form.Group>
-          <Form.Group controlId="formEmail">
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              type="email"
-              name="email"
-              value={userData.email}
-              onChange={handleInputChange}
-            />
-          </Form.Group>
-          <Form.Group controlId="formDOB">
-            <Form.Label>Date of Birth</Form.Label>
-            <Form.Control
-              type="date"
-              name="dob"
-              value={userData.dob}
-              onChange={handleInputChange}
-            />
-          </Form.Group>
-          <Button variant="primary" onClick={handleSave}>
-            Save
+      <Card>
+        <Card.Body>
+          <Form>
+            <Form.Group controlId="formUsername">
+              <Form.Label>Username</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Username"
+                value={formData.username}
+                onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+              />
+            </Form.Group>
+
+            <Form.Group controlId="formPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                value={formData.password}
+                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+              />
+            </Form.Group>
+
+            <Form.Group controlId="formEmail">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Email"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              />
+            </Form.Group>
+
+            <Form.Group controlId="formDateOfBirth">
+              <Form.Label>Date of Birth</Form.Label>
+              <Form.Control
+                type="date"
+                value={formData.dateOfBirth}
+                onChange={(e) => setFormData({ ...formData, dateOfBirth: e.target.value })}
+              />
+            </Form.Group>
+          </Form>
+          <Button variant="primary" onClick={handleUpdate}>
+            Update
           </Button>
-          <Button variant="secondary" onClick={handleCancel}>
-            Cancel
-          </Button>
-        </Form>
-      ) : (
-        <div>
-          <p><strong>Username:</strong> {user.username}</p>
-          <p><strong>Email:</strong> {user.email}</p>
-          <p><strong>Date of Birth:</strong> {user.dob}</p>
-          <Button variant="primary" onClick={handleEdit}>
-            Edit
-          </Button>
-          <Button variant="danger" onClick={onDeregister}>
+          <Button variant="danger" onClick={handleDeregister}>
             Deregister
           </Button>
-        </div>
-      )}
+        </Card.Body>
+      </Card>
 
       <h3>Favorite Movies</h3>
-      <ul>
+      <div className="favorite-movies">
         {favoriteMovies.map((movie) => (
-          <li key={movie._id}>{movie.title}</li>
+          <Card key={movie._id}>
+            <Card.Img variant="top" src={movie.imgURL} />
+            <Card.Body>
+              <Card.Title>{movie.title}</Card.Title>
+              <Card.Text>{movie.description}</Card.Text>
+            </Card.Body>
+          </Card>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
