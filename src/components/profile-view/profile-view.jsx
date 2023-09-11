@@ -1,9 +1,16 @@
+<<<<<<< Updated upstream
 // ProfileView.jsx
+=======
+>>>>>>> Stashed changes
 import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 
 export const ProfileView = ({ user, onUpdateUser, onDeregister, favoriteMovies }) => {
+<<<<<<< Updated upstream
   const [userData, setUserData] = useState({}); // Store user data for editing
+=======
+  const [userData, setUserData] = useState({});
+>>>>>>> Stashed changes
   const [editing, setEditing] = useState(false);
 
   useEffect(() => {

@@ -17,8 +17,13 @@ export const MovieCard = ({ movie, onMovieClick, isFavorite, onToggleFavorite })
           Open
         </Button>
         <Button
+<<<<<<< Updated upstream
           className={isFavorite ? 'btn-primary' : 'btn-secondary'} // Set button style based on favorite status
           onClick={() => onToggleFavorite(movie)} // Call the function to add/remove from favorites
+=======
+          className={isFavorite ? 'btn-primary' : 'btn-secondary'} 
+          onClick={() => onToggleFavorite(movie)} 
+>>>>>>> Stashed changes
         >
           {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
         </Button>
@@ -41,6 +46,11 @@ MovieCard.propTypes = {
     imgURL: PropTypes.string.isRequired,
   }).isRequired,
   onMovieClick: PropTypes.func.isRequired,
+<<<<<<< Updated upstream
   isFavorite: PropTypes.bool.isRequired, // Indicates if the movie is in favorites
   onToggleFavorite: PropTypes.func.isRequired, // Function to add/remove from favorites
+=======
+  isFavorite: PropTypes.bool.isRequired, 
+  onToggleFavorite: PropTypes.func.isRequired,
+>>>>>>> Stashed changes
 };

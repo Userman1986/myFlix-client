@@ -9,9 +9,11 @@ import { BrowserRouter, Routes, Route, Link, Navigate } from "react-router-dom";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
 import { ProfileView } from "../profile-view/profile-view";
 
+
 export const MainView = ({ token, apiUrl }) => {
   const [movies, setMovies] = useState([]);
   const [user, setUser] = useState(null);
+  const [favoriteMovies, setFavoriteMovies] = useState([]);
 
   useEffect(() => {
     if (token) {
@@ -90,12 +92,12 @@ export const MainView = ({ token, apiUrl }) => {
               <ProfileView
                 user={user}
                 onUpdateUser={(updatedUser) => {
-                  // Implement logic to update user data here
+                  
                 }}
                 onDeregister={() => {
-                  // Implement logic to deregister user here
+                  
                 }}
-                favoriteMovies={[] /* Pass user's favorite movies here */}
+                favoriteMovies={[] }
               />
             ) : (
               <Navigate to="/login" replace />
@@ -111,7 +113,7 @@ export const MainView = ({ token, apiUrl }) => {
                   <Col>The list is empty!</Col>
                 ) : (
                   <Col md={8}>
-                    {/* Render MovieView component with dynamic route */}
+                  
                     <MovieView movies={movies} />
                   </Col>
                 )}
@@ -130,7 +132,7 @@ export const MainView = ({ token, apiUrl }) => {
                   <>
                     {movies.map((movie) => (
                       <Col className="mb-4" key={movie._id} md={3}>
-                        {/* Use Link to navigate to MovieView */}
+                       
                         <Link to={`/movies/${movie._id}`}>
                           <MovieCard movie={movie} />
                         </Link>
