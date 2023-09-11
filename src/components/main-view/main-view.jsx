@@ -8,13 +8,12 @@ import Row from "react-bootstrap/Row";
 import { BrowserRouter, Routes, Route, Link, Navigate } from "react-router-dom";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
 
-export const MainView = ({ token, apiUrl }) => { // Receive token and apiUrl as props
+export const MainView = ({ token, apiUrl }) => {
   const [movies, setMovies] = useState([]);
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    if (token) { // Check if token is defined
-      // Fetch your movies data here using apiUrl and token
+    if (token) {
       fetch(apiUrl, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -48,15 +47,12 @@ export const MainView = ({ token, apiUrl }) => { // Receive token and apiUrl as 
   }, [token, apiUrl]);
 
   const handleLogout = () => {
-    // Implement your logout logic here
-    // ...
-
-    setUser(null); // Set user to null when logged out
+    setUser(null);
   };
-  
+
   return (
     <BrowserRouter>
-    <NavigationBar user={user} onLoggedOut={handleLogout} />
+      <NavigationBar user={user} onLoggedOut={handleLogout} />
       <Row className="justify-content-md-center">
         <Routes>
           <Route
