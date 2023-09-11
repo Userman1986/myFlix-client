@@ -10,7 +10,7 @@ import { MovieView } from '../movie-view/movie-view';
 
 export const MainView = ({ propToken, apiUrl }) => {
   const [movies, setMovies] = useState([]);
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || null);
+  const [user, setUser] = useState(localStorage.getItem('user') || null);
   const [token, setToken] = useState(localStorage.getItem('token') || null);
   const [showSignup, setShowSignup] = useState(false);
   const [favoriteMovies, setFavoriteMovies] = useState([]);
@@ -29,73 +29,40 @@ export const MainView = ({ propToken, apiUrl }) => {
 
   useEffect(() => {
     if (token) {
-      
-      fetchMovies();
-    }
-  }, [token, apiUrl]);
+      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('token', token);
 
-  useEffect(() => {
-    if (token && user) {
-     
-      fetchUserData();
-    }
-  }, [token, user]);
+      fetch(`https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/movies`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          const moviesFromApi = data.map((movie) => {
+            return {
+              _id: movie._id,
+              title: movie.title,
+              description: movie.description,
+              imgURL: movie.imgURL,
+              director: movie.director ? {
+                _id: movie.director._id || '',
+                name: movie.director.name || '',
+              } : {},
+              genre: movie.genre ? {
+                _id: movie.genre._id || '',
+                name: movie.genre.name || '',
+              } : {},
+            };
+          });
 
-  const fetchMovies = () => {
-    fetch(`https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/movies`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        const moviesFromApi = data.map((movie) => {
-          return {
-            _id: movie._id,
-            title: movie.title,
-            description: movie.description,
-            imgURL: movie.imgURL,
-            director: movie.director ? {
-              _id: movie.director._id || '',
-              name: movie.director.name || '',
-            } : {},
-            genre: movie.genre ? {
-              _id: movie.genre._id || '',
-              name: movie.genre.name || '',
-            } : {},
-          };
+          setMovies(moviesFromApi);
+        })
+        .catch((error) => {
+          console.error('Error fetching data:', error);
         });
-
-        setMovies(moviesFromApi);
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
-  };
-
-  const fetchUserData = () => {
-    fetch(`https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/users/${user._id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error('User data request failed.');
-        }
-      })
-      .then((userData) => {
-        
-        const updatedUser = { ...user, ...userData, _id: user._id };
-        localStorage.setItem('user', JSON.stringify(updatedUser));
-        setUser(updatedUser);
-      })
-      .catch((error) => {
-        console.error('Error fetching user data:', error);
-      });
-  };
+    }
+  }, [token, apiUrl, user]);
 
   const handleLogout = () => {
     localStorage.clear();
@@ -117,8 +84,6 @@ export const MainView = ({ propToken, apiUrl }) => {
       .then((response) => {
         if (response.ok) {
           console.log('User data updated successfully.');
-         
-          fetchUserData();
         } else {
           console.error('Failed to update user data.');
         }
@@ -140,8 +105,6 @@ export const MainView = ({ propToken, apiUrl }) => {
       .then((response) => {
         if (response.ok) {
           console.log('User account deregistered successfully.');
-          
-          handleLogout();
         } else {
           console.error('Failed to deregister user account.');
         }
@@ -156,6 +119,27 @@ export const MainView = ({ propToken, apiUrl }) => {
   const toggleSignup = () => {
     setShowSignup(!showSignup);
   };
+
+  useEffect(() => {
+    if (token && user) { 
+      fetch(`https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/users/${user._id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((userData) => {
+          localStorage.setItem('user', JSON.stringify(userData));
+          setUser(userData);
+        })
+        .catch((error) => {
+          console.error('Error fetching user data:', error);
+        });
+    }
+  }, [token, user]);
+
+
+
 
   return (
     <BrowserRouter>
@@ -174,8 +158,8 @@ export const MainView = ({ propToken, apiUrl }) => {
                       onLoggedIn={(user, token) => {
                         setUser(user);
                         setToken(token);
-                        localStorage.removeItem('user');
-                        localStorage.removeItem('token');
+                        localStorage.removeItem('user', JSON.stringify(user));
+                        localStorage.removeItem('token', token);
                       }}
                     />
                   </Col>
