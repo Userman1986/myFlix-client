@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Button, Form } from 'react-bootstrap';
 
-export const ProfileView = ({ user, onUpdateUser, onDeregister, movies }) => {
+export const ProfileView = ({ user, onUpdateUser, onDeregister, movies, userFavoriteMovies, onUpdateUserFavoriteMovies }) => {
   const [formData, setFormData] = useState({
     username: user.Username,
     password: '',
@@ -9,17 +9,29 @@ export const ProfileView = ({ user, onUpdateUser, onDeregister, movies }) => {
     dateOfBirth: user.DateOfBirth,
   });
 
+  const handleToggleFavorite = (movie) => {
+    const isFavorite = userFavoriteMovies.some((favMovie) => favMovie._id === movie._id);
+
+    if (isFavorite) {
+      const updatedFavorites = userFavoriteMovies.filter((favMovie) => favMovie._id !== movie._id);
+      onUpdateUserFavoriteMovies(updatedFavorites); 
+    } else {
+      onUpdateUserFavoriteMovies([...userFavoriteMovies, movie]); 
+    }
+  };
+
+
   const [favoriteMovies, setFavoriteMovies] = useState([]);
 
   useEffect(() => {
     if (movies && user && user.FavoriteMovies) {
-      // Filter the movies to get favoriteMovies
+     
       const favoriteMovies = movies.filter((movie) => user.FavoriteMovies.includes(movie._id));
       setFavoriteMovies(favoriteMovies);
     }
   }, [movies, user]);
   const handleUpdate = () => {
-    // Send a request to update user information using formData
+   
     onUpdateUser(formData);
   };
 
@@ -84,16 +96,16 @@ export const ProfileView = ({ user, onUpdateUser, onDeregister, movies }) => {
 
       <h3>Favorite Movies</h3>
       <div className="favorite-movies">
-        {favoriteMovies.map((movie) => (
-          <Card key={movie._id}>
-            <Card.Img variant="top" src={movie.imgURL} />
-            <Card.Body>
-              <Card.Title>{movie.title}</Card.Title>
-              <Card.Text>{movie.description}</Card.Text>
-            </Card.Body>
-          </Card>
-        ))}
-      </div>
+  {userFavoriteMovies && userFavoriteMovies.map((movie) => (
+    <Card key={movie._id}>
+      <Card.Img variant="top" src={movie.imgURL} />
+      <Card.Body>
+        <Card.Title>{movie.title}</Card.Title>
+        <Card.Text>{movie.description}</Card.Text>
+      </Card.Body>
+    </Card>
+  ))}
+</div>
     </div>
   );
 };

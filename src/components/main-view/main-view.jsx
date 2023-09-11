@@ -164,15 +164,18 @@ export const MainView = ({ propToken, apiUrl }) => {
     user ? (
       <ProfileView
         user={user}
-        onUpdateUser={handleUpdateUser} 
-        onDeregister={handleDeregisterUser} 
+        onUpdateUser={handleUpdateUser}
+        onDeregister={handleDeregisterUser}
         movies={movies}
+        favoriteMovies={favoriteMovies}
+        onUpdateFavoriteMovies={setFavoriteMovies} 
       />
     ) : (
       <Navigate to="/login" replace />
     )
   }
 />
+
           <Route
             path="/movies/:movieId"
             element={
