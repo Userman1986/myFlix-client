@@ -27172,6 +27172,7 @@ const MainView = ({ token, apiUrl })=>{
     const [movies, setMovies] = (0, _react.useState)([]);
     const [user, setUser] = (0, _react.useState)(null);
     const [favoriteMovies, setFavoriteMovies] = (0, _react.useState)([]);
+    const params = (0, _reactRouterDom.useParams)();
     (0, _react.useEffect)(()=>{
         if (token) fetch(`https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/movies`, {
             headers: {
@@ -27212,7 +27213,7 @@ const MainView = ({ token, apiUrl })=>{
                 onLoggedOut: handleLogout
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 56,
+                lineNumber: 57,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _rowDefault.default), {
@@ -27233,19 +27234,15 @@ const MainView = ({ token, apiUrl })=>{
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 59,
+                            lineNumber: 60,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
                             path: "/profile",
                             element: user ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _profileView.ProfileView), {
                                 user: user,
-                                onUpdateUser: (updatedUser)=>{
-                                // Implement user update logic here if needed
-                                },
-                                onDeregister: ()=>{
-                                // Implement user deregister logic here if needed
-                                },
+                                onUpdateUser: (updatedUser)=>{},
+                                onDeregister: ()=>{},
                                 favoriteMovies: []
                             }, void 0, false, void 0, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Navigate), {
                                 to: "/login",
@@ -27253,7 +27250,7 @@ const MainView = ({ token, apiUrl })=>{
                             }, void 0, false, void 0, void 0)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 73,
+                            lineNumber: 74,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27262,23 +27259,21 @@ const MainView = ({ token, apiUrl })=>{
                                 children: !user ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Navigate), {
                                     to: "/login",
                                     replace: true
-                                }, void 0, false, void 0, void 0) : movies.length === 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
-                                    children: "The list is empty!"
                                 }, void 0, false, void 0, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
                                     md: 8,
-                                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
+                                    children: movies.length === 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                        children: "Loading..."
+                                    }, void 0, false, void 0, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
                                         movie: movies.find((movie)=>movie._id === params.movieId),
                                         onBackClick: ()=>navigate(-1),
                                         isFavorite: favoriteMovies.some((favMovie)=>favMovie._id === params.movieId),
-                                        onToggleFavorite: (movie)=>{
-                                        // Implement logic to add or remove the movie from favorites here
-                                        }
+                                        onToggleFavorite: (movie)=>{}
                                     }, void 0, false, void 0, void 0)
                                 }, void 0, false, void 0, void 0)
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 90,
+                            lineNumber: 91,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27287,50 +27282,54 @@ const MainView = ({ token, apiUrl })=>{
                                 children: !user ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Navigate), {
                                     to: "/login",
                                     replace: true
-                                }, void 0, false, void 0, void 0) : movies.length === 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
-                                    children: "The list is empty!"
                                 }, void 0, false, void 0, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
-                                    children: movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
-                                            className: "mb-4",
-                                            md: 3,
-                                            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
-                                                to: `/movies/${movie._id}`,
-                                                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
-                                                    movie: movie,
-                                                    onMovieClick: (selectedMovie)=>navigate(`/movies/${selectedMovie._id}`),
-                                                    isFavorite: favoriteMovies.some((favMovie)=>favMovie._id === movie._id),
-                                                    onToggleFavorite: (movie)=>{
-                                                    // Implement logic to add or remove the movie from favorites here
-                                                    }
+                                    children: movies.length === 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
+                                        children: "The list is empty!"
+                                    }, void 0, false, void 0, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
+                                        children: movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
+                                                className: "mb-4",
+                                                md: 3,
+                                                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
+                                                    to: `/movies/${movie._id}`,
+                                                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
+                                                        movie: movie,
+                                                        onMovieClick: (selectedMovie)=>navigate(`/movies/${selectedMovie._id}`),
+                                                        isFavorite: favoriteMovies.some((favMovie)=>favMovie._id === movie._id),
+                                                        onToggleFavorite: (movie)=>{}
+                                                    }, void 0, false, void 0, void 0)
                                                 }, void 0, false, void 0, void 0)
-                                            }, void 0, false, void 0, void 0)
-                                        }, movie._id, false, void 0, void 0))
+                                            }, movie._id, false, void 0, void 0))
+                                    }, void 0, false)
                                 }, void 0, false)
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 113,
+                            lineNumber: 116,
                             columnNumber: 11
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 58,
+                    lineNumber: 59,
                     columnNumber: 9
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 57,
+                lineNumber: 58,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 55,
+        lineNumber: 56,
         columnNumber: 5
     }, undefined);
 };
-_s(MainView, "3U/1YAVRaZ9GYjVgKRHqJI3LY1E=");
+_s(MainView, "akyIulkSE8SdH0qAYhJ3Co2GRcI=", false, function() {
+    return [
+        (0, _reactRouterDom.useParams)
+    ];
+});
 _c = MainView;
 var _c;
 $RefreshReg$(_c, "MainView");

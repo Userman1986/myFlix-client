@@ -4,7 +4,7 @@ import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import { BrowserRouter, Routes, Route, Link, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link, Navigate, useParams } from 'react-router-dom';
 import { NavigationBar } from '../navigation-bar/navigation-bar';
 import { ProfileView } from '../profile-view/profile-view';
 
@@ -12,6 +12,7 @@ export const MainView = ({ token, apiUrl }) => {
   const [movies, setMovies] = useState([]);
   const [user, setUser] = useState(null);
   const [favoriteMovies, setFavoriteMovies] = useState([]);
+  const params = useParams();
 
   useEffect(() => {
     if (token) {
@@ -76,10 +77,10 @@ export const MainView = ({ token, apiUrl }) => {
               <ProfileView
                 user={user}
                 onUpdateUser={(updatedUser) => {
-                  // Implement user update logic here if needed
+                
                 }}
                 onDeregister={() => {
-                  // Implement user deregister logic here if needed
+                  
                 }}
                 favoriteMovies={[]}
               />
@@ -93,18 +94,20 @@ export const MainView = ({ token, apiUrl }) => {
               <>
                 {!user ? (
                   <Navigate to="/login" replace />
-                ) : movies.length === 0 ? (
-                  <Col>The list is empty!</Col>
                 ) : (
                   <Col md={8}>
-                    <MovieView
-                      movie={movies.find((movie) => movie._id === params.movieId)}
-                      onBackClick={() => navigate(-1)}
-                      isFavorite={favoriteMovies.some((favMovie) => favMovie._id === params.movieId)}
-                      onToggleFavorite={(movie) => {
-                        // Implement logic to add or remove the movie from favorites here
-                      }}
-                    />
+                    {movies.length === 0 ? (
+                      <div>Loading...</div>
+                    ) : (
+                      <MovieView
+                        movie={movies.find((movie) => movie._id === params.movieId)}
+                        onBackClick={() => navigate(-1)}
+                        isFavorite={favoriteMovies.some((favMovie) => favMovie._id === params.movieId)}
+                        onToggleFavorite={(movie) => {
+                          
+                        }}
+                      />
+                    )}
                   </Col>
                 )}
               </>
@@ -116,24 +119,28 @@ export const MainView = ({ token, apiUrl }) => {
               <>
                 {!user ? (
                   <Navigate to="/login" replace />
-                ) : movies.length === 0 ? (
-                  <Col>The list is empty!</Col>
                 ) : (
                   <>
-                    {movies.map((movie) => (
-                      <Col className="mb-4" key={movie._id} md={3}>
-                        <Link to={`/movies/${movie._id}`}>
-                          <MovieCard
-                            movie={movie}
-                            onMovieClick={(selectedMovie) => navigate(`/movies/${selectedMovie._id}`)}
-                            isFavorite={favoriteMovies.some((favMovie) => favMovie._id === movie._id)}
-                            onToggleFavorite={(movie) => {
-                              // Implement logic to add or remove the movie from favorites here
-                            }}
-                          />
-                        </Link>
-                      </Col>
-                    ))}
+                    {movies.length === 0 ? (
+                      <Col>The list is empty!</Col>
+                    ) : (
+                      <>
+                        {movies.map((movie) => (
+                          <Col className="mb-4" key={movie._id} md={3}>
+                            <Link to={`/movies/${movie._id}`}>
+                              <MovieCard
+                                movie={movie}
+                                onMovieClick={(selectedMovie) => navigate(`/movies/${selectedMovie._id}`)}
+                                isFavorite={favoriteMovies.some((favMovie) => favMovie._id === movie._id)}
+                                onToggleFavorite={(movie) => {
+                                 
+                                }}
+                              />
+                            </Link>
+                          </Col>
+                        ))}
+                      </>
+                    )}
                   </>
                 )}
               </>
