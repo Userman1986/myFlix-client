@@ -7,6 +7,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { BrowserRouter, Routes, Route, Link, Navigate } from "react-router-dom";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
+import { ProfileView } from "../profile-view/profile-view";
 
 export const MainView = ({ token, apiUrl }) => {
   const [movies, setMovies] = useState([]);
@@ -82,6 +83,23 @@ export const MainView = ({ token, apiUrl }) => {
                 )}
               </>
             }
+          />
+          <Route
+            path="/profile"
+            element={user ? (
+              <ProfileView
+                user={user}
+                onUpdateUser={(updatedUser) => {
+                  // Implement logic to update user data here
+                }}
+                onDeregister={() => {
+                  // Implement logic to deregister user here
+                }}
+                favoriteMovies={[] /* Pass user's favorite movies here */}
+              />
+            ) : (
+              <Navigate to="/login" replace />
+            )}
           />
           <Route
             path="/movies/:movieId"

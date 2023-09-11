@@ -1,19 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Card } from 'react-bootstrap'; // Make sure 'Card' is imported from 'react-bootstrap'
+import { Button, Card } from 'react-bootstrap';
 
 import '../../dist/index.css';
 
-export const MovieCard = ({ movie, onMovieClick }) => {
+export const MovieCard = ({ movie, onMovieClick, isFavorite, onToggleFavorite }) => {
   const { _id, title, imgURL, description, genre, director } = movie;
+
   return (
     <Card className="movie-card">
-      <Card.Img variant="top" src={movie.imgURL} />
+      <Card.Img variant="top" src={imgURL} />
       <Card.Body>
-        <Card.Title>{movie.title}</Card.Title>
-        <Card.Text>{movie.description}</Card.Text>
+        <Card.Title>{title}</Card.Title>
+        <Card.Text>{description}</Card.Text>
         <Button className="btn-danger1" onClick={() => onMovieClick(movie)} variant="danger">
           Open
+        </Button>
+        <Button
+          className={isFavorite ? 'btn-primary' : 'btn-secondary'} // Set button style based on favorite status
+          onClick={() => onToggleFavorite(movie)} // Call the function to add/remove from favorites
+        >
+          {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
         </Button>
       </Card.Body>
     </Card>
@@ -34,4 +41,6 @@ MovieCard.propTypes = {
     imgURL: PropTypes.string.isRequired,
   }).isRequired,
   onMovieClick: PropTypes.func.isRequired,
+  isFavorite: PropTypes.bool.isRequired, // Indicates if the movie is in favorites
+  onToggleFavorite: PropTypes.func.isRequired, // Function to add/remove from favorites
 };

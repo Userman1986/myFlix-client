@@ -2,12 +2,16 @@ import React from "react";
 import PropTypes from 'prop-types';
 import "../../dist/index.css"; 
 
-export const MovieView = ({ movie, onBackClick }) => {
+export const MovieView = ({ movie, onBackClick, isFavorite, onToggleFavorite }) => {
   return (
     <div className="movie-view">
       <div className="movie-header">
         <button className="back-button" onClick={onBackClick}>
           Back
+        </button>
+        
+        <button className="favorite-button" onClick={() => onToggleFavorite(movie)}>
+          {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
         </button>
       </div>
       <div className="movie-content">
@@ -27,7 +31,6 @@ export const MovieView = ({ movie, onBackClick }) => {
   );
 };
 
-
 MovieView.propTypes = {
   movie: PropTypes.shape({
     _id: PropTypes.string.isRequired,
@@ -42,4 +45,6 @@ MovieView.propTypes = {
     imgURL: PropTypes.string.isRequired,
   }).isRequired,
   onBackClick: PropTypes.func.isRequired,
+  isFavorite: PropTypes.bool.isRequired, // Indicates whether the movie is a favorite
+  onToggleFavorite: PropTypes.func.isRequired, // Function to toggle favorite status
 };
