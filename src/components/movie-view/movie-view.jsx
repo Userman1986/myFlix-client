@@ -9,11 +9,7 @@ export const MovieView = ({ movie, onBackClick, isFavorite, onToggleFavorite }) 
         <button className="back-button" onClick={onBackClick}>
           Back
         </button>
-<<<<<<< Updated upstream
         
-=======
-        {/* Render a button to toggle favorite status */}
->>>>>>> Stashed changes
         <button className="favorite-button" onClick={() => onToggleFavorite(movie)}>
           {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
         </button>
@@ -49,6 +45,6 @@ MovieView.propTypes = {
     imgURL: PropTypes.string.isRequired,
   }).isRequired,
   onBackClick: PropTypes.func.isRequired,
-  isFavorite: PropTypes.bool.isRequired, // Indicates whether the movie is a favorite
-  onToggleFavorite: PropTypes.func.isRequired, // Function to toggle favorite status
+  isFavorite: PropTypes.bool.isRequired, 
+  onToggleFavorite: PropTypes.func.isRequired, 
 };
