@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { MovieCard } from "../movie-card/movie-card";
-import { MovieView } from "../movie-view/movie-view";
-import { LoginView } from "../login-view/login-view";
-import SignupView from '../signup-view/signup-view';
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import { BrowserRouter, Routes, Route, Link, Navigate } from "react-router-dom";
-import { NavigationBar } from "../navigation-bar/navigation-bar";
-import { ProfileView } from "../profile-view/profile-view";
-
+import { MovieCard } from '../movie-card/movie-card';
+import { MovieView } from '../movie-view/movie-view';
+import { LoginView } from '../login-view/login-view';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import { BrowserRouter, Routes, Route, Link, Navigate } from 'react-router-dom';
+import { NavigationBar } from '../navigation-bar/navigation-bar';
+import { ProfileView } from '../profile-view/profile-view';
 
 export const MainView = ({ token, apiUrl }) => {
   const [movies, setMovies] = useState([]);
@@ -17,7 +15,7 @@ export const MainView = ({ token, apiUrl }) => {
 
   useEffect(() => {
     if (token) {
-      fetch(apiUrl, {
+      fetch(`https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/movies`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -59,20 +57,6 @@ export const MainView = ({ token, apiUrl }) => {
       <Row className="justify-content-md-center">
         <Routes>
           <Route
-            path="/signup"
-            element={
-              <>
-                {user ? (
-                  <Navigate to="/" />
-                ) : (
-                  <Col md={5}>
-                    <SignupView />
-                  </Col>
-                )}
-              </>
-            }
-          />
-          <Route
             path="/login"
             element={
               <>
@@ -92,12 +76,12 @@ export const MainView = ({ token, apiUrl }) => {
               <ProfileView
                 user={user}
                 onUpdateUser={(updatedUser) => {
-                  
+                  // Implement user update logic here if needed
                 }}
                 onDeregister={() => {
-                  
+                  // Implement user deregister logic here if needed
                 }}
-                favoriteMovies={[] }
+                favoriteMovies={[]}
               />
             ) : (
               <Navigate to="/login" replace />
@@ -113,8 +97,14 @@ export const MainView = ({ token, apiUrl }) => {
                   <Col>The list is empty!</Col>
                 ) : (
                   <Col md={8}>
-                  
-                    <MovieView movies={movies} />
+                    <MovieView
+                      movie={movies.find((movie) => movie._id === params.movieId)}
+                      onBackClick={() => navigate(-1)}
+                      isFavorite={favoriteMovies.some((favMovie) => favMovie._id === params.movieId)}
+                      onToggleFavorite={(movie) => {
+                        // Implement logic to add or remove the movie from favorites here
+                      }}
+                    />
                   </Col>
                 )}
               </>
@@ -132,9 +122,15 @@ export const MainView = ({ token, apiUrl }) => {
                   <>
                     {movies.map((movie) => (
                       <Col className="mb-4" key={movie._id} md={3}>
-                       
                         <Link to={`/movies/${movie._id}`}>
-                          <MovieCard movie={movie} />
+                          <MovieCard
+                            movie={movie}
+                            onMovieClick={(selectedMovie) => navigate(`/movies/${selectedMovie._id}`)}
+                            isFavorite={favoriteMovies.some((favMovie) => favMovie._id === movie._id)}
+                            onToggleFavorite={(movie) => {
+                              // Implement logic to add or remove the movie from favorites here
+                            }}
+                          />
                         </Link>
                       </Col>
                     ))}
