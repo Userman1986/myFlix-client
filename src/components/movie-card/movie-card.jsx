@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Card } from 'react-bootstrap';
+import { Link } from 'react-router-dom'; // Add this import
 
 import '../../dist/index.css';
 
@@ -13,14 +14,14 @@ export const MovieCard = ({ movie, isFavorite, onToggleFavorite }) => {
       <Card.Body>
         <Card.Title>{title}</Card.Title>
         <Card.Text>{description}</Card.Text>
-        <Link to={`/movies/${_id}`}>
+        <Link to={`/movies/${_id}`}> {/* Use Link component */}
           <Button className="btn-danger1" variant="danger">
             Open
           </Button>
         </Link>
         <Button
-          className={isFavorite ? 'btn-primary' : 'btn-secondary'} 
-          onClick={() => onToggleFavorite(movie)} 
+          className={isFavorite ? 'btn-primary' : 'btn-secondary'}
+          onClick={() => onToggleFavorite(movie)}
         >
           {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
         </Button>
@@ -42,6 +43,6 @@ MovieCard.propTypes = {
     }).isRequired,
     imgURL: PropTypes.string.isRequired,
   }).isRequired,
-  isFavorite: PropTypes.bool.isRequired, 
-  onToggleFavorite: PropTypes.func.isRequired, 
+  isFavorite: PropTypes.bool.isRequired,
+  onToggleFavorite: PropTypes.func.isRequired,
 };
