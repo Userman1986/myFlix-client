@@ -27241,8 +27241,7 @@ const MainView = ({ propToken, apiUrl })=>{
         user
     ]);
     const handleLogout = ()=>{
-        localStorage.removeItem("user");
-        localStorage.removeItem("token");
+        localStorage.clear();
         setUser(null);
         setToken(null);
     };
@@ -27280,6 +27279,21 @@ const MainView = ({ propToken, apiUrl })=>{
     const toggleSignup = ()=>{
         setShowSignup(!showSignup);
     };
+    (0, _react.useEffect)(()=>{
+        if (token && user) fetch(`https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/users/${user._id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response)=>response.json()).then((userData)=>{
+            localStorage.setItem("user", JSON.stringify(userData));
+            setUser(userData);
+        }).catch((error)=>{
+            console.error("Error fetching user data:", error);
+        });
+    }, [
+        token,
+        user
+    ]);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.BrowserRouter), {
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navigationBar.NavigationBar), {
@@ -27287,7 +27301,7 @@ const MainView = ({ propToken, apiUrl })=>{
                 onLoggedOut: handleLogout
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 139,
+                lineNumber: 146,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _rowDefault.default), {
@@ -27305,7 +27319,7 @@ const MainView = ({ propToken, apiUrl })=>{
                                         onLoggedIn: (user, token)=>{
                                             setUser(user);
                                             setToken(token);
-                                            localStorage.removeItem("user", JSONE.stringify(user));
+                                            localStorage.removeItem("user", JSON.stringify(user));
                                             localStorage.removeItem("token", token);
                                         }
                                     }, void 0, false, void 0, void 0)
@@ -27313,7 +27327,7 @@ const MainView = ({ propToken, apiUrl })=>{
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 142,
+                            lineNumber: 149,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27331,7 +27345,7 @@ const MainView = ({ propToken, apiUrl })=>{
                             }, void 0, false, void 0, void 0)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 163,
+                            lineNumber: 170,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27345,7 +27359,7 @@ const MainView = ({ propToken, apiUrl })=>{
                             }, void 0, false, void 0, void 0)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 181,
+                            lineNumber: 188,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27375,28 +27389,28 @@ const MainView = ({ propToken, apiUrl })=>{
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 193,
+                            lineNumber: 200,
                             columnNumber: 11
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 141,
+                    lineNumber: 148,
                     columnNumber: 9
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 140,
+                lineNumber: 147,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 138,
+        lineNumber: 145,
         columnNumber: 5
     }, undefined);
 };
-_s(MainView, "Vfnd1wfm4VK/EUZ4uHIua4fjrgY=", false, function() {
+_s(MainView, "9PdD+FXJsVMoLFE+70dJ5yNzZsY=", false, function() {
     return [
         (0, _reactRouterDom.useParams)
     ];

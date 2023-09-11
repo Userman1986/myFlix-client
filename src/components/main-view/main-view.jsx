@@ -16,17 +16,13 @@ export const MainView = ({ propToken, apiUrl }) => {
   const [favoriteMovies, setFavoriteMovies] = useState([]);
   const params = useParams();
 
-  
   const handleToggleFavorite = (movie) => {
-    
     const isFavorite = favoriteMovies.some((favMovie) => favMovie._id === movie._id);
-  
+
     if (isFavorite) {
-      
       const updatedFavorites = favoriteMovies.filter((favMovie) => favMovie._id !== movie._id);
       setFavoriteMovies(updatedFavorites);
     } else {
-      
       setFavoriteMovies([...favoriteMovies, movie]);
     }
   };
@@ -69,14 +65,12 @@ export const MainView = ({ propToken, apiUrl }) => {
   }, [token, apiUrl, user]);
 
   const handleLogout = () => {
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
+    localStorage.clear();
     setUser(null);
     setToken(null);
   };
 
   const handleUpdateUser = (updatedUserData) => {
- 
     const updateUserEndpoint = `https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/users/${user._id}`;
 
     fetch(updateUserEndpoint, {
@@ -89,10 +83,8 @@ export const MainView = ({ propToken, apiUrl }) => {
     })
       .then((response) => {
         if (response.ok) {
-         
           console.log('User data updated successfully.');
         } else {
-   
           console.error('Failed to update user data.');
         }
       })
@@ -102,9 +94,8 @@ export const MainView = ({ propToken, apiUrl }) => {
   };
 
   const handleDeregisterUser = () => {
-    
     const deregisterEndpoint = `https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/users/${user._id}`;
-    
+
     fetch(deregisterEndpoint, {
       method: 'DELETE',
       headers: {
@@ -113,11 +104,8 @@ export const MainView = ({ propToken, apiUrl }) => {
     })
       .then((response) => {
         if (response.ok) {
-         
           console.log('User account deregistered successfully.');
-        
         } else {
-          
           console.error('Failed to deregister user account.');
         }
       })
@@ -126,13 +114,32 @@ export const MainView = ({ propToken, apiUrl }) => {
       });
   };
 
-  const handleSignup = () => {
- 
-  };
+  const handleSignup = () => {};
 
   const toggleSignup = () => {
     setShowSignup(!showSignup);
   };
+
+  useEffect(() => {
+    if (token && user) { 
+      fetch(`https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/users/${user._id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((userData) => {
+          localStorage.setItem('user', JSON.stringify(userData));
+          setUser(userData);
+        })
+        .catch((error) => {
+          console.error('Error fetching user data:', error);
+        });
+    }
+  }, [token, user]);
+
+
+
 
   return (
     <BrowserRouter>
@@ -151,7 +158,7 @@ export const MainView = ({ propToken, apiUrl }) => {
                       onLoggedIn={(user, token) => {
                         setUser(user);
                         setToken(token);
-                        localStorage.removeItem('user', JSONE.stringify(user));
+                        localStorage.removeItem('user', JSON.stringify(user));
                         localStorage.removeItem('token', token);
                       }}
                     />
@@ -161,32 +168,32 @@ export const MainView = ({ propToken, apiUrl }) => {
             }
           />
           <Route
-  path="/profile"
-  element={
-    user ? (
-      <ProfileView
-        user={user}
-        onUpdateUser={handleUpdateUser}
-        onDeregister={handleDeregisterUser}
-        movies={movies}
-        favoriteMovies={favoriteMovies}
-        onUpdateFavoriteMovies={setFavoriteMovies} 
-      />
-    ) : (
-      <Navigate to="/login" replace />
-    )
-  }
-/>
+            path="/profile"
+            element={
+              user ? (
+                <ProfileView
+                  user={user}
+                  onUpdateUser={handleUpdateUser}
+                  onDeregister={handleDeregisterUser}
+                  movies={movies}
+                  favoriteMovies={favoriteMovies}
+                  onUpdateFavoriteMovies={setFavoriteMovies}
+                />
+              ) : (
+                <Navigate to="/login" replace />
+              )
+            }
+          />
 
           <Route
             path="/movies/:movieId"
             element={
               <MovieView
-                movies={movies} 
+                movies={movies}
                 user={user}
                 token={token}
                 favoriteMovies={favoriteMovies}
-                onToggleFavorite={handleToggleFavorite} 
+                onToggleFavorite={handleToggleFavorite}
               />
             }
           />
@@ -208,7 +215,7 @@ export const MainView = ({ propToken, apiUrl }) => {
                               <MovieCard
                                 movie={movie}
                                 isFavorite={favoriteMovies.some((favMovie) => favMovie._id === movie._id)}
-                                onToggleFavorite={handleToggleFavorite} 
+                                onToggleFavorite={handleToggleFavorite}
                               />
                             </Link>
                           </Col>
