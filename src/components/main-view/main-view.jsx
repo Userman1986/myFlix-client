@@ -75,6 +75,57 @@ export const MainView = ({ propToken, apiUrl }) => {
     setToken(null);
   };
 
+  const handleUpdateUser = (updatedUserData) => {
+ 
+    const updateUserEndpoint = `https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/users/${user._id}`;
+
+    fetch(updateUserEndpoint, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(updatedUserData),
+    })
+      .then((response) => {
+        if (response.ok) {
+         
+          console.log('User data updated successfully.');
+        } else {
+   
+          console.error('Failed to update user data.');
+        }
+      })
+      .catch((error) => {
+        console.error('Error updating user data:', error);
+      });
+  };
+
+  const handleDeregisterUser = () => {
+    
+    const deregisterEndpoint = `https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/users/${user._id}`;
+    
+    fetch(deregisterEndpoint, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+         
+          console.log('User account deregistered successfully.');
+        
+        } else {
+          
+          console.error('Failed to deregister user account.');
+        }
+      })
+      .catch((error) => {
+        console.error('Error deregistering user account:', error);
+      });
+  };
+
   const handleSignup = () => {
  
   };
@@ -108,22 +159,20 @@ export const MainView = ({ propToken, apiUrl }) => {
             }
           />
           <Route
-            path="/profile"
-            element={user ? (
-              <ProfileView
-                user={user}
-                onUpdateUser={(updatedUser) => {
-                  
-                }}
-                onDeregister={() => {
-                 
-                }}
-                favoriteMovies={favoriteMovies}
-              />
-            ) : (
-              <Navigate to="/login" replace />
-            )}
-          />
+  path="/profile"
+  element={
+    user ? (
+      <ProfileView
+        user={user}
+        onUpdateUser={handleUpdateUser} 
+        onDeregister={handleDeregisterUser} 
+        movies={movies}
+      />
+    ) : (
+      <Navigate to="/login" replace />
+    )
+  }
+/>
           <Route
             path="/movies/:movieId"
             element={

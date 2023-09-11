@@ -27226,6 +27226,36 @@ const MainView = ({ propToken, apiUrl })=>{
         setUser(null);
         setToken(null);
     };
+    const handleUpdateUser = (updatedUserData)=>{
+        const updateUserEndpoint = `https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/users/${user._id}`;
+        fetch(updateUserEndpoint, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify(updatedUserData)
+        }).then((response)=>{
+            if (response.ok) console.log("User data updated successfully.");
+            else console.error("Failed to update user data.");
+        }).catch((error)=>{
+            console.error("Error updating user data:", error);
+        });
+    };
+    const handleDeregisterUser = ()=>{
+        const deregisterEndpoint = `https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/users/${user._id}`;
+        fetch(deregisterEndpoint, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response)=>{
+            if (response.ok) console.log("User account deregistered successfully.");
+            else console.error("Failed to deregister user account.");
+        }).catch((error)=>{
+            console.error("Error deregistering user account:", error);
+        });
+    };
     const handleSignup = ()=>{};
     const toggleSignup = ()=>{
         setShowSignup(!showSignup);
@@ -27237,7 +27267,7 @@ const MainView = ({ propToken, apiUrl })=>{
                 onLoggedOut: handleLogout
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 88,
+                lineNumber: 139,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _rowDefault.default), {
@@ -27261,23 +27291,23 @@ const MainView = ({ propToken, apiUrl })=>{
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 91,
+                            lineNumber: 142,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
                             path: "/profile",
                             element: user ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _profileView.ProfileView), {
                                 user: user,
-                                onUpdateUser: (updatedUser)=>{},
-                                onDeregister: ()=>{},
-                                favoriteMovies: favoriteMovies
+                                onUpdateUser: handleUpdateUser,
+                                onDeregister: handleDeregisterUser,
+                                movies: movies
                             }, void 0, false, void 0, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Navigate), {
                                 to: "/login",
                                 replace: true
                             }, void 0, false, void 0, void 0)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 110,
+                            lineNumber: 161,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27291,7 +27321,7 @@ const MainView = ({ propToken, apiUrl })=>{
                             }, void 0, false, void 0, void 0)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 127,
+                            lineNumber: 176,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27321,24 +27351,24 @@ const MainView = ({ propToken, apiUrl })=>{
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 139,
+                            lineNumber: 188,
                             columnNumber: 11
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 90,
+                    lineNumber: 141,
                     columnNumber: 9
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 89,
+                lineNumber: 140,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 87,
+        lineNumber: 138,
         columnNumber: 5
     }, undefined);
 };
