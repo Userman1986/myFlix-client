@@ -16,6 +16,11 @@ export const MainView = ({ propToken, apiUrl }) => {
   const [favoriteMovies, setFavoriteMovies] = useState([]);
   const params = useParams();
 
+  
+  const handleToggleFavorite = (movie) => {
+ 
+  };
+
   useEffect(() => {
     if (token) {
       localStorage.setItem('user', user);
@@ -61,7 +66,7 @@ export const MainView = ({ propToken, apiUrl }) => {
   };
 
   const handleSignup = () => {
-    // ... Your signup logic ...
+ 
   };
 
   const toggleSignup = () => {
@@ -117,10 +122,7 @@ export const MainView = ({ propToken, apiUrl }) => {
                 user={user}
                 token={token}
                 favoriteMovies={favoriteMovies}
-               
-                onToggleFavorite={(movie) => {
-                  
-                }}
+                onToggleFavorite={handleToggleFavorite} 
               />
             }
           />
@@ -142,6 +144,7 @@ export const MainView = ({ propToken, apiUrl }) => {
                               <MovieCard
                                 movie={movie}
                                 isFavorite={favoriteMovies.some((favMovie) => favMovie._id === movie._id)}
+                                onToggleFavorite={handleToggleFavorite} 
                               />
                             </Link>
                           </Col>
