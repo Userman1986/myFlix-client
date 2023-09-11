@@ -8,7 +8,7 @@ export const MovieCard = ({ movie, onMovieClick, isFavorite, onToggleFavorite })
   const { _id, title, imgURL, description, genre, director } = movie;
 
   return (
-    <Card className="movie-card">
+    <Card className="movie-card" key={_id}>
       <Card.Img variant="top" src={imgURL} />
       <Card.Body>
         <Card.Title>{title}</Card.Title>
@@ -17,8 +17,8 @@ export const MovieCard = ({ movie, onMovieClick, isFavorite, onToggleFavorite })
           Open
         </Button>
         <Button
-          className={isFavorite ? 'btn-primary' : 'btn-secondary'} 
-          onClick={() => onToggleFavorite(movie)} 
+          className={isFavorite ? 'btn-primary' : 'btn-secondary'}
+          onClick={() => onToggleFavorite(movie)}
         >
           {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
         </Button>
@@ -41,6 +41,6 @@ MovieCard.propTypes = {
     imgURL: PropTypes.string.isRequired,
   }).isRequired,
   onMovieClick: PropTypes.func.isRequired,
-  isFavorite: PropTypes.bool.isRequired, 
-  onToggleFavorite: PropTypes.func.isRequired, 
+  isFavorite: PropTypes.bool.isRequired,
+  onToggleFavorite: PropTypes.func.isRequired,
 };
