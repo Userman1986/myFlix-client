@@ -3,9 +3,16 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import "../../dist/index.css"; 
 
-export const MovieView = ({ movies, user, token, favoriteMovies }) => {
+export const MovieView = ({ movies, user, token, favoriteMovies, navigate }) => {
   const { movieId } = useParams(); 
   const movie = movies.find((movie) => movie._id === movieId); 
+
+  
+  if (!movie) {
+    return <div>Movie not found.</div>;
+  }
+
+  const isFavorite = favoriteMovies.some((favMovie) => favMovie._id === movie._id);
 
   return (
     <div className="movie-view">
@@ -42,4 +49,5 @@ MovieView.propTypes = {
   user: PropTypes.object,
   token: PropTypes.string,
   favoriteMovies: PropTypes.array,
+  navigate: PropTypes.func.isRequired, // Pass navigate function
 };

@@ -98,10 +98,10 @@ export const MainView = ({ propToken, apiUrl }) => {
               <ProfileView
                 user={user}
                 onUpdateUser={(updatedUser) => {
-                  // Handle user profile update
+                  
                 }}
                 onDeregister={() => {
-                  // Handle user deregistration
+                 
                 }}
                 favoriteMovies={favoriteMovies}
               />
@@ -113,10 +113,13 @@ export const MainView = ({ propToken, apiUrl }) => {
             path="/movies/:movieId"
             element={
               <MovieView
-                movies={movies} // Pass movies as a prop to MovieView
+                movies={movies} 
                 user={user}
                 token={token}
                 favoriteMovies={favoriteMovies}
+                onToggleFavorite={(movie) => {
+                  
+                }}
               />
             }
           />
