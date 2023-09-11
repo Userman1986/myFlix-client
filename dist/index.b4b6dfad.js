@@ -27190,7 +27190,7 @@ var _s = $RefreshSig$();
 const MainView = ({ propToken, apiUrl })=>{
     _s();
     const [movies, setMovies] = (0, _react.useState)([]);
-    const [user, setUser] = (0, _react.useState)(localStorage.getItem("user") || null);
+    const [user, setUser] = (0, _react.useState)(JSON.parse(localStorage.getItem("user")) || null);
     const [token, setToken] = (0, _react.useState)(localStorage.getItem("token") || null);
     const [showSignup, setShowSignup] = (0, _react.useState)(false);
     const [favoriteMovies, setFavoriteMovies] = (0, _react.useState)([]);
@@ -27206,40 +27206,66 @@ const MainView = ({ propToken, apiUrl })=>{
         ]);
     };
     (0, _react.useEffect)(()=>{
-        if (token) {
-            localStorage.setItem("user", JSON.stringify(user));
-            localStorage.setItem("token", token);
-            fetch(`https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/movies`, {
-                headers: {
                     Authorization: `Bearer ${token}`
                 }
-            }).then((response)=>response.json()).then((data)=>{
-                const moviesFromApi = data.map((movie)=>{
-                    return {
-                        _id: movie._id,
-                        title: movie.title,
-                        description: movie.description,
-                        imgURL: movie.imgURL,
-                        director: movie.director ? {
-                            _id: movie.director._id || "",
-                            name: movie.director.name || ""
-                        } : {},
-                        genre: movie.genre ? {
-                            _id: movie.genre._id || "",
-                            name: movie.genre.name || ""
-                        } : {}
-                    };
-                });
-                setMovies(moviesFromApi);
-            }).catch((error)=>{
-                console.error("Error fetching data:", error);
-            });
-        }
+        if (token) fetchMovies();
     }, [
         token,
-        apiUrl,
+        apiUrl
+    ]);
+    (0, _react.useEffect)(()=>{
+        if (token && user) fetchUserData();
+    }, [
+        token,
         user
     ]);
+    const fetchMovies = ()=>{
+        fetch(`https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/movies`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response)=>response.json()).then((data)=>{
+            const moviesFromApi = data.map((movie)=>{
+                return {
+                    _id: movie._id,
+                    title: movie.title,
+                    description: movie.description,
+                    imgURL: movie.imgURL,
+                    director: movie.director ? {
+                        _id: movie.director._id || "",
+                        name: movie.director.name || ""
+                    } : {},
+                    genre: movie.genre ? {
+                        _id: movie.genre._id || "",
+                        name: movie.genre.name || ""
+                    } : {}
+                };
+            });
+            setMovies(moviesFromApi);
+        }).catch((error)=>{
+            console.error("Error fetching data:", error);
+        });
+    };
+    const fetchUserData = ()=>{
+        fetch(`https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/users/${user._id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response)=>{
+            if (response.ok) return response.json();
+            else throw new Error("User data request failed.");
+        }).then((userData)=>{
+            const updatedUser = {
+                ...user,
+                ...userData,
+                _id: user._id
+            };
+            localStorage.setItem("user", JSON.stringify(updatedUser));
+            setUser(updatedUser);
+        }).catch((error)=>{
+            console.error("Error fetching user data:", error);
+        });
+    };
     const handleLogout = ()=>{
         localStorage.clear();
         setUser(null);
@@ -27255,8 +27281,10 @@ const MainView = ({ propToken, apiUrl })=>{
             },
             body: JSON.stringify(updatedUserData)
         }).then((response)=>{
-            if (response.ok) console.log("User data updated successfully.");
-            else console.error("Failed to update user data.");
+            if (response.ok) {
+                console.log("User data updated successfully.");
+                fetchUserData();
+            } else console.error("Failed to update user data.");
         }).catch((error)=>{
             console.error("Error updating user data:", error);
         });
@@ -27269,8 +27297,10 @@ const MainView = ({ propToken, apiUrl })=>{
                 Authorization: `Bearer ${token}`
             }
         }).then((response)=>{
-            if (response.ok) console.log("User account deregistered successfully.");
-            else console.error("Failed to deregister user account.");
+            if (response.ok) {
+                console.log("User account deregistered successfully.");
+                handleLogout();
+            } else console.error("Failed to deregister user account.");
         }).catch((error)=>{
             console.error("Error deregistering user account:", error);
         });
@@ -27279,21 +27309,6 @@ const MainView = ({ propToken, apiUrl })=>{
     const toggleSignup = ()=>{
         setShowSignup(!showSignup);
     };
-    (0, _react.useEffect)(()=>{
-        if (token && user) fetch(`https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/users/${user._id}`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }).then((response)=>response.json()).then((userData)=>{
-            localStorage.setItem("user", JSON.stringify(userData));
-            setUser(userData);
-        }).catch((error)=>{
-            console.error("Error fetching user data:", error);
-        });
-    }, [
-        token,
-        user
-    ]);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.BrowserRouter), {
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navigationBar.NavigationBar), {
@@ -27301,7 +27316,7 @@ const MainView = ({ propToken, apiUrl })=>{
                 onLoggedOut: handleLogout
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 146,
+                lineNumber: 162,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _rowDefault.default), {
@@ -27319,15 +27334,15 @@ const MainView = ({ propToken, apiUrl })=>{
                                         onLoggedIn: (user, token)=>{
                                             setUser(user);
                                             setToken(token);
-                                            localStorage.removeItem("user", JSON.stringify(user));
-                                            localStorage.removeItem("token", token);
+                                            localStorage.removeItem("user");
+                                            localStorage.removeItem("token");
                                         }
                                     }, void 0, false, void 0, void 0)
                                 }, void 0, false, void 0, void 0)
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 149,
+                            lineNumber: 165,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27345,7 +27360,7 @@ const MainView = ({ propToken, apiUrl })=>{
                             }, void 0, false, void 0, void 0)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 170,
+                            lineNumber: 186,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27359,7 +27374,7 @@ const MainView = ({ propToken, apiUrl })=>{
                             }, void 0, false, void 0, void 0)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 188,
+                            lineNumber: 204,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27389,28 +27404,28 @@ const MainView = ({ propToken, apiUrl })=>{
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 200,
+                            lineNumber: 216,
                             columnNumber: 11
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 148,
+                    lineNumber: 164,
                     columnNumber: 9
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 147,
+                lineNumber: 163,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 145,
+        lineNumber: 161,
         columnNumber: 5
     }, undefined);
 };
-_s(MainView, "9PdD+FXJsVMoLFE+70dJ5yNzZsY=", false, function() {
+_s(MainView, "8yRJhN0QEKLsSxQVIks5AH2/DpQ=", false, function() {
     return [
         (0, _reactRouterDom.useParams)
     ];
