@@ -24,8 +24,8 @@ export const MovieView = ({ movies, user, token, favoriteMovies, navigate }) => 
         </Link>
         
         <button className="favorite-button" onClick={() => onToggleFavorite(movie)}>
-          {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
-        </button>
+  {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
+</button>
       </div>
       <div className="movie-content">
         <div className="movie-poster">

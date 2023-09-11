@@ -18,7 +18,17 @@ export const MainView = ({ propToken, apiUrl }) => {
 
   
   const handleToggleFavorite = (movie) => {
- 
+    
+    const isFavorite = favoriteMovies.some((favMovie) => favMovie._id === movie._id);
+  
+    if (isFavorite) {
+      
+      const updatedFavorites = favoriteMovies.filter((favMovie) => favMovie._id !== movie._id);
+      setFavoriteMovies(updatedFavorites);
+    } else {
+      
+      setFavoriteMovies([...favoriteMovies, movie]);
+    }
   };
 
   useEffect(() => {
