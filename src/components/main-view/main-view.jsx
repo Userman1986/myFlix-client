@@ -70,10 +70,20 @@ export const MainView = ({ propToken, apiUrl }) => {
     setToken(null);
   };
 
+
+  console.log('User object:', user);
+  console.log('Token:', token);
+
+
   const handleUpdateUser = async (updatedUserData) => {
-    try {
-      const updateUserEndpoint = `https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/users/${user._id}`;
+    if (!user || !user._id || !token) {
+      console.error('User or token is missing.');
+      return;
+    }
   
+    const updateUserEndpoint = `https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/users/${user._id}`;
+  
+    try {
       const response = await fetch(updateUserEndpoint, {
         method: 'PUT',
         headers: {
@@ -85,7 +95,6 @@ export const MainView = ({ propToken, apiUrl }) => {
   
       if (response.ok) {
         console.log('User data updated successfully.');
-        
       } else {
         console.error('Failed to update user data.');
       }
