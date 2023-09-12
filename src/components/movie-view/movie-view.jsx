@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import PropTypes from 'prop-types';
 import { Link, useParams } from 'react-router-dom';
 import "../../dist/index.css"; 
 
-export const MovieView = ({ movies, user, token, favoriteMovies, navigate }) => {
+export const MovieView = ({ movies, user, token, favoriteMovies, navigate, onToggleFavorite }) => {
   const { movieId } = useParams(); 
   const movie = movies.find((movie) => movie._id === movieId); 
 
-  
   if (!movie) {
     return <div>Movie not found.</div>;
   }
@@ -24,8 +23,8 @@ export const MovieView = ({ movies, user, token, favoriteMovies, navigate }) => 
         </Link>
         
         <button className="favorite-button" onClick={() => onToggleFavorite(movie)}>
-  {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
-</button>
+          {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
+        </button>
       </div>
       <div className="movie-content">
         <div className="movie-poster">
@@ -49,5 +48,6 @@ MovieView.propTypes = {
   user: PropTypes.object,
   token: PropTypes.string,
   favoriteMovies: PropTypes.array,
-  navigate: PropTypes.func.isRequired, // Pass navigate function
+  navigate: PropTypes.func.isRequired,
+  onToggleFavorite: PropTypes.func.isRequired,
 };
