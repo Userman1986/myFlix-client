@@ -27326,8 +27326,8 @@ const MainView = ({ propToken, apiUrl })=>{
                                         onLoggedIn: (user, token)=>{
                                             setUser(user);
                                             setToken(token);
-                                            localStorage.removeItem("user", JSON.stringify(user));
-                                            localStorage.removeItem("token", token);
+                                            localStorage.setItem("user", JSON.stringify(user));
+                                            localStorage.setItem("token", token);
                                         }
                                     }, void 0, false, void 0, void 0)
                                 }, void 0, false, void 0, void 0)
