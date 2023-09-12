@@ -70,28 +70,31 @@ export const MainView = ({ propToken, apiUrl }) => {
     setToken(null);
   };
 
-  const handleUpdateUser = (updatedUserData) => {
-    const updateUserEndpoint = `https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/users/${user._id}`;
-
-    fetch(updateUserEndpoint, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(updatedUserData),
-    })
-      .then((response) => {
-        if (response.ok) {
-          console.log('User data updated successfully.');
-        } else {
-          console.error('Failed to update user data.');
-        }
-      })
-      .catch((error) => {
-        console.error('Error updating user data:', error);
+  const handleUpdateUser = async (updatedUserData) => {
+    try {
+      const updateUserEndpoint = `https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/users/${user._id}`;
+  
+      const response = await fetch(updateUserEndpoint, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(updatedUserData),
       });
+  
+      if (response.ok) {
+        console.log('User data updated successfully.');
+        
+      } else {
+        console.error('Failed to update user data.');
+      }
+    } catch (error) {
+      console.error('Error updating user data:', error);
+    }
   };
+    
+  
 
   const handleDeregisterUser = () => {
     const deregisterEndpoint = `https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/users/${user._id}`;
@@ -121,7 +124,7 @@ export const MainView = ({ propToken, apiUrl }) => {
   };
 
   useEffect(() => {
-    if (token && user) { 
+    if (token && user && user._id) { 
       fetch(`https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/users/${user._id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
