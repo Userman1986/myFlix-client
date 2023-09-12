@@ -27242,6 +27242,7 @@ const MainView = ({ propToken, apiUrl })=>{
         setToken(null);
     };
     const handleUpdateUser = async (updatedUserData)=>{
+        console.log("Updating user with data:", updatedUserData);
         if (!user || !user._id || !token) {
             console.error("User or token is missing.");
             return;
@@ -27262,19 +27263,24 @@ const MainView = ({ propToken, apiUrl })=>{
             console.error("Error updating user data:", error);
         }
     };
-    const handleDeregisterUser = ()=>{
+    const handleDeregisterUser = async ()=>{
         const deregisterEndpoint = `https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/users/${user._id}`;
-        fetch(deregisterEndpoint, {
-            method: "DELETE",
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }).then((response)=>{
+        try {
+            const response = await fetch(deregisterEndpoint, {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
             if (response.ok) console.log("User account deregistered successfully.");
-            else console.error("Failed to deregister user account.");
-        }).catch((error)=>{
+            else {
+                console.error("Failed to deregister user account. HTTP Status:", response.status);
+                const errorData = await response.json();
+                console.error("Error details:", errorData);
+            }
+        } catch (error) {
             console.error("Error deregistering user account:", error);
-        });
+        }
     };
     const handleSignup = ()=>{};
     const toggleSignup = ()=>{
@@ -27302,7 +27308,7 @@ const MainView = ({ propToken, apiUrl })=>{
                 onLoggedOut: handleLogout
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 155,
+                lineNumber: 158,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _rowDefault.default), {
@@ -27328,7 +27334,7 @@ const MainView = ({ propToken, apiUrl })=>{
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 158,
+                            lineNumber: 161,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27346,7 +27352,7 @@ const MainView = ({ propToken, apiUrl })=>{
                             }, void 0, false, void 0, void 0)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 179,
+                            lineNumber: 182,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27360,7 +27366,7 @@ const MainView = ({ propToken, apiUrl })=>{
                             }, void 0, false, void 0, void 0)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 197,
+                            lineNumber: 200,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27390,24 +27396,24 @@ const MainView = ({ propToken, apiUrl })=>{
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 209,
+                            lineNumber: 212,
                             columnNumber: 11
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 157,
+                    lineNumber: 160,
                     columnNumber: 9
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 156,
+                lineNumber: 159,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 154,
+        lineNumber: 157,
         columnNumber: 5
     }, undefined);
 };

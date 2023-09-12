@@ -73,6 +73,7 @@ export const MainView = ({ propToken, apiUrl }) => {
 
 
   const handleUpdateUser = async (updatedUserData) => {
+    console.log('Updating user with data:', updatedUserData);
     if (!user || !user._id || !token) {
       console.error('User or token is missing.');
       return;
@@ -101,27 +102,29 @@ export const MainView = ({ propToken, apiUrl }) => {
   };
     
   
-
-  const handleDeregisterUser = () => {
+  const handleDeregisterUser = async () => {
     const deregisterEndpoint = `https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/users/${user._id}`;
-
-    fetch(deregisterEndpoint, {
-      method: 'DELETE',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((response) => {
-        if (response.ok) {
-          console.log('User account deregistered successfully.');
-        } else {
-          console.error('Failed to deregister user account.');
-        }
-      })
-      .catch((error) => {
-        console.error('Error deregistering user account:', error);
+  
+    try {
+      const response = await fetch(deregisterEndpoint, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
+  
+      if (response.ok) {
+        console.log('User account deregistered successfully.');
+      } else {
+        console.error('Failed to deregister user account. HTTP Status:', response.status);
+        const errorData = await response.json(); 
+        console.error('Error details:', errorData);
+      }
+    } catch (error) {
+      console.error('Error deregistering user account:', error);
+    }
   };
+  
 
   const handleSignup = () => {};
 
