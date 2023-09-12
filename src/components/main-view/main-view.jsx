@@ -10,7 +10,7 @@ import { MovieView } from '../movie-view/movie-view';
 
 export const MainView = ({ propToken, apiUrl }) => {
   const [movies, setMovies] = useState([]);
-  const [user, setUser] = useState(localStorage.getItem('user') || null);
+  const [user, setUser] = useState(JSON.parce(localStorage.getItem('user') || null));
   const [token, setToken] = useState(localStorage.getItem('token') || null);
   const [showSignup, setShowSignup] = useState(false);
   const [favoriteMovies, setFavoriteMovies] = useState([]);
@@ -29,8 +29,7 @@ export const MainView = ({ propToken, apiUrl }) => {
 
   useEffect(() => {
     if (token) {
-      localStorage.setItem('user', JSON.stringify(user));
-      localStorage.setItem('token', token);
+    
 
       fetch(`https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/movies`, {
         headers: {
