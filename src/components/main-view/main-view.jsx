@@ -10,7 +10,7 @@ import { MovieView } from '../movie-view/movie-view';
 
 export const MainView = ({ propToken, apiUrl }) => {
   const [movies, setMovies] = useState([]);
-  const [user, setUser] = useState(JSON.parce(localStorage.getItem('user') || null));
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user') || null));
   const [token, setToken] = useState(localStorage.getItem('token') || null);
   const [showSignup, setShowSignup] = useState(false);
   const [favoriteMovies, setFavoriteMovies] = useState([]);
