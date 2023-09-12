@@ -70,8 +70,6 @@ export const MainView = ({ propToken, apiUrl }) => {
   };
 
 
-  console.log('User object:', user);
-  console.log('Token:', token);
 
 
   const handleUpdateUser = async (updatedUserData) => {

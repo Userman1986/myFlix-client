@@ -27190,7 +27190,7 @@ var _s = $RefreshSig$();
 const MainView = ({ propToken, apiUrl })=>{
     _s();
     const [movies, setMovies] = (0, _react.useState)([]);
-    const [user, setUser] = (0, _react.useState)(localStorage.getItem("user") || null);
+    const [user, setUser] = (0, _react.useState)(JSON.parse(localStorage.getItem("user") || null));
     const [token, setToken] = (0, _react.useState)(localStorage.getItem("token") || null);
     const [showSignup, setShowSignup] = (0, _react.useState)(false);
     const [favoriteMovies, setFavoriteMovies] = (0, _react.useState)([]);
@@ -27206,35 +27206,31 @@ const MainView = ({ propToken, apiUrl })=>{
         ]);
     };
     (0, _react.useEffect)(()=>{
-        if (token) {
-            localStorage.setItem("user", JSON.stringify(user));
-            localStorage.setItem("token", token);
-            fetch(`https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/movies`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            }).then((response)=>response.json()).then((data)=>{
-                const moviesFromApi = data.map((movie)=>{
-                    return {
-                        _id: movie._id,
-                        title: movie.title,
-                        description: movie.description,
-                        imgURL: movie.imgURL,
-                        director: movie.director ? {
-                            _id: movie.director._id || "",
-                            name: movie.director.name || ""
-                        } : {},
-                        genre: movie.genre ? {
-                            _id: movie.genre._id || "",
-                            name: movie.genre.name || ""
-                        } : {}
-                    };
-                });
-                setMovies(moviesFromApi);
-            }).catch((error)=>{
-                console.error("Error fetching data:", error);
+        if (token) fetch(`https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/movies`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response)=>response.json()).then((data)=>{
+            const moviesFromApi = data.map((movie)=>{
+                return {
+                    _id: movie._id,
+                    title: movie.title,
+                    description: movie.description,
+                    imgURL: movie.imgURL,
+                    director: movie.director ? {
+                        _id: movie.director._id || "",
+                        name: movie.director.name || ""
+                    } : {},
+                    genre: movie.genre ? {
+                        _id: movie.genre._id || "",
+                        name: movie.genre.name || ""
+                    } : {}
+                };
             });
-        }
+            setMovies(moviesFromApi);
+        }).catch((error)=>{
+            console.error("Error fetching data:", error);
+        });
     }, [
         token,
         apiUrl,
@@ -27245,8 +27241,6 @@ const MainView = ({ propToken, apiUrl })=>{
         setUser(null);
         setToken(null);
     };
-    console.log("User object:", user);
-    console.log("Token:", token);
     const handleUpdateUser = async (updatedUserData)=>{
         if (!user || !user._id || !token) {
             console.error("User or token is missing.");
@@ -27308,7 +27302,7 @@ const MainView = ({ propToken, apiUrl })=>{
                 onLoggedOut: handleLogout
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 158,
+                lineNumber: 155,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _rowDefault.default), {
@@ -27334,7 +27328,7 @@ const MainView = ({ propToken, apiUrl })=>{
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 161,
+                            lineNumber: 158,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27352,7 +27346,7 @@ const MainView = ({ propToken, apiUrl })=>{
                             }, void 0, false, void 0, void 0)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 182,
+                            lineNumber: 179,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27366,7 +27360,7 @@ const MainView = ({ propToken, apiUrl })=>{
                             }, void 0, false, void 0, void 0)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 200,
+                            lineNumber: 197,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27396,28 +27390,28 @@ const MainView = ({ propToken, apiUrl })=>{
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 212,
+                            lineNumber: 209,
                             columnNumber: 11
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 160,
+                    lineNumber: 157,
                     columnNumber: 9
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 159,
+                lineNumber: 156,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 157,
+        lineNumber: 154,
         columnNumber: 5
     }, undefined);
 };
-_s(MainView, "9PdD+FXJsVMoLFE+70dJ5yNzZsY=", false, function() {
+_s(MainView, "UKAIPRo4rJ9xiXDcjcbmOd0KXyo=", false, function() {
     return [
         (0, _reactRouterDom.useParams)
     ];
