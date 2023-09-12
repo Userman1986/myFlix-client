@@ -7,6 +7,9 @@ import { BrowserRouter, Routes, Route, Link, Navigate, useParams } from 'react-r
 import { NavigationBar } from '../navigation-bar/navigation-bar';
 import { ProfileView } from '../profile-view/profile-view';
 import { MovieView } from '../movie-view/movie-view';
+import { Route } from 'react-router-dom';
+import SignupView from '../signup-view/signup-view';
+
 
 export const MainView = ({ propToken, apiUrl }) => {
   const [movies, setMovies] = useState([]);
@@ -152,7 +155,6 @@ export const MainView = ({ propToken, apiUrl }) => {
 
 
 
-
   return (
     <BrowserRouter>
       <NavigationBar user={user} onLoggedOut={handleLogout} />
@@ -209,6 +211,17 @@ export const MainView = ({ propToken, apiUrl }) => {
               />
             }
           />
+
+         
+          <Route
+            path="/signup"
+            element={
+              <SignupView
+                onSignup={handleSignup}
+              />
+            }
+          />
+
           <Route
             path="/"
             element={
