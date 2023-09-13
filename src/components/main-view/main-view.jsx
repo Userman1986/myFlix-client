@@ -64,7 +64,7 @@ export const MainView = ({ propToken, apiUrl }) => {
           console.error('Error fetching data:', error);
         });
     }
-  }, [token, apiUrl, user]);
+  }, [token, apiUrl]);
 
   const handleLogout = () => {
     localStorage.clear();
