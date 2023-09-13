@@ -206,7 +206,7 @@ export const MainView = ({ propToken, apiUrl }) => {
                       <>
                         {movies.map((movie) => (
                           <Col className="mb-4" key={movie._id} md={3}>
-                            <Link to={`/movies/${movie._id}`}>
+                            <Link to={`/movies/${movie._id}`}className="movie-card" >
                               <MovieCard
                                 movie={movie}
                                 isFavorite={favoriteMovies.some((favMovie) => favMovie._id === movie._id)}

@@ -14,6 +14,8 @@ export const MovieCard = ({ movie, isFavorite, onToggleFavorite }) => {
       <Card.Body>
         <Card.Title>{title}</Card.Title>
         <Card.Text>{description}</Card.Text>
+
+        
         <Link to={`/movies/${_id}`}> {/* Use Link component */}
           <Button className="btn-danger1" variant="danger">
             Open
