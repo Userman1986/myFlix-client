@@ -10,7 +10,6 @@ import { MovieView } from '../movie-view/movie-view';
 import { Route } from 'react-router-dom';
 import SignupView from '../signup-view/signup-view';
 
-
 export const MainView = ({ propToken, apiUrl }) => {
   const [movies, setMovies] = useState([]);
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user') || null));
@@ -32,8 +31,6 @@ export const MainView = ({ propToken, apiUrl }) => {
 
   useEffect(() => {
     if (token) {
-    
-
       fetch(`https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/movies`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -72,18 +69,15 @@ export const MainView = ({ propToken, apiUrl }) => {
     setToken(null);
   };
 
-
-
-
   const handleUpdateUser = async (updatedUserData) => {
     console.log('Updating user with data:', updatedUserData);
     if (!user || !user._id || !token) {
       console.error('User or token is missing.');
       return;
     }
-  
+
     const updateUserEndpoint = `https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/users/${user._id}`;
-  
+
     try {
       const response = await fetch(updateUserEndpoint, {
         method: 'PUT',
@@ -93,7 +87,7 @@ export const MainView = ({ propToken, apiUrl }) => {
         },
         body: JSON.stringify(updatedUserData),
       });
-  
+
       if (response.ok) {
         console.log('User data updated successfully.');
       } else {
@@ -103,11 +97,10 @@ export const MainView = ({ propToken, apiUrl }) => {
       console.error('Error updating user data:', error);
     }
   };
-    
-  
+
   const handleDeregisterUser = async () => {
     const deregisterEndpoint = `https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/users/${user._id}`;
-  
+
     try {
       const response = await fetch(deregisterEndpoint, {
         method: 'DELETE',
@@ -115,45 +108,24 @@ export const MainView = ({ propToken, apiUrl }) => {
           Authorization: `Bearer ${token}`,
         },
       });
-  
+
       if (response.ok) {
         console.log('User account deregistered successfully.');
       } else {
         console.error('Failed to deregister user account. HTTP Status:', response.status);
-        const errorData = await response.json(); 
+        const errorData = await response.json();
         console.error('Error details:', errorData);
       }
     } catch (error) {
       console.error('Error deregistering user account:', error);
     }
   };
-  
 
   const handleSignup = () => {};
 
   const toggleSignup = () => {
     setShowSignup(!showSignup);
   };
-
-  useEffect(() => {
-    if (token && user && user._id) { 
-      fetch(`https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/users/${user._id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-        .then((response) => response.json())
-        .then((userData) => {
-          localStorage.setItem('user', JSON.stringify(userData));
-          setUser(userData);
-        })
-        .catch((error) => {
-          console.error('Error fetching user data:', error);
-        });
-    }
-  }, [token, user]);
-
-
 
   return (
     <BrowserRouter>
@@ -190,8 +162,8 @@ export const MainView = ({ propToken, apiUrl }) => {
                   onUpdateUser={handleUpdateUser}
                   onDeregister={handleDeregisterUser}
                   movies={movies}
-                  favoriteMovies={favoriteMovies}
-                  onUpdateFavoriteMovies={setFavoriteMovies}
+                  userFavoriteMovies={favoriteMovies} 
+                  onUpdateUserFavoriteMovies={setFavoriteMovies}
                 />
               ) : (
                 <Navigate to="/login" replace />
@@ -212,7 +184,6 @@ export const MainView = ({ propToken, apiUrl }) => {
             }
           />
 
-         
           <Route
             path="/signup"
             element={
