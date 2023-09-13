@@ -37,7 +37,7 @@ body {
   margin-right: 10px;
 }
 
-/* Style the main view */
+
 .main-view {
   padding: 20px 0;
 }
@@ -50,52 +50,46 @@ body {
   border-radius: 5px;
   margin: 0 10px 20px;
   padding: 10px;
-  transition: transform .2s;
+  transition: transform 0.2s;
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow: hidden;
   box-shadow: 0 4px 8px #0003;
+  /* Set fixed width and height for each card */
+  width: 260px;
   height: 730px;
-  color: white; 
+  color: white;
 }
-
-.movie-card .card-title,
-.movie-card .card-text {
-  
-
-   
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 50px; 
-    color: white; 
-  }
-
-
-  .movie-card .btn-danger1 {
-    background-color: #e50914;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 3px;
-    cursor: pointer;
-    font-size: 16px;
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: auto;
-  }
-  
 
 .movie-card:hover {
   transform: scale(1.05);
 }
 
+.movie-card .card-title,
+.movie-card .card-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  color: white;
+}
+
+
+.movie-card a {
+  text-decoration: none;
+}
+
+
+.movie-card .card-title a {
+  color: #fff; 
+  font-weight: bold;
+}
+
+
 .movie-card .card-img-top {
-  width: 260px;
-  height: 386px; 
+  width: 200px; 
+  height: 300px; 
   object-fit: cover;
 }
 
@@ -106,8 +100,8 @@ body {
 }
 
 .movie-description {
-  color: white; 
-  font-size: 14px; 
+  color: white;
+  font-size: 14px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

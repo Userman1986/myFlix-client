@@ -13463,6 +13463,7 @@ body {
   border-radius: 5px;
   flex-direction: column;
   align-items: center;
+  width: 260px;
   height: 730px;
   margin: 0 10px 20px;
   padding: 10px;
@@ -13470,6 +13471,10 @@ body {
   display: flex;
   overflow: hidden;
   box-shadow: 0 4px 8px #0003;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
 }
 
 .movie-card .card-title, .movie-card .card-text {
@@ -13480,29 +13485,19 @@ body {
   display: flex;
 }
 
-.movie-card .btn-danger1 {
-  color: #fff;
-  cursor: pointer;
-  background-color: #e50914;
-  border: none;
-  border-radius: 3px;
-  width: auto;
-  padding: 10px 20px;
-  font-size: 16px;
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+.movie-card a {
+  text-decoration: none;
 }
 
-.movie-card:hover {
-  transform: scale(1.05);
+.movie-card .card-title a {
+  color: #fff;
+  font-weight: bold;
 }
 
 .movie-card .card-img-top {
   object-fit: cover;
-  width: 260px;
-  height: 386px;
+  width: 200px;
+  height: 300px;
 }
 
 .movie-card img {
