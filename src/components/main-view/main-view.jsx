@@ -7,7 +7,6 @@ import { BrowserRouter, Routes, Route, Link, Navigate, useParams } from 'react-r
 import { NavigationBar } from '../navigation-bar/navigation-bar';
 import { ProfileView } from '../profile-view/profile-view';
 import { MovieView } from '../movie-view/movie-view';
-import { Route } from 'react-router-dom';
 import SignupView from '../signup-view/signup-view';
 
 export const MainView = ({ propToken, apiUrl }) => {
@@ -139,7 +138,7 @@ export const MainView = ({ propToken, apiUrl }) => {
                 {user ? (
                   <Navigate to="/" />
                 ) : (
-                  <Col md={5}>
+                  <Col md={5} className="login-form">
                     <LoginView
                       onLoggedIn={(user, token) => {
                         setUser(user);
@@ -162,7 +161,7 @@ export const MainView = ({ propToken, apiUrl }) => {
                   onUpdateUser={handleUpdateUser}
                   onDeregister={handleDeregisterUser}
                   movies={movies}
-                  userFavoriteMovies={favoriteMovies} 
+                  userFavoriteMovies={favoriteMovies}
                   onUpdateUserFavoriteMovies={setFavoriteMovies}
                 />
               ) : (
