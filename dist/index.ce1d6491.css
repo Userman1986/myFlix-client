@@ -1,17 +1,34 @@
-.container {
-  padding: 20px;
+.my-flix {
+  color: #4682b4;
 }
 
-button {
-  margin-right: 10px;
+body, h1, h2, h3, p {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
+  display: flex;
 }
 
 .movie-card {
-  border: 1px solid #ccc;
+  cursor: pointer;
+  background-color: #141414;
   border-radius: 5px;
-  margin-bottom: 20px;
+  width: 200px;
+  margin: 10px;
   padding: 10px;
-  box-shadow: 0 0 5px #0003;
+  transition: transform .2s;
+  box-shadow: 0 0 10px #0003;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
 }
 
 .movie-card img {
@@ -19,45 +36,38 @@ button {
   height: auto;
 }
 
-.login-form, .signup-form {
-  background-color: #f8f8f8;
+.movie-details {
+  background-color: #141414;
   border-radius: 5px;
+  max-width: 400px;
+  margin: 0 auto;
   padding: 20px;
-  box-shadow: 0 0 5px #0003;
+  box-shadow: 0 0 10px #0003;
 }
 
-.login-form input, .signup-form input {
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  width: 100%;
-  margin-bottom: 10px;
-  padding: 10px;
+.movie-details img {
+  max-width: 100%;
+  height: auto;
 }
 
-.signup-form button {
+.movie-details span {
+  color: #fff;
+  margin: 5px 0;
+  display: block;
+}
+
+.movie-details button {
   color: #fff;
   cursor: pointer;
-  background-color: #007bff;
+  background-color: #e50914;
   border: none;
-  border-radius: 3px;
-  padding: 10px 20px;
-}
-
-.logout-button {
-  color: #fff;
-  cursor: pointer;
-  background-color: #dc3545;
-  border: none;
-  border-radius: 3px;
-  padding: 10px 20px;
-}
-
-.movie-view {
-  border: 1px solid #ccc;
   border-radius: 5px;
-  margin-top: 20px;
-  padding: 20px;
-  box-shadow: 0 0 5px #0003;
+  padding: 10px 20px;
+  transition: background-color .3s;
+}
+
+.movie-details button:hover {
+  background-color: #ff0a16;
 }
 
 :root, [data-bs-theme="light"] {
@@ -13453,6 +13463,7 @@ body {
   border-radius: 5px;
   flex-direction: column;
   align-items: center;
+  width: 100%;
   height: 730px;
   margin: 0 10px 20px;
   padding: 10px;
@@ -13460,6 +13471,10 @@ body {
   display: flex;
   overflow: hidden;
   box-shadow: 0 4px 8px #0003;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
 }
 
 .movie-card .card-title, .movie-card .card-text {
@@ -13470,29 +13485,19 @@ body {
   display: flex;
 }
 
-.movie-card .btn-danger1 {
-  color: #fff;
-  cursor: pointer;
-  background-color: #e50914;
-  border: none;
-  border-radius: 3px;
-  width: auto;
-  padding: 10px 20px;
-  font-size: 16px;
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+.movie-card a {
+  text-decoration: none;
 }
 
-.movie-card:hover {
-  transform: scale(1.05);
+.movie-card .card-title a {
+  color: #fff;
+  font-weight: bold;
 }
 
 .movie-card .card-img-top {
   object-fit: cover;
-  width: 260px;
-  height: 386px;
+  width: 200px;
+  height: 300px;
 }
 
 .movie-card img {
@@ -13507,30 +13512,60 @@ body {
   white-space: nowrap;
   flex-grow: 1;
   font-size: 14px;
+  text-decoration: none;
   overflow: hidden;
 }
 
 .movie-view {
-  background-color: #1e1e1e;
+  color: #fff;
+  text-align: center;
+  background-color: #000;
   border-radius: 5px;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: auto;
   padding: 20px;
+  display: flex;
   box-shadow: 0 4px 8px #0003;
 }
 
-.movie-view img {
-  object-fit: cover;
+.movie-poster img {
+  object-fit: contain;
   max-width: 100%;
   height: auto;
+  margin: 0 auto;
 }
 
-.movie-view h2 {
+.movie-title {
   margin-bottom: 10px;
-  font-size: 24px;
+  font-size: 36px;
+  text-decoration: none;
 }
 
-.movie-view p {
+.movie-meta {
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  display: flex;
+}
+
+.back-button {
+  color: #fff;
+  cursor: pointer;
+  background-color: #e50914;
+  border: none;
+  border-radius: 3px;
+  padding: 10px 20px;
   font-size: 16px;
-  line-height: 1.5;
+}
+
+a {
+  text-decoration: none;
+}
+
+.movie-view .movie-genre, .movie-view .movie-director {
+  font-size: 16px;
 }
 
 .login-form {
@@ -13583,6 +13618,89 @@ body {
   width: 100%;
   padding: 10px 20px;
   font-size: 16px;
+}
+
+.navbar {
+  background-color: #141414;
+}
+
+.navbar-brand img {
+  filter: brightness(0) invert();
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: #fff;
+  margin-right: 20px;
+  font-size: 16px;
+  transition: color .3s;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+  color: #e50914;
+}
+
+.navbar-nav {
+  margin-right: 0;
+}
+
+.navbar-nav .nav-link {
+  padding: 15px;
+}
+
+.profile-view {
+  color: #fff;
+  padding: 20px;
+}
+
+h2 {
+  margin-bottom: 20px;
+  font-size: 32px;
+}
+
+.card {
+  color: #fff;
+  background-color: #1e1e1e;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px #0003;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  color: #fff;
+  font-weight: bold;
+}
+
+.form-control {
+  color: #fff;
+  background-color: #333;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.form-control::placeholder {
+  color: #ccc;
+}
+
+.button {
+  margin-right: 10px;
+}
+
+.favorite-movies {
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  display: grid;
+}
+
+.favorite-movies .card {
+  width: 100%;
+  margin: 0;
 }
 
 /*# sourceMappingURL=index.ce1d6491.css.map */
