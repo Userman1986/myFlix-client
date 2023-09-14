@@ -27182,7 +27182,7 @@ var _col = require("react-bootstrap/Col");
 var _colDefault = parcelHelpers.interopDefault(_col);
 var _row = require("react-bootstrap/Row");
 var _rowDefault = parcelHelpers.interopDefault(_row);
-var _reactRouterDom = require("react-router-dom");
+var _reactRouterDom = require("react-router-dom"); // Import useNavigate
 var _navigationBar = require("../navigation-bar/navigation-bar");
 var _profileView = require("../profile-view/profile-view");
 var _movieView = require("../movie-view/movie-view");
@@ -27197,31 +27197,50 @@ const MainView = ({ propToken, apiUrl })=>{
     const [showSignup, setShowSignup] = (0, _react.useState)(false);
     const [favoriteMovies, setFavoriteMovies] = (0, _react.useState)([]);
     const params = (0, _reactRouterDom.useParams)();
+    // Use useNavigate hook here
+    const navigate = (0, _reactRouterDom.useNavigate)();
     const handleToggleFavorite = async (e, movie)=>{
         e.preventDefault();
         const isFavorite = favoriteMovies.some((favMovie)=>favMovie._id === movie._id);
-        if (isFavorite) {
-            const updatedFavorites = favoriteMovies.filter((favMovie)=>favMovie._id !== movie._id);
-            setFavoriteMovies(updatedFavorites);
-        } else setFavoriteMovies([
-            ...favoriteMovies,
-            movie
-        ]);
-        if (user && user._id) try {
-            const response = await fetch(`https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/users/${user._id}`, {
-                method: "PUT",
+        if (isFavorite) try {
+            const response = await fetch(`https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/users/${user._id}/favorites/${movie._id}`, {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            if (response.ok) {
+                const updatedFavorites = favoriteMovies.filter((favMovie)=>favMovie._id !== movie._id);
+                setFavoriteMovies(updatedFavorites);
+                console.log("Movie removed from favorites successfully.");
+                // Use navigate here
+                navigate(`/movies/${movie._id}`);
+            } else console.error("Failed to remove movie from favorites.");
+        } catch (error) {
+            console.error("Error removing movie from favorites:", error);
+        }
+        else try {
+            const response = await fetch(`https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/users/${user._id}/favorites`, {
+                method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`
                 },
                 body: JSON.stringify({
-                    favoriteMovies: favoriteMovies
+                    movieId: movie._id
                 })
             });
-            if (response.ok) console.log("User favorite movies updated successfully in the database.");
-            else console.error("Failed to update user favorite movies in the database.");
+            if (response.ok) {
+                setFavoriteMovies([
+                    ...favoriteMovies,
+                    movie
+                ]);
+                console.log("Movie added to favorites successfully.");
+                // Use navigate here
+                navigate(`/movies/${movie._id}`);
+            } else console.error("Failed to add movie to favorites.");
         } catch (error) {
-            console.error("Error updating user favorite movies in the database:", error);
+            console.error("Error adding movie to favorites:", error);
         }
     };
     (0, _react.useEffect)(()=>{
@@ -27311,7 +27330,7 @@ const MainView = ({ propToken, apiUrl })=>{
                 onLoggedOut: handleLogout
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 156,
+                lineNumber: 182,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _rowDefault.default), {
@@ -27338,7 +27357,7 @@ const MainView = ({ propToken, apiUrl })=>{
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 159,
+                            lineNumber: 185,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27356,7 +27375,7 @@ const MainView = ({ propToken, apiUrl })=>{
                             }, void 0, false, void 0, void 0)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 180,
+                            lineNumber: 206,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27370,7 +27389,7 @@ const MainView = ({ propToken, apiUrl })=>{
                             }, void 0, false, void 0, void 0)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 198,
+                            lineNumber: 224,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27380,7 +27399,7 @@ const MainView = ({ propToken, apiUrl })=>{
                             }, void 0, false, void 0, void 0)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 211,
+                            lineNumber: 237,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27411,30 +27430,31 @@ const MainView = ({ propToken, apiUrl })=>{
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 220,
+                            lineNumber: 246,
                             columnNumber: 11
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 158,
+                    lineNumber: 184,
                     columnNumber: 9
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 157,
+                lineNumber: 183,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 155,
+        lineNumber: 181,
         columnNumber: 5
     }, undefined);
 };
-_s(MainView, "mYk0y09I2n+xa9oTewkj04lMkoQ=", false, function() {
+_s(MainView, "+AGg/sqGYnJUjb+Bii1FWtmjzk4=", false, function() {
     return [
-        (0, _reactRouterDom.useParams)
+        (0, _reactRouterDom.useParams),
+        (0, _reactRouterDom.useNavigate)
     ];
 });
 _c = MainView;
@@ -27446,7 +27466,7 @@ $RefreshReg$(_c, "MainView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../movie-card/movie-card":"bwuIu","../movie-view/movie-view":"ggaUx","@parcel/transformer-js/src/esmodule-helpers.js":"aw2qs","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"oxxb5","../login-view/login-view":"9YtA0","react-bootstrap/Col":"2L2I6","react-bootstrap/Row":"cMC39","react-router-dom":"9xmpe","../navigation-bar/navigation-bar":"bsPVM","../profile-view/profile-view":"2vVqf","../signup-view/signup-view":"4OGiN"}],"bwuIu":[function(require,module,exports) {
+},{"react":"21dqq","../movie-card/movie-card":"bwuIu","../movie-view/movie-view":"ggaUx","@parcel/transformer-js/src/esmodule-helpers.js":"aw2qs","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"oxxb5","../login-view/login-view":"9YtA0","react-bootstrap/Col":"2L2I6","react-bootstrap/Row":"cMC39","react-router-dom":"9xmpe","../navigation-bar/navigation-bar":"bsPVM","../profile-view/profile-view":"2vVqf","../signup-view/signup-view":"4OGiN"}],"bwuIu":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$67b2 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;

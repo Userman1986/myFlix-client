@@ -3,7 +3,8 @@ import { MovieCard } from '../movie-card/movie-card';
 import { LoginView } from '../login-view/login-view';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import { BrowserRouter, Routes, Route, Link, Navigate, useParams } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link, Navigate, useParams, useNavigate } from 'react-router-dom'; // Import useNavigate
+
 import { NavigationBar } from '../navigation-bar/navigation-bar';
 import { ProfileView } from '../profile-view/profile-view';
 import { MovieView } from '../movie-view/movie-view';
@@ -17,38 +18,63 @@ export const MainView = ({ propToken, apiUrl }) => {
   const [favoriteMovies, setFavoriteMovies] = useState([]);
   const params = useParams();
 
+  // Use useNavigate hook here
+  const navigate = useNavigate();
+
   const handleToggleFavorite = async (e, movie) => {
     e.preventDefault();
     const isFavorite = favoriteMovies.some((favMovie) => favMovie._id === movie._id);
 
     if (isFavorite) {
-      const updatedFavorites = favoriteMovies.filter((favMovie) => favMovie._id !== movie._id);
-      setFavoriteMovies(updatedFavorites);
-    } else {
-      setFavoriteMovies([...favoriteMovies, movie]);
-    }
-    
-    if (user && user._id) {
       try {
         const response = await fetch(
-          `https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/users/${user._id}`,
+          `https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/users/${user._id}/favorites/${movie._id}`,
           {
-            method: 'PUT',
+            method: 'DELETE',
             headers: {
-              'Content-Type': 'application/json',
               Authorization: `Bearer ${token}`,
             },
-            body: JSON.stringify({ favoriteMovies: favoriteMovies }),
           }
         );
 
         if (response.ok) {
-          console.log('User favorite movies updated successfully in the database.');
+          const updatedFavorites = favoriteMovies.filter((favMovie) => favMovie._id !== movie._id);
+          setFavoriteMovies(updatedFavorites);
+          console.log('Movie removed from favorites successfully.');
+
+          // Use navigate here
+          navigate(`/movies/${movie._id}`);
         } else {
-          console.error('Failed to update user favorite movies in the database.');
+          console.error('Failed to remove movie from favorites.');
         }
       } catch (error) {
-        console.error('Error updating user favorite movies in the database:', error);
+        console.error('Error removing movie from favorites:', error);
+      }
+    } else {
+      try {
+        const response = await fetch(
+          `https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/users/${user._id}/favorites`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({ movieId: movie._id }),
+          }
+        );
+
+        if (response.ok) {
+          setFavoriteMovies([...favoriteMovies, movie]);
+          console.log('Movie added to favorites successfully.');
+
+          // Use navigate here
+          navigate(`/movies/${movie._id}`);
+        } else {
+          console.error('Failed to add movie to favorites.');
+        }
+      } catch (error) {
+        console.error('Error adding movie to favorites:', error);
       }
     }
   };
