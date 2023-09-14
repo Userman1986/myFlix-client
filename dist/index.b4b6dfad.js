@@ -27179,16 +27179,12 @@ const MainView = ({ propToken, apiUrl })=>{
     const handleToggleFavorite = async (e, movie)=>{
         e.preventDefault();
         const isFavorite = favoriteMovies.some((favMovie)=>favMovie._id === movie._id);
-        let favs = [];
-        if (isFavorite) {
-            const updatedFavorites = movies.filter((favMovie)=>favMovie._id !== movie._id);
-            setFavoriteMovies(updatedFavorites);
-            favs = updatedFavorites;
-        } else favs = [
-            ...favoriteMovies,
-            movie
+        let updatedFavoriteMovies = [
+            ...favoriteMovies
         ];
-        const fav_ids = favs.map((fav)=>fav._id);
+        if (isFavorite) updatedFavoriteMovies = updatedFavoriteMovies.filter((favMovie)=>favMovie._id !== movie._id);
+        else updatedFavoriteMovies.push(movie);
+        const fav_ids = updatedFavoriteMovies.map((fav)=>fav._id);
         if (user && user._id) try {
             const response = await fetch(`https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/users/${user._id}`, {
                 method: "PUT",
@@ -27201,7 +27197,7 @@ const MainView = ({ propToken, apiUrl })=>{
                 })
             });
             if (response.ok) {
-                setFavoriteMovies(favs);
+                setFavoriteMovies(updatedFavoriteMovies);
                 console.log("User favorite movies updated successfully in the database.");
             } else console.error("Failed to update user favorite movies in the database.");
         } catch (error) {
@@ -27306,7 +27302,7 @@ const MainView = ({ propToken, apiUrl })=>{
                 onLoggedOut: handleLogout
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 175,
+                lineNumber: 179,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _rowDefault.default), {
@@ -27333,7 +27329,7 @@ const MainView = ({ propToken, apiUrl })=>{
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 178,
+                            lineNumber: 182,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27351,7 +27347,7 @@ const MainView = ({ propToken, apiUrl })=>{
                             }, void 0, false, void 0, void 0)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 199,
+                            lineNumber: 203,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27365,7 +27361,7 @@ const MainView = ({ propToken, apiUrl })=>{
                             }, void 0, false, void 0, void 0)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 217,
+                            lineNumber: 221,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27375,7 +27371,7 @@ const MainView = ({ propToken, apiUrl })=>{
                             }, void 0, false, void 0, void 0)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 230,
+                            lineNumber: 234,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27406,24 +27402,24 @@ const MainView = ({ propToken, apiUrl })=>{
                             }, void 0, false)
                         }, void 0, false, {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 239,
+                            lineNumber: 243,
                             columnNumber: 11
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 177,
+                    lineNumber: 181,
                     columnNumber: 9
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 176,
+                lineNumber: 180,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 174,
+        lineNumber: 178,
         columnNumber: 5
     }, undefined);
 };
