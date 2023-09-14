@@ -23,7 +23,7 @@ export const MovieCard = ({ movie, isFavorite, onToggleFavorite }) => {
         </Link>
         <Button
           className={isFavorite ? 'btn-primary' : 'btn-secondary'}
-          onClick={() => onToggleFavorite(movie)}
+          onClick={(e) => onToggleFavorite(e, movie)}
         >
           {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
         </Button>

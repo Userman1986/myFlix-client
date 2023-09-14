@@ -18,6 +18,7 @@ export const MainView = ({ propToken, apiUrl }) => {
   const params = useParams();
 
   const handleToggleFavorite = (movie) => {
+    e.preventDefault();
     const isFavorite = favoriteMovies.some((favMovie) => favMovie._id === movie._id);
 
     if (isFavorite) {
