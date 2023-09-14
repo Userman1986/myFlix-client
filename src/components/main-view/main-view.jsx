@@ -14,22 +14,23 @@ export const MainView = ({ propToken, apiUrl }) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user') || null));
   const [token, setToken] = useState(localStorage.getItem('token') || null);
   const [showSignup, setShowSignup] = useState(false);
-  const [favoriteMovies, setFavoriteMovies] = useState(JSON.parse(localStorage.getItem('favoriteMovies')) || []);
-  const params = useParams();
+  const [favoriteMovies, setFavoriteMovies] = useState([]);
+  
 
   const handleToggleFavorite = async (e, movie) => {
     e.preventDefault();
     const isFavorite = favoriteMovies.some((favMovie) => favMovie._id === movie._id);
-
+let favs = [];
     if (isFavorite) {
-      const updatedFavorites = favoriteMovies.filter((favMovie) => favMovie._id !== movie._id);
+      const updatedFavorites = movies.filter((favMovie) => favMovie._id !== movie._id);
       setFavoriteMovies(updatedFavorites);
+      favs = updatedFavorites;
     } else {
-      setFavoriteMovies([...favoriteMovies, movie]);
+      favs = ([...favoriteMovies, movie]);
     }
 
     
-    localStorage.setItem('favoriteMovies', JSON.stringify(favoriteMovies));
+  const fav_ids = favs.map (fav => fav._id);
 
     if (user && user._id) {
       try {
@@ -41,11 +42,12 @@ export const MainView = ({ propToken, apiUrl }) => {
               'Content-Type': 'application/json',
               Authorization: `Bearer ${token}`,
             },
-            body: JSON.stringify({ favoriteMovies: favoriteMovies }),
+            body: JSON.stringify({ favoriteMovies: fav_ids }),
           }
         );
 
         if (response.ok) {
+          setFavoriteMovies(favs);
           console.log('User favorite movies updated successfully in the database.');
         } else {
           console.error('Failed to update user favorite movies in the database.');
@@ -55,6 +57,20 @@ export const MainView = ({ propToken, apiUrl }) => {
       }
     }
   };
+
+  useEffect(() => {
+    if(token && movies.length > 0){
+      fetch(`https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/users/${user._id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }).then((res)=>res.json())
+      .then((res) => {
+        setFavoriteMovies(movies.filter(movie => res.FavoriteMovies.includes(movie._id)))
+      })
+    }
+  }, [movies])
 
   useEffect(() => {
     if (token) {
