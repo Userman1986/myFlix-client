@@ -14,10 +14,10 @@ export const MainView = ({ propToken, apiUrl }) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user') || null));
   const [token, setToken] = useState(localStorage.getItem('token') || null);
   const [showSignup, setShowSignup] = useState(false);
-  const [favoriteMovies, setFavoriteMovies] = useState([]);
+  const [favoriteMovies, setFavoriteMovies] = useState(JSON.parse(localStorage.getItem('favoriteMovies')) || []);
   const params = useParams();
 
-  const handleToggleFavorite = (e, movie) => {
+  const handleToggleFavorite = async (e, movie) => {
     e.preventDefault();
     const isFavorite = favoriteMovies.some((favMovie) => favMovie._id === movie._id);
 
@@ -26,6 +26,33 @@ export const MainView = ({ propToken, apiUrl }) => {
       setFavoriteMovies(updatedFavorites);
     } else {
       setFavoriteMovies([...favoriteMovies, movie]);
+    }
+
+    
+    localStorage.setItem('favoriteMovies', JSON.stringify(favoriteMovies));
+
+    if (user && user._id) {
+      try {
+        const response = await fetch(
+          `https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/users/${user._id}`,
+          {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({ favoriteMovies: favoriteMovies }),
+          }
+        );
+
+        if (response.ok) {
+          console.log('User favorite movies updated successfully in the database.');
+        } else {
+          console.error('Failed to update user favorite movies in the database.');
+        }
+      } catch (error) {
+        console.error('Error updating user favorite movies in the database:', error);
+      }
     }
   };
 
@@ -207,11 +234,11 @@ export const MainView = ({ propToken, apiUrl }) => {
                       <>
                         {movies.map((movie) => (
                           <Col className="mb-4" key={movie._id} md={3}>
-                            <Link to={`/movies/${movie._id}`}className="movie-card" >
+                            <Link to={`/movies/${movie._id}`} className="movie-card">
                               <MovieCard
                                 movie={movie}
                                 isFavorite={favoriteMovies.some((favMovie) => favMovie._id === movie._id)}
-                                onToggleFavorite={handleToggleFavorite}
+                                onToggleFavorite={(e) => handleToggleFavorite(e, movie)}
                               />
                             </Link>
                           </Col>
