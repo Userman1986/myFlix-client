@@ -20,18 +20,21 @@ export const MainView = ({ propToken, apiUrl }) => {
   const handleToggleFavorite = async (e, movie) => {
     e.preventDefault();
     const isFavorite = favoriteMovies.some((favMovie) => favMovie._id === movie._id);
-let favs = [];
+  
+   
+    let updatedFavoriteMovies = [...favoriteMovies];
+  
     if (isFavorite) {
-      const updatedFavorites = movies.filter((favMovie) => favMovie._id !== movie._id);
-      setFavoriteMovies(updatedFavorites);
-      favs = updatedFavorites;
+     
+      updatedFavoriteMovies = updatedFavoriteMovies.filter((favMovie) => favMovie._id !== movie._id);
     } else {
-      favs = ([...favoriteMovies, movie]);
+      
+      updatedFavoriteMovies.push(movie);
     }
-
+  
     
-  const fav_ids = favs.map (fav => fav._id);
-
+    const fav_ids = updatedFavoriteMovies.map((fav) => fav._id);
+  
     if (user && user._id) {
       try {
         const response = await fetch(
@@ -45,9 +48,10 @@ let favs = [];
             body: JSON.stringify({ favoriteMovies: fav_ids }),
           }
         );
-
+  
         if (response.ok) {
-          setFavoriteMovies(favs);
+          
+          setFavoriteMovies(updatedFavoriteMovies);
           console.log('User favorite movies updated successfully in the database.');
         } else {
           console.error('Failed to update user favorite movies in the database.');
