@@ -3,7 +3,7 @@ import { MovieCard } from '../movie-card/movie-card';
 import { LoginView } from '../login-view/login-view';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import { BrowserRouter, Routes, Route, Link, Navigate, useParams, useNavigate } from 'react-router-dom'; // Import useNavigate
+import { BrowserRouter, Routes, Route, Link, Navigate, useParams, useNavigate } from 'react-router-dom'; 
 
 import { NavigationBar } from '../navigation-bar/navigation-bar';
 import { ProfileView } from '../profile-view/profile-view';
@@ -18,7 +18,7 @@ export const MainView = ({ propToken, apiUrl }) => {
   const [favoriteMovies, setFavoriteMovies] = useState([]);
   const params = useParams();
 
-  // Use useNavigate hook here
+  
   const navigate = useNavigate();
 
   const handleToggleFavorite = async (e, movie) => {
