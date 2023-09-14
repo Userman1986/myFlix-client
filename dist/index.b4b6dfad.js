@@ -27182,7 +27182,7 @@ var _col = require("react-bootstrap/Col");
 var _colDefault = parcelHelpers.interopDefault(_col);
 var _row = require("react-bootstrap/Row");
 var _rowDefault = parcelHelpers.interopDefault(_row);
-var _reactRouterDom = require("react-router-dom");
+var _reactRouterDom = require("react-router-dom"); // Import useNavigate
 var _navigationBar = require("../navigation-bar/navigation-bar");
 var _profileView = require("../profile-view/profile-view");
 var _movieView = require("../movie-view/movie-view");
@@ -27197,6 +27197,7 @@ const MainView = ({ propToken, apiUrl })=>{
     const [showSignup, setShowSignup] = (0, _react.useState)(false);
     const [favoriteMovies, setFavoriteMovies] = (0, _react.useState)([]);
     const params = (0, _reactRouterDom.useParams)();
+    // Use useNavigate hook here
     const navigate = (0, _reactRouterDom.useNavigate)();
     const handleToggleFavorite = async (e, movie)=>{
         e.preventDefault();
