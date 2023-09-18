@@ -27,7 +27,7 @@ const SignupView = ({ onSignup }) => {
       .then((response) => {
         if (response.ok) {
           alert("Signup successful");
-          onSignup(); 
+          onSignup();
         } else {
           alert("Signup failed");
         }
@@ -39,9 +39,9 @@ const SignupView = ({ onSignup }) => {
   };
 
   return (
-    <div>
-      <h2>Sign Up</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="signup-container">
+      <h2 className="signup-title">Sign Up</h2>
+      <form className="signup-form" onSubmit={handleSubmit}>
         <label>
           Username:
           <input
@@ -84,6 +84,5 @@ const SignupView = ({ onSignup }) => {
     </div>
   );
 };
-
 
 export default SignupView;
