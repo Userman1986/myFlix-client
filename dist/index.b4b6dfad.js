@@ -27342,7 +27342,6 @@ const MainView = ({ propToken, apiUrl })=>{
                         children: [
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
                                 htmlFor: "genreFilter",
-                                className: "filter-label",
                                 children: "Filter by Genre:"
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
@@ -27353,14 +27352,13 @@ const MainView = ({ propToken, apiUrl })=>{
                                 id: "genreFilter",
                                 onChange: (e)=>setSelectedGenre(e.target.value),
                                 value: selectedGenre,
-                                className: "filter-dropdown",
                                 children: [
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
                                         value: "All",
                                         children: "All Genres"
                                     }, void 0, false, {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 199,
+                                        lineNumber: 198,
                                         columnNumber: 5
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -27368,7 +27366,7 @@ const MainView = ({ propToken, apiUrl })=>{
                                         children: "Action"
                                     }, void 0, false, {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 200,
+                                        lineNumber: 199,
                                         columnNumber: 5
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -27376,7 +27374,7 @@ const MainView = ({ propToken, apiUrl })=>{
                                         children: "Drama"
                                     }, void 0, false, {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 201,
+                                        lineNumber: 200,
                                         columnNumber: 5
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -27384,7 +27382,7 @@ const MainView = ({ propToken, apiUrl })=>{
                                         children: "Horror"
                                     }, void 0, false, {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 202,
+                                        lineNumber: 201,
                                         columnNumber: 5
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -27392,7 +27390,7 @@ const MainView = ({ propToken, apiUrl })=>{
                                         children: "Comedy"
                                     }, void 0, false, {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 203,
+                                        lineNumber: 202,
                                         columnNumber: 5
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -27400,7 +27398,7 @@ const MainView = ({ propToken, apiUrl })=>{
                                         children: "Adventure"
                                     }, void 0, false, {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 204,
+                                        lineNumber: 203,
                                         columnNumber: 5
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -27408,7 +27406,7 @@ const MainView = ({ propToken, apiUrl })=>{
                                         children: "Thriller"
                                     }, void 0, false, {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 205,
+                                        lineNumber: 204,
                                         columnNumber: 5
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -27416,7 +27414,7 @@ const MainView = ({ propToken, apiUrl })=>{
                                         children: "Fantasy"
                                     }, void 0, false, {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 206,
+                                        lineNumber: 205,
                                         columnNumber: 5
                                     }, undefined)
                                 ]
@@ -27427,7 +27425,9 @@ const MainView = ({ propToken, apiUrl })=>{
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
                                 htmlFor: "directorFilter",
-                                className: "filter-label",
+                                style: {
+                                    marginBottom: "5px"
+                                },
                                 children: "Filter by Director:"
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
@@ -27438,14 +27438,13 @@ const MainView = ({ propToken, apiUrl })=>{
                                 id: "directorFilter",
                                 onChange: (e)=>setSelectedDirector(e.target.value),
                                 value: selectedDirector,
-                                className: "filter-dropdown",
                                 children: [
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
                                         value: "All",
                                         children: "All Directors"
                                     }, void 0, false, {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 216,
+                                        lineNumber: 215,
                                         columnNumber: 5
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -27453,7 +27452,7 @@ const MainView = ({ propToken, apiUrl })=>{
                                         children: "Quentin Tarantino"
                                     }, void 0, false, {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 217,
+                                        lineNumber: 216,
                                         columnNumber: 5
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -27461,7 +27460,7 @@ const MainView = ({ propToken, apiUrl })=>{
                                         children: "Director 2"
                                     }, void 0, false, {
                                         fileName: "src/components/main-view/main-view.jsx",
-                                        lineNumber: 218,
+                                        lineNumber: 217,
                                         columnNumber: 5
                                     }, undefined)
                                 ]
@@ -27498,7 +27497,7 @@ const MainView = ({ propToken, apiUrl })=>{
                                 }, void 0, false)
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 222,
+                                lineNumber: 221,
                                 columnNumber: 11
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27516,7 +27515,7 @@ const MainView = ({ propToken, apiUrl })=>{
                                 }, void 0, false, void 0, void 0)
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 243,
+                                lineNumber: 242,
                                 columnNumber: 11
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27530,7 +27529,7 @@ const MainView = ({ propToken, apiUrl })=>{
                                 }, void 0, false, void 0, void 0)
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 261,
+                                lineNumber: 260,
                                 columnNumber: 11
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27540,7 +27539,7 @@ const MainView = ({ propToken, apiUrl })=>{
                                 }, void 0, false, void 0, void 0)
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 274,
+                                lineNumber: 273,
                                 columnNumber: 11
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27571,13 +27570,13 @@ const MainView = ({ propToken, apiUrl })=>{
                                 }, void 0, false)
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 283,
+                                lineNumber: 282,
                                 columnNumber: 11
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 221,
+                        lineNumber: 220,
                         columnNumber: 9
                     }, undefined)
                 ]

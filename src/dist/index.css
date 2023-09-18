@@ -347,3 +347,7 @@ select {
 .filter-button:hover {
   background-color: darkred; 
 }
+
+#genreFilter {
+  margin-left: 5px;
+}
