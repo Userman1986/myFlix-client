@@ -18,15 +18,6 @@ export const MainView = ({ propToken, apiUrl }) => {
   const [selectedGenre, setSelectedGenre] = useState('All'); 
   const [selectedDirector, setSelectedDirector] = useState('All');
 
-  const location = useLocation();
-
-  useEffect(() => {
-    const savedSelectedGenre = localStorage.getItem('selectedGenre') || 'All';
-    const savedSelectedDirector = localStorage.getItem('selectedDirector') || 'All';
-    setSelectedGenre(savedSelectedGenre);
-    setSelectedDirector(savedSelectedDirector);
-  }, []);
-
   const handleToggleFavorite = async (e, movie) => {
     e.preventDefault();
     const isFavorite = favoriteMovies.some((favMovie) => favMovie._id === movie._id);
@@ -65,10 +56,6 @@ export const MainView = ({ propToken, apiUrl }) => {
         console.error('Error updating user favorite movies in the database:', error);
       }
     }
-
-    localStorage.setItem('selectedGenre', selectedGenre);
-    localStorage.setItem('selectedDirector', selectedDirector);
-
   };
 
   useEffect(() => {
