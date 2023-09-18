@@ -1,17 +1,34 @@
-.container {
-  padding: 20px;
+.my-flix {
+  color: #4682b4;
 }
 
-button {
-  margin-right: 10px;
+body, h1, h2, h3, p {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
+  display: flex;
 }
 
 .movie-card {
-  border: 1px solid #ccc;
+  cursor: pointer;
+  background-color: #141414;
   border-radius: 5px;
-  margin-bottom: 20px;
+  width: 200px;
+  margin: 10px;
   padding: 10px;
-  box-shadow: 0 0 5px #0003;
+  transition: transform .2s;
+  box-shadow: 0 0 10px #0003;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
 }
 
 .movie-card img {
@@ -19,45 +36,38 @@ button {
   height: auto;
 }
 
-.login-form, .signup-form {
-  background-color: #f8f8f8;
+.movie-details {
+  background-color: #141414;
   border-radius: 5px;
+  max-width: 400px;
+  margin: 0 auto;
   padding: 20px;
-  box-shadow: 0 0 5px #0003;
+  box-shadow: 0 0 10px #0003;
 }
 
-.login-form input, .signup-form input {
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  width: 100%;
-  margin-bottom: 10px;
-  padding: 10px;
+.movie-details img {
+  max-width: 100%;
+  height: auto;
 }
 
-.signup-form button {
+.movie-details span {
+  color: #fff;
+  margin: 5px 0;
+  display: block;
+}
+
+.movie-details button {
   color: #fff;
   cursor: pointer;
-  background-color: #007bff;
+  background-color: #e50914;
   border: none;
-  border-radius: 3px;
-  padding: 10px 20px;
-}
-
-.logout-button {
-  color: #fff;
-  cursor: pointer;
-  background-color: #dc3545;
-  border: none;
-  border-radius: 3px;
-  padding: 10px 20px;
-}
-
-.movie-view {
-  border: 1px solid #ccc;
   border-radius: 5px;
-  margin-top: 20px;
-  padding: 20px;
-  box-shadow: 0 0 5px #0003;
+  padding: 10px 20px;
+  transition: background-color .3s;
+}
+
+.movie-details button:hover {
+  background-color: #ff0a16;
 }
 
 :root, [data-bs-theme="light"] {
@@ -13411,6 +13421,7 @@ body {
   color: #fff;
   background-color: #141414;
   font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
 }
 
 .container {
@@ -13442,7 +13453,10 @@ body {
 }
 
 .main-view {
+  box-sizing: border-box;
+  max-height: 100vh;
   padding: 20px 0;
+  overflow-y: auto;
 }
 
 .movie-card {
@@ -13691,6 +13705,47 @@ h2 {
 .favorite-movies .card {
   width: 100%;
   margin: 0;
+}
+
+.filters {
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+  display: flex;
+}
+
+label {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+select {
+  color: #333;
+  cursor: pointer;
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 14px;
+}
+
+.filter-button {
+  color: #fff;
+  cursor: pointer;
+  background-color: red;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 14px;
+  transition: background-color .3s;
+}
+
+.filter-button:hover {
+  background-color: #8b0000;
+}
+
+#genreFilter {
+  margin-left: 5px;
 }
 
 /*# sourceMappingURL=index.ce1d6491.css.map */
