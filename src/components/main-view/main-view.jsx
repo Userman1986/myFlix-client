@@ -188,35 +188,36 @@ export const MainView = ({ propToken, apiUrl }) => {
     <BrowserRouter>
       <NavigationBar user={user} onLoggedOut={handleLogout} />
       <Row className="justify-content-md-center">
-      <div className="filters">
-  <label htmlFor="genreFilter">Filter by Genre:</label>
-  <select
-    id="genreFilter"
-    onChange={(e) => setSelectedGenre(e.target.value)}
-    value={selectedGenre}
-  >
-    <option value="All">All Genres</option>
-    <option value="Action">Action</option>
-    <option value="Drama">Drama</option>
-    <option value="Horror">Horror</option>
-    <option value="Comedy">Comedy</option>
-    <option value="Adventure">Adventure</option>
-    <option value="Thriller">Thriller</option>
-    <option value="Fantasy">Fantasy</option>
-  </select>
+      {location.pathname === '/' && ( 
+        <div className="filters">
+          <label htmlFor="genreFilter">Filter by Genre:</label>
+          <select
+            id="genreFilter"
+            onChange={(e) => setSelectedGenre(e.target.value)}
+            value={selectedGenre}
+          >
+            <option value="All">All Genres</option>
+            <option value="Action">Action</option>
+            <option value="Drama">Drama</option>
+            <option value="Horror">Horror</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Adventure">Adventure</option>
+            <option value="Thriller">Thriller</option>
+            <option value="Fantasy">Fantasy</option>
+          </select>
 
- 
-  <label htmlFor="directorFilter" style={{ marginBottom: '5px' }}>Filter by Director:</label>
-  <select
-    id="directorFilter"
-    onChange={(e) => setSelectedDirector(e.target.value)}
-    value={selectedDirector}
-  >
-    <option value="All">All Directors</option>
-    <option value="Quentin Tarantino">Quentin Tarantino</option>
-    <option value="Director 2">Director 2</option>
-  </select>
-</div>
+          <label htmlFor="directorFilter" style={{ marginBottom: '5px' }}>Filter by Director:</label>
+          <select
+            id="directorFilter"
+            onChange={(e) => setSelectedDirector(e.target.value)}
+            value={selectedDirector}
+          >
+            <option value="All">All Directors</option>
+            <option value="Quentin Tarantino">Quentin Tarantino</option>
+            <option value="Director 2">Director 2</option>
+          </select>
+        </div>
+      )} 
         <Routes>
           <Route
             path="/login"
