@@ -3,13 +3,14 @@ import { MovieCard } from '../movie-card/movie-card';
 import { LoginView } from '../login-view/login-view';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import { BrowserRouter, Routes, Route, Link, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link, Navigate, useLocation } from 'react-router-dom';
 import { NavigationBar } from '../navigation-bar/navigation-bar';
 import { ProfileView } from '../profile-view/profile-view';
 import { MovieView } from '../movie-view/movie-view';
 import SignupView from '../signup-view/signup-view';
 
 export const MainView = ({ propToken, apiUrl }) => {
+  const location = useLocation();
   const [movies, setMovies] = useState([]);
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || null);
   const [token, setToken] = useState(localStorage.getItem('token') || null);
@@ -17,6 +18,15 @@ export const MainView = ({ propToken, apiUrl }) => {
   const [favoriteMovies, setFavoriteMovies] = useState([]);
   const [selectedGenre, setSelectedGenre] = useState('All'); 
   const [selectedDirector, setSelectedDirector] = useState('All');
+
+
+
+  useEffect(() => {
+    const savedSelectedGenre = localStorage.getItem('selectedGenre') || 'All';
+    const savedSelectedDirector = localStorage.getItem('selectedDirector') || 'All';
+    setSelectedGenre(savedSelectedGenre);
+    setSelectedDirector(savedSelectedDirector);
+  }, []);
 
   const handleToggleFavorite = async (e, movie) => {
     e.preventDefault();
@@ -56,6 +66,10 @@ export const MainView = ({ propToken, apiUrl }) => {
         console.error('Error updating user favorite movies in the database:', error);
       }
     }
+
+    localStorage.setItem('selectedGenre', selectedGenre);
+    localStorage.setItem('selectedDirector', selectedDirector);
+
   };
 
   useEffect(() => {
@@ -206,7 +220,7 @@ export const MainView = ({ propToken, apiUrl }) => {
             <option value="Fantasy">Fantasy</option>
           </select>
 
-          <label htmlFor="directorFilter" style={{ marginBottom: '5px' }}>Filter by Director:</label>
+          <label htmlFor="directorFilter" style={{ marginLeft: '5px' }}>Filter by Director:</label>
           <select
             id="directorFilter"
             onChange={(e) => setSelectedDirector(e.target.value)}
