@@ -13421,6 +13421,7 @@ body {
   color: #fff;
   background-color: #141414;
   font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
 }
 
 .container {
@@ -13452,7 +13453,10 @@ body {
 }
 
 .main-view {
+  box-sizing: border-box;
+  max-height: 100vh;
   padding: 20px 0;
+  overflow-y: auto;
 }
 
 .movie-card {
@@ -13701,6 +13705,43 @@ h2 {
 .favorite-movies .card {
   width: 100%;
   margin: 0;
+}
+
+.filters {
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+  display: flex;
+}
+
+label {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+select {
+  color: #333;
+  cursor: pointer;
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 14px;
+}
+
+.filter-button {
+  color: #fff;
+  cursor: pointer;
+  background-color: red;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 14px;
+  transition: background-color .3s;
+}
+
+.filter-button:hover {
+  background-color: #8b0000;
 }
 
 /*# sourceMappingURL=index.ce1d6491.css.map */
