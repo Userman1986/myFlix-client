@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Card } from 'react-bootstrap';
-import { Link } from 'react-router-dom'; // Add this import
+import { Link } from 'react-router-dom'; 
 
 import '../../dist/index.css';
 
@@ -16,7 +16,7 @@ export const MovieCard = ({ movie, isFavorite, onToggleFavorite }) => {
         <Card.Text>{description}</Card.Text>
 
         
-        <Link to={`/movies/${_id}`}> {/* Use Link component */}
+        <Link to={`/movies/${_id}`}>
           <Button className="btn-danger1" variant="danger">
             Open
           </Button>
