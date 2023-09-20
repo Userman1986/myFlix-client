@@ -9,6 +9,7 @@ import { ProfileView } from '../profile-view/profile-view';
 import { MovieView } from '../movie-view/movie-view';
 import SignupView from '../signup-view/signup-view';
 
+
 export const MainView = ({ propToken, apiUrl }) => {
   const location = useLocation();
   const [movies, setMovies] = useState([]);
@@ -16,17 +17,7 @@ export const MainView = ({ propToken, apiUrl }) => {
   const [token, setToken] = useState(localStorage.getItem('token') || null);
   const [showSignup, setShowSignup] = useState(false);
   const [favoriteMovies, setFavoriteMovies] = useState([]);
-  const [selectedGenre, setSelectedGenre] = useState('All'); 
-  const [selectedDirector, setSelectedDirector] = useState('All');
-
-
-
-  useEffect(() => {
-    const savedSelectedGenre = localStorage.getItem('selectedGenre') || 'All';
-    const savedSelectedDirector = localStorage.getItem('selectedDirector') || 'All';
-    setSelectedGenre(savedSelectedGenre);
-    setSelectedDirector(savedSelectedDirector);
-  }, []);
+  
 
   const handleToggleFavorite = async (e, movie) => {
     e.preventDefault();
@@ -67,8 +58,7 @@ export const MainView = ({ propToken, apiUrl }) => {
       }
     }
 
-    localStorage.setItem('selectedGenre', selectedGenre);
-    localStorage.setItem('selectedDirector', selectedDirector);
+   
 
   };
 
@@ -184,54 +174,16 @@ export const MainView = ({ propToken, apiUrl }) => {
     setShowSignup(!showSignup);
   };
 
-  const filteredMovies = movies
-    .filter((movie) => {
-      if (selectedGenre !== 'All') {
-        return movie.genre.name === selectedGenre;
-      }
-      return true;
-    })
-    .filter((movie) => {
-      if (selectedDirector !== 'All') {
-        return movie.director.name === selectedDirector;
-      }
-      return true;
-    });
+ 
 
   return (
     <BrowserRouter>
       <NavigationBar user={user} onLoggedOut={handleLogout} />
       <Row className="justify-content-md-center">
-      {location.pathname === '/' && ( 
-        <div className="filters">
-          <label htmlFor="genreFilter">Filter by Genre:</label>
-          <select
-            id="genreFilter"
-            onChange={(e) => setSelectedGenre(e.target.value)}
-            value={selectedGenre}
-          >
-            <option value="All">All Genres</option>
-            <option value="Action">Action</option>
-            <option value="Drama">Drama</option>
-            <option value="Horror">Horror</option>
-            <option value="Comedy">Comedy</option>
-            <option value="Adventure">Adventure</option>
-            <option value="Thriller">Thriller</option>
-            <option value="Fantasy">Fantasy</option>
-          </select>
+      
+   <Filters selectedGenre={selectedGenre} setSelectedGenre={setSelectedGenre}
+   selectedDirector={selectedDirector} setSelectedDirector={setSelectedDirector}/>
 
-          <label htmlFor="directorFilter" style={{ marginLeft: '5px' }}>Filter by Director:</label>
-          <select
-            id="directorFilter"
-            onChange={(e) => setSelectedDirector(e.target.value)}
-            value={selectedDirector}
-          >
-            <option value="All">All Directors</option>
-            <option value="Quentin Tarantino">Quentin Tarantino</option>
-            <option value="Director 2">Director 2</option>
-          </select>
-        </div>
-      )} 
         <Routes>
           <Route
             path="/login"
