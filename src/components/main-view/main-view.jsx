@@ -17,6 +17,15 @@ export const MainView = ({ propToken, apiUrl }) => {
   const [token, setToken] = useState(localStorage.getItem('token') || null);
   const [showSignup, setShowSignup] = useState(false);
   const [favoriteMovies, setFavoriteMovies] = useState([]);
+  const [selectedGenre, setSelectedGenre] = useState('All');
+  const [selectedDirector, setSelectedDirector] = useState('All');
+
+
+  const filteredMovies = movies.filter((movie) => {
+    const genreFilter = selectedGenre === 'All' || movie.genre.name === selectedGenre;
+    const directorFilter = selectedDirector === 'All' || movie.director.name === selectedDirector;
+    return genreFilter && directorFilter;
+  });
   
 
   const handleToggleFavorite = async (e, movie) => {
@@ -181,8 +190,12 @@ export const MainView = ({ propToken, apiUrl }) => {
       <NavigationBar user={user} onLoggedOut={handleLogout} />
       <Row className="justify-content-md-center">
       
-   <Filters selectedGenre={selectedGenre} setSelectedGenre={setSelectedGenre}
-   selectedDirector={selectedDirector} setSelectedDirector={setSelectedDirector}/>
+      <Filters
+          selectedGenre={selectedGenre}
+          setSelectedGenre={setSelectedGenre}
+          selectedDirector={selectedDirector}
+          setSelectedDirector={setSelectedDirector}
+        />
 
         <Routes>
           <Route
