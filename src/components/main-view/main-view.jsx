@@ -8,6 +8,10 @@ import { NavigationBar } from '../navigation-bar/navigation-bar';
 import { ProfileView } from '../profile-view/profile-view';
 import { MovieView } from '../movie-view/movie-view';
 import SignupView from '../signup-view/signup-view';
+import {Filters} from '../filter/filter';
+
+
+
 
 
 export const MainView = ({ propToken, apiUrl }) => {
