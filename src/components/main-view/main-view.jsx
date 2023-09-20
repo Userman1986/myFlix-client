@@ -15,7 +15,7 @@ import {Filters} from '../filter/filter';
 
 
 export const MainView = ({ propToken, apiUrl }) => {
-  const location = useLocation();
+
   const [movies, setMovies] = useState([]);
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || null);
   const [token, setToken] = useState(localStorage.getItem('token') || null);
