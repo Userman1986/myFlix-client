@@ -1,13 +1,17 @@
 @import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 
-
+/* Reset default margin and padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
   background-color: #141414;
   color: #fff;
   font-family: Arial, Helvetica, sans-serif;
   overflow-x: hidden;
-  
 }
 
 .container {
@@ -16,10 +20,10 @@ body {
 
 /* Style the header */
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  background-color: #1e1e1e;
+  color: #fff;
   padding: 20px 0;
+  text-align: center;
 }
 
 .header h1 {
@@ -30,6 +34,8 @@ body {
 .header .user-info {
   display: flex;
   align-items: center;
+  justify-content: center;
+  margin-top: 10px;
 }
 
 .header .user-info img {
@@ -39,32 +45,28 @@ body {
   margin-right: 10px;
 }
 
-
+/* Improved main view styling */
 .main-view {
-  max-height: 100vh;
-  overflow-y: auto; 
-  padding: 20px 0;
-  box-sizing: border-box; 
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 20px;
 }
 
-
+/* Stylish movie card */
 .movie-card {
   cursor: pointer;
   text-align: center;
   background-color: #1e1e1e;
   border-radius: 5px;
-  margin: 0 10px 20px;
+  margin-bottom: 20px;
   padding: 10px;
   transition: transform 0.2s;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  overflow: hidden;
-  box-shadow: 0 4px 8px #0003;
- 
- 
-  height: 730px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  height: auto;
   color: white;
+  overflow: hidden;
 }
 
 .movie-card:hover {
@@ -73,37 +75,26 @@ body {
 
 .movie-card .card-title,
 .movie-card .card-text {
+  min-height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 50px;
   color: white;
 }
 
-
 .movie-card a {
   text-decoration: none;
-}
-
-
-.movie-card .card-title a {
-  color: #fff; 
+  color: #fff;
   font-weight: bold;
 }
 
-
 .movie-card .card-img-top {
-  width: 200px; 
-  height: 300px; 
-  object-fit: cover;
-}
-
-.movie-card img {
   max-width: 100%;
   height: auto;
   object-fit: cover;
 }
 
+/* Improved movie description */
 .movie-description {
   color: white;
   font-size: 14px;
@@ -111,10 +102,9 @@ body {
   text-overflow: ellipsis;
   white-space: nowrap;
   flex-grow: 1;
-  text-decoration: none;
 }
 
-
+/* Stylish movie view */
 .movie-view {
   background-color: #000;
   color: #fff;
@@ -123,30 +113,29 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
-  align-items: center; 
+  align-items: center;
   gap: 20px;
   text-align: center;
-  width: auto;
 }
 
 .movie-poster img {
   max-width: 100%;
   height: auto;
   object-fit: contain;
-  margin: 0 auto; 
+  margin: 0 auto;
 }
 
 .movie-title {
   font-size: 36px;
   margin-bottom: 10px;
   text-decoration: none;
+  color: #fff;
 }
-
 
 .movie-meta {
   display: flex;
-  flex-direction: column; 
-  align-items: center; 
+  flex-direction: column;
+  align-items: center;
   gap: 10px;
 }
 
@@ -158,22 +147,12 @@ body {
   border-radius: 3px;
   cursor: pointer;
   font-size: 16px;
-}
-
-a {
   text-decoration: none;
 }
 
-
-.movie-view .movie-genre,
-.movie-view .movie-director {
-  font-size: 16px;
-}
-
-
-
+/* Stylish login form */
 .login-form {
-  background-color: #000;
+  background-color: #1e1e1e;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
@@ -186,7 +165,7 @@ a {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
-  border: 1px solid #ccc;
+  border: none;
   border-radius: 3px;
   background-color: #333;
   color: white;
@@ -199,193 +178,12 @@ a {
   padding: 10px 20px;
   border-radius: 3px;
   cursor: pointer;
-  width: 100%; 
-  font-size: 16px;
-}
-
-
-.signup-container {
-  width: 300px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  text-align: center;
-}
-
-
-.signup-title {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-
-.signup-form label {
-  display: block;
-  text-align: left;
-  margin-bottom: 10px;
-  font-size: 16px;
-}
-
-.signup-form input[type="text"],
-.signup-form input[type="password"],
-.signup-form input[type="email"],
-.signup-form input[type="date"] {
   width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
   font-size: 16px;
-}
-
-/* Submit button */
-.signup-form button[type="submit"] {
-  width: 100%;
-  padding: 10px;
-  background-color: #e50914;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  font-size: 18px;
-  cursor: pointer;
+  text-transform: uppercase;
   transition: background-color 0.3s ease;
 }
 
-.signup-form button[type="submit"]:hover {
+.login-button:hover {
   background-color: #c20910;
-}
-
-
-
-
-
-.navbar {
-  background-color: #141414;
-}
-
-.navbar-brand img {
-  filter: brightness(0) invert(1);
-}
-
-.navbar-dark .navbar-nav .nav-link {
-  color: #fff;
-  margin-right: 20px;
-  font-size: 16px;
-  transition: color 0.3s;
-}
-
-.navbar-dark .navbar-nav .nav-link:hover {
-  color: #e50914; 
-}
-
-
-.navbar-nav {
-  margin-right: 0;
-}
-
-.navbar-nav .nav-link {
-  padding: 15px;
-}
-
-
-.profile-view {
-  padding: 20px;
-  color: #fff;
-}
-
-h2 {
-  font-size: 32px;
-  margin-bottom: 20px;
-}
-
-.card {
-  background-color: #1e1e1e;
-  color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.card-body {
-  padding: 20px;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-label {
-  color: #fff;
-  font-weight: bold;
-}
-
-.form-control {
-  background-color: #333;
-  color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-}
-
-.form-control::placeholder {
-  color: #ccc;
-}
-
-.button {
-  margin-right: 10px;
-}
-
-.favorite-movies {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
-}
-
-.favorite-movies .card {
-  width: 100%;
-  margin: 0;
-}
-
-
-
-.filters {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 10px 0; 
-}
-
-label {
-  font-weight: bold;
-  margin-right: 10px;
-}
-
-select {
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f8f8f8;
-  color: #333;
-  font-size: 14px; 
-  cursor: pointer;
-}
-
-.filter-button {
-  background-color: red; 
-  color: white;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 5px;
-  font-size: 14px; 
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.filter-button:hover {
-  background-color: darkred; 
-}
-
-#genreFilter {
-  margin-left: 5px;
 }
