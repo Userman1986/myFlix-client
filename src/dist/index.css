@@ -1,6 +1,6 @@
 @import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 
-/* Reset default margin and padding */
+
 * {
   margin: 0;
   padding: 0;
@@ -18,7 +18,7 @@ body {
   padding: 20px;
 }
 
-/* Style the header */
+
 .header {
   background-color: #1e1e1e;
   color: #fff;
@@ -45,7 +45,7 @@ body {
   margin-right: 10px;
 }
 
-/* Improved main view styling */
+
 .main-view {
   padding: 20px;
   display: flex;
@@ -54,7 +54,7 @@ body {
   gap: 20px;
 }
 
-/* Stylish movie card */
+
 .movie-card {
   cursor: pointer;
   text-align: center;
@@ -94,7 +94,7 @@ body {
   object-fit: cover;
 }
 
-/* Improved movie description */
+
 .movie-description {
   color: white;
   font-size: 14px;
@@ -104,7 +104,7 @@ body {
   flex-grow: 1;
 }
 
-/* Stylish movie view */
+
 .movie-view {
   background-color: #000;
   color: #fff;
@@ -150,7 +150,7 @@ body {
   text-decoration: none;
 }
 
-/* Stylish login form */
+
 .login-form {
   background-color: #1e1e1e;
   padding: 20px;
