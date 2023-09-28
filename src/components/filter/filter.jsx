@@ -21,7 +21,7 @@ export const Filters = ({
 
   return (
     <div className="filters">
-      <label htmlFor="genreFilter">Filter by Genre:</label>
+      <label htmlFor="genreFilter">Genre:</label>
       <select
         id="genreFilter"
         onChange={handleGenreChange}
@@ -38,7 +38,7 @@ export const Filters = ({
       </select>
 
       <label htmlFor="directorFilter" style={{ marginLeft: '5px' }}>
-        Filter by Director:
+        Director:
       </label>
       <select
         id="directorFilter"
