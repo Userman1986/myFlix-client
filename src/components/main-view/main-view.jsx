@@ -1,31 +1,104 @@
 import React, { useState, useEffect } from 'react';
-import { MovieCard } from "../movie-card/movie-card";
-import { MovieView } from "../movie-view/movie-view";
-import { LoginView } from "../login-view/login-view";
+import { MovieCard } from '../movie-card/movie-card';
+import { LoginView } from '../login-view/login-view';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import { BrowserRouter, Routes, Route, Link, Navigate, useLocation } from 'react-router-dom';
+import { NavigationBar } from '../navigation-bar/navigation-bar';
+import { ProfileView } from '../profile-view/profile-view';
+import { MovieView } from '../movie-view/movie-view';
 import SignupView from '../signup-view/signup-view';
-import { Row, Col, Container, Button } from "react-bootstrap";
-import "../../dist/index.css";
+import {Filters} from '../filter/filter';
 
-export const MainView = ({ apiUrl }) => {
+
+
+
+
+export const MainView = ({ propToken, apiUrl }) => {
+
   const [movies, setMovies] = useState([]);
-  const [user, setUser] = useState(localStorage.getItem('user') || null);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || null);
   const [token, setToken] = useState(localStorage.getItem('token') || null);
   const [showSignup, setShowSignup] = useState(false);
-  const [selectedMovie, setSelectedMovie] = useState(null);
+  const [favoriteMovies, setFavoriteMovies] = useState([]);
+  const [selectedGenre, setSelectedGenre] = useState('All');
+  const [selectedDirector, setSelectedDirector] = useState('All');
+
+
+  const filteredMovies = movies.filter((movie) => {
+    const genreFilter = selectedGenre === 'All' || movie.genre.name === selectedGenre;
+    const directorFilter = selectedDirector === 'All' || movie.director.name === selectedDirector;
+    return genreFilter && directorFilter;
+  });
+  
+
+  const handleToggleFavorite = async (e, movie) => {
+    e.preventDefault();
+    const isFavorite = favoriteMovies.some((favMovie) => favMovie._id === movie._id);
+
+    let updatedFavoriteMovies = [...favoriteMovies];
+
+    if (isFavorite) {
+      updatedFavoriteMovies = updatedFavoriteMovies.filter((favMovie) => favMovie._id !== movie._id);
+    } else {
+      updatedFavoriteMovies.push(movie);
+    }
+
+    const fav_ids = updatedFavoriteMovies.map((fav) => fav._id);
+
+    if (user && user._id) {
+      try {
+        const response = await fetch(
+          `https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/users/${user._id}`,
+          {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({ favoriteMovies: fav_ids }),
+          }
+        );
+
+        if (response.ok) {
+          setFavoriteMovies(updatedFavoriteMovies);
+          console.log('User favorite movies updated successfully in the database.');
+        } else {
+          console.error('Failed to update user favorite movies in the database.');
+        }
+      } catch (error) {
+        console.error('Error updating user favorite movies in the database:', error);
+      }
+    }
+
+   
+
+  };
+
+  useEffect(() => {
+    if (token && movies.length > 0) {
+      fetch(`https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/users/${user._id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          setFavoriteMovies(movies.filter((movie) => res.FavoriteMovies.includes(movie._id)));
+        });
+    }
+  }, [movies]);
 
   useEffect(() => {
     if (token) {
-      localStorage.setItem('user', user);
-      localStorage.setItem('token', token);
-
-      fetch(apiUrl, {
+      fetch(`https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/movies`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
         .then((response) => response.json())
         .then((data) => {
-          const movieFromApi = data.map((movie) => {
+          const moviesFromApi = data.map((movie) => {
             return {
               _id: movie._id,
               title: movie.title,
@@ -42,83 +115,186 @@ export const MainView = ({ apiUrl }) => {
             };
           });
 
-          setMovies(movieFromApi);
+          setMovies(moviesFromApi);
         })
         .catch((error) => {
           console.error('Error fetching data:', error);
         });
     }
-  }, [token, apiUrl, user]);
+  }, [token, apiUrl]);
 
   const handleLogout = () => {
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
+    localStorage.clear();
     setUser(null);
     setToken(null);
   };
 
-  const handleSignup = () => {
-    // ... Your signup logic ...
+  const handleUpdateUser = async (updatedUserData) => {
+    console.log('Updating user with data:', updatedUserData);
+    if (!user || !user._id || !token) {
+      console.error('User or token is missing.');
+      return;
+    }
+
+    const updateUserEndpoint = `https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/users/${user._id}`;
+
+    try {
+      const response = await fetch(updateUserEndpoint, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(updatedUserData),
+      });
+
+      if (response.ok) {
+        console.log('User data updated successfully.');
+      } else {
+        console.error('Failed to update user data.');
+      }
+    } catch (error) {
+      console.error('Error updating user data:', error);
+    }
   };
+
+  const handleDeregisterUser = async () => {
+    const deregisterEndpoint = `https://guarded-hamlet-46049-f301c8b926bd.herokuapp.com/users/${user._id}`;
+
+    try {
+      const response = await fetch(deregisterEndpoint, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        console.log('User account deregistered successfully.');
+      } else {
+        console.error('Failed to deregister user account. HTTP Status:', response.status);
+        const errorData = await response.json();
+        console.error('Error details:', errorData);
+      }
+    } catch (error) {
+      console.error('Error deregistering user account:', error);
+    }
+  };
+
+  const handleSignup = () => {};
 
   const toggleSignup = () => {
     setShowSignup(!showSignup);
   };
 
-  const handleMovieCardClick = (movie) => {
-    setSelectedMovie(movie);
-  };
-
-  const handleBackClick = () => {
-    setSelectedMovie(null);
-  };
+ 
 
   return (
-    <Container>
-      {user ? (
-        <div>
-          <Button variant="danger" onClick={handleLogout}>
-            Logout
-          </Button>
-          {selectedMovie ? ( 
-            <MovieView
-              movie={selectedMovie}
-              onBackClick={handleBackClick}
-            />
-          ) : (
-            <div>
-              <Row>
-                {movies.map((movie) => (
-                  <Col key={movie._id} sm={6} md={4} lg={3}>
-                    <MovieCard
-                      movie={movie}
-                      onMovieClick={() => handleMovieCardClick(movie)}
+    <BrowserRouter>
+      <NavigationBar user={user} onLoggedOut={handleLogout} />
+      <Row className="justify-content-md-center">
+      
+      <Filters
+          selectedGenre={selectedGenre}
+          setSelectedGenre={setSelectedGenre}
+          selectedDirector={selectedDirector}
+          setSelectedDirector={setSelectedDirector}
+        />
+
+        <Routes>
+          <Route
+            path="/login"
+            element={
+              <>
+                {user ? (
+                  <Navigate to="/" />
+                ) : (
+                  <Col md={5} className="login-form">
+                    <LoginView
+                      onLoggedIn={(user, token) => {
+                        setUser(user);
+                        setToken(token);
+                        localStorage.setItem('user', JSON.stringify(user));
+                        localStorage.setItem('token', token);
+                      }}
                     />
                   </Col>
-                ))}
-              </Row>
-            </div>
-          )}
-        </div>
-      ) : (
-        <div className="login-container">
-          <LoginView
-            onLoggedIn={(user, token) => {
-              setUser(user);
-              setToken(token);
-            }}
+                )}
+              </>
+            }
           />
-          <div className="signup-form">
-            {showSignup ? (
-              <SignupView onSignup={handleSignup} />
-            ) : (
-              <Button className="signup-button" onClick={toggleSignup}>
-                Signup
-              </Button>
-            )}
-          </div>
-        </div>
-      )}
-    </Container>
+          <Route
+            path="/profile"
+            element={
+              user ? (
+                <ProfileView
+                  user={user}
+                  onUpdateUser={handleUpdateUser}
+                  onDeregister={handleDeregisterUser}
+                  movies={movies}
+                  userFavoriteMovies={favoriteMovies}
+                  onUpdateUserFavoriteMovies={setFavoriteMovies}
+                />
+              ) : (
+                <Navigate to="/login" replace />
+              )
+            }
+          />
+
+          <Route
+            path="/movies/:movieId"
+            element={
+              <MovieView
+                movies={movies}
+                user={user}
+                token={token}
+                favoriteMovies={favoriteMovies}
+                onToggleFavorite={handleToggleFavorite}
+              />
+            }
+          />
+
+          <Route
+            path="/signup"
+            element={
+              <SignupView
+                onSignup={handleSignup}
+              />
+            }
+          />
+
+          <Route
+            path="/"
+            element={
+              <>
+                {!user ? (
+                  <Navigate to="/login" replace />
+                ) : (
+                  <>
+                    {filteredMovies.length === 0 ? (
+                      <Col>The list is empty!</Col>
+                    ) : (
+                      <>
+                        {filteredMovies.map((movie) => (
+                          <Col className="mb-4" key={movie._id} md={3}>
+                            <Link to={`/movies/${movie._id}`} className="movie-card">
+                              <MovieCard
+                                movie={movie}
+                                isFavorite={favoriteMovies.some((favMovie) => favMovie._id === movie._id)}
+                                onToggleFavorite={(e) => handleToggleFavorite(e, movie)}
+                              />
+                            </Link>
+                          </Col>
+                        ))}
+                      </>
+                    )}
+                  </>
+                )}
+              </>
+            }
+          />
+        </Routes>
+      </Row>
+    </BrowserRouter>
   );
 };

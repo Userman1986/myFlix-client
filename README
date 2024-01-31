@@ -1,0 +1,33 @@
+myFlix Client
+Welcome to the myFlix Client repository! This is the client-side application for the myFlix movie database.
+
+Table of Contents
+Introduction
+Features
+Demo
+Getting Started
+Usage
+Contributing
+License
+Introduction
+The myFlix Client is the front-end of the myFlix movie application, allowing users to explore a vast collection of movies, manage their user profile, and create lists of favorite movies.
+
+Features
+Browse a diverse selection of movies.
+View movie details including title, description, genre, director, and more.
+Mark movies as favorites and manage your list of favorite movies.
+Update user profile information.
+User authentication for secure access to user-specific features.
+
+Demo
+You can try out the myFlix Client by visiting the hosted application - https://myflixappfromevhenii.netlify.app/
+
+Repository - https://github.com/Userman1986/myFlix-client
+
+
+Usage
+Browsing Movies: On the home page, you can browse and search for movies. Click on a movie card to view its details.
+
+Managing Favorites: When logged in, you can mark movies as favorites. Click the heart icon on a movie to add or remove it from your favorites list.
+
+User Profile: Access your user profile by clicking on the user icon. Here, you can update your user information.

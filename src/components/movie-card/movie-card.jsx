@@ -1,19 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Card } from 'react-bootstrap'; // Make sure 'Card' is imported from 'react-bootstrap'
+import { Button, Card } from 'react-bootstrap';
+import { Link } from 'react-router-dom'; 
 
 import '../../dist/index.css';
 
-export const MovieCard = ({ movie, onMovieClick }) => {
+export const MovieCard = ({ movie, isFavorite, onToggleFavorite }) => {
   const { _id, title, imgURL, description, genre, director } = movie;
+
   return (
     <Card className="movie-card">
-      <Card.Img variant="top" src={movie.imgURL} />
+      <Card.Img variant="top" src={imgURL} />
       <Card.Body>
-        <Card.Title>{movie.title}</Card.Title>
-        <Card.Text>{movie.description}</Card.Text>
-        <Button className="btn-danger1" onClick={() => onMovieClick(movie)} variant="danger">
-          Open
+        <Card.Title>{title}</Card.Title>
+        <Card.Text>{description}</Card.Text>
+
+        
+        <Link to={`/movies/${_id}`}>
+          <Button className="btn-danger1" variant="danger">
+            Open
+          </Button>
+        </Link>
+        <Button
+          className={isFavorite ? 'btn-primary' : 'btn-secondary'}
+          onClick={(e) => onToggleFavorite(e, movie)}
+        >
+          {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
         </Button>
       </Card.Body>
     </Card>
@@ -33,5 +45,6 @@ MovieCard.propTypes = {
     }).isRequired,
     imgURL: PropTypes.string.isRequired,
   }).isRequired,
-  onMovieClick: PropTypes.func.isRequired,
+  isFavorite: PropTypes.bool.isRequired,
+  onToggleFavorite: PropTypes.func.isRequired,
 };
