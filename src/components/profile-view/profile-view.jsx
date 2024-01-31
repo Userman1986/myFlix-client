@@ -16,19 +16,6 @@ export const ProfileView = ({
     dateOfBirth: user.DateOfBirth || '',
   });
 
-  const onToggleFavorite = (movie) => {
-    const isFavorite = userFavoriteMovies.some((favMovie) => favMovie._id === movie._id);
-
-    if (isFavorite) {
-      const updatedFavorites = userFavoriteMovies.filter((favMovie) => favMovie._id !== movie._id);
-      onUpdateUserFavoriteMovies(updatedFavorites);
-    } else {
-      onUpdateUserFavoriteMovies([...userFavoriteMovies, movie]);
-    }
-  };
-
-  const [isFavorite, setFavoriteMovies] = useState([]);
-
   useEffect(() => {
     if (movies && user && user.FavoriteMovies) {
       const favoriteMovies = movies.filter((movie) => user.FavoriteMovies.includes(movie._id));
@@ -41,8 +28,18 @@ export const ProfileView = ({
   };
 
   const handleDeregister = () => {
-
     onDeregister();
+  };
+
+  const onToggleFavorite = (movie) => {
+    const isFavorite = userFavoriteMovies.some((favMovie) => favMovie._id === movie._id);
+
+    if (isFavorite) {
+      const updatedFavorites = userFavoriteMovies.filter((favMovie) => favMovie._id !== movie._id);
+      onUpdateUserFavoriteMovies(updatedFavorites);
+    } else {
+      onUpdateUserFavoriteMovies([...userFavoriteMovies, movie]);
+    }
   };
 
   return (
@@ -111,13 +108,15 @@ export const ProfileView = ({
                   <Card.Body>
                     <Card.Title>{movie.title}</Card.Title>
                     <Card.Text>{movie.description}</Card.Text>
-                    <div className="d-flex justify-content-center">    
-                    <Button
-          className={isFavorite ? 'btn-primary' : 'btn-secondary'}
-          onClick={(e) => onToggleFavorite(e, movie)}
-        >
-          {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
-        </Button>
+                    <div className="d-flex justify-content-center">
+                      <Button
+                        variant={userFavoriteMovies.some((favMovie) => favMovie._id === movie._id) ? 'danger' : 'primary'}
+                        onClick={() => onToggleFavorite(movie)}
+                      >
+                        {userFavoriteMovies.some((favMovie) => favMovie._id === movie._id)
+                          ? 'Remove from Favorites'
+                          : 'Add to Favorites'}
+                      </Button>
                     </div>
                   </Card.Body>
                 </Card>
