@@ -111,7 +111,19 @@ export const ProfileView = ({
                   <Card.Body>
                     <Card.Title>{movie.title}</Card.Title>
                     <Card.Text>{movie.description}</Card.Text>
+                    
                   </Card.Body>
+                  <Link to={`/movies/${_id}`}>
+          <Button className="btn-danger1" variant="danger">
+            Open
+          </Button>
+        </Link>
+        <Button
+          className={isFavorite ? 'btn-primary' : 'btn-secondary'}
+          onClick={(e) => onToggleFavorite(e, movie)}
+        >
+          {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
+        </Button>
                 </Card>
               ))}
           </div>
