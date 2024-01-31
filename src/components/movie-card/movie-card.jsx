@@ -15,7 +15,7 @@ export const MovieCard = ({ movie, isFavorite, onToggleFavorite }) => {
         <Card.Title>{title}</Card.Title>
         <Card.Text>{description}</Card.Text>
 
-        <div className="d-flex justify-content-between">
+        <div className="d-flex justify-content-center">
         <Link to={`/movies/${_id}`}>
           <Button className="btn-danger1" variant="danger">
             Open
