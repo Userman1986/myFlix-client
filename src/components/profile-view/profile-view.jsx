@@ -19,7 +19,7 @@ export const ProfileView = ({
   useEffect(() => {
     if (movies && user && user.FavoriteMovies) {
       const favoriteMovies = movies.filter((movie) => user.FavoriteMovies.includes(movie._id));
-      favoriteMovies(favoriteMovies);
+      
     }
   }, [movies, user]);
 
