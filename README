@@ -1,33 +1,52 @@
-myFlix Client
+# myFlix Client
+
 Welcome to the myFlix Client repository! This is the client-side application for the myFlix movie database.
 
-Table of Contents
-Introduction
-Features
-Demo
-Getting Started
-Usage
-Contributing
-License
-Introduction
+## Table of Contents
+- [Introduction](#introduction)
+- [Features](#features)
+- [Demo](#demo)
+- [Getting Started](#getting-started)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Introduction
+
 The myFlix Client is the front-end of the myFlix movie application, allowing users to explore a vast collection of movies, manage their user profile, and create lists of favorite movies.
 
-Features
-Browse a diverse selection of movies.
-View movie details including title, description, genre, director, and more.
-Mark movies as favorites and manage your list of favorite movies.
-Update user profile information.
-User authentication for secure access to user-specific features.
+## Features
 
-Demo
-You can try out the myFlix Client by visiting the hosted application - https://myflixappfromevhenii.netlify.app/
+- Browse a diverse selection of movies.
+- View movie details including title, description, genre, director, and more.
+- Mark movies as favorites and manage your list of favorite movies.
+- Update user profile information.
+- User authentication for secure access to user-specific features.
 
-Repository - https://github.com/Userman1986/myFlix-client
+## Demo
 
+You can try out the myFlix Client by visiting the hosted application - [myFlix App](https://myflixappfromevhenii.netlify.app/)
 
-Usage
-Browsing Movies: On the home page, you can browse and search for movies. Click on a movie card to view its details.
+Repository - [myFlix Client Repo](https://github.com/Userman1986/myFlix-client)
 
-Managing Favorites: When logged in, you can mark movies as favorites. Click the heart icon on a movie to add or remove it from your favorites list.
+## Usage
 
-User Profile: Access your user profile by clicking on the user icon. Here, you can update your user information.
+### Browsing Movies:
+
+On the home page, you can browse and search for movies. Click on a movie card to view its details.
+
+### Managing Favorites:
+
+When logged in, you can mark movies as favorites. Click the heart icon on a movie to add or remove it from your favorites list.
+
+### User Profile:
+
+Access your user profile by clicking on the user icon. Here, you can update your user information.
+
+## Contributing
+
+If you'd like to contribute to the development of myFlix Client, please follow the guidelines in the [CONTRIBUTING.md](CONTRIBUTING.md) file.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
