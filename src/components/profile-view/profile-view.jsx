@@ -112,8 +112,7 @@ export const ProfileView = ({
                     <Card.Title>{movie.title}</Card.Title>
                     <Card.Text>{movie.description}</Card.Text>
                     
-                  </Card.Body>
-                  <Link to={`/movies/${_id}`}>
+                    <Link to={`/movies/${_id}`}>
           <Button className="btn-danger1" variant="danger">
             Open
           </Button>
@@ -124,6 +123,8 @@ export const ProfileView = ({
         >
           {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
         </Button>
+                  </Card.Body>
+                  
                 </Card>
               ))}
           </div>
