@@ -21,7 +21,7 @@ export const ProfileView = ({
   useEffect(() => {
     if (movies && user && user.FavoriteMovies) {
       const favoriteMovies = movies.filter((movie) => user.FavoriteMovies.includes(movie._id));
-      setFavoriteMovies(favoriteMovies);
+      setIsFavoriteMovies(favoriteMovies);
     }
   }, [movies, user]);
 
@@ -112,7 +112,11 @@ export const ProfileView = ({
                     <Card.Text>{movie.description}</Card.Text>
                     <div className="d-flex justify-content-center">
                       <Button
-                        variant={isFavoriteMovies.some((favMovie) => favMovie._id === movie._id) ? 'danger' : 'primary'}
+                        variant={
+                          isFavoriteMovies.some((favMovie) => favMovie._id === movie._id)
+                            ? 'danger'
+                            : 'primary'
+                        }
                         onClick={() => onToggleFavorite(movie)}
                       >
                         {isFavoriteMovies.some((favMovie) => favMovie._id === movie._id)
