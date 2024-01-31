@@ -15,10 +15,8 @@ export const MovieCard = ({ movie, isFavorite, onToggleFavorite }) => {
         <Card.Title>{title}</Card.Title>
         <Card.Text>{description}</Card.Text>
 
-        
-        
-      </Card.Body>
-      <Link to={`/movies/${_id}`}>
+        <div className="d-flex justify-content-between">
+        <Link to={`/movies/${_id}`}>
           <Button className="btn-danger1" variant="danger">
             Open
           </Button>
@@ -29,6 +27,11 @@ export const MovieCard = ({ movie, isFavorite, onToggleFavorite }) => {
         >
           {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
         </Button>
+        </div>
+        
+        
+      </Card.Body>  
+      
     </Card>
   );
 };
