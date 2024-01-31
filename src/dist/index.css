@@ -217,3 +217,8 @@ body {
   width: 100%; 
   font-size: 16px;
 }
+
+.signupcolortitle {
+  color: rgb(0, 0, 0);
+
+}
