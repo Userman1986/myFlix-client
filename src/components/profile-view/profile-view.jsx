@@ -16,7 +16,7 @@ export const ProfileView = ({
     dateOfBirth: user.DateOfBirth || '',
   });
 
-  const handleToggleFavorite = (movie) => {
+  const onToggleFavorite = (movie) => {
     const isFavorite = userFavoriteMovies.some((favMovie) => favMovie._id === movie._id);
 
     if (isFavorite) {
@@ -27,7 +27,7 @@ export const ProfileView = ({
     }
   };
 
-  const [favoriteMovies, setFavoriteMovies] = useState([]);
+  const [isFavorite, setFavoriteMovies] = useState([]);
 
   useEffect(() => {
     if (movies && user && user.FavoriteMovies) {
