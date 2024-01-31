@@ -111,8 +111,14 @@ export const ProfileView = ({
                   <Card.Body>
                     <Card.Title>{movie.title}</Card.Title>
                     <Card.Text>{movie.description}</Card.Text>
-
-                    
+                    <div className="d-flex justify-content-center">    
+                    <Button
+          className={isFavorite ? 'btn-primary' : 'btn-secondary'}
+          onClick={(e) => onToggleFavorite(e, movie)}
+        >
+          {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
+        </Button>
+                    </div>
                   </Card.Body>
                 </Card>
               ))}
