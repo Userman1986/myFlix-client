@@ -43,7 +43,7 @@ const SignupView = ({ onSignup }) => {
       <h2 className="signup-title">Sign Up</h2>
       <form className="signup-form" onSubmit={handleSubmit}>
         <label>
-          Username:
+        <h3 className="signup-color"> Username:</h3>
           <input
             type="text"
             value={username}
@@ -53,7 +53,7 @@ const SignupView = ({ onSignup }) => {
           />
         </label>
         <label>
-          Password:
+        <h3 className="signup-color">Password:</h3>
           <input
             type="password"
             value={password}
@@ -62,7 +62,7 @@ const SignupView = ({ onSignup }) => {
           />
         </label>
         <label>
-          Email:
+        <h3 className="signup-color"> Email:</h3>
           <input
             type="email"
             value={email}
@@ -71,7 +71,7 @@ const SignupView = ({ onSignup }) => {
           />
         </label>
         <label>
-          Birthday:
+        <h3 className="signup-color"> Birthday:</h3>
           <input
             type="date"
             value={birthday}
